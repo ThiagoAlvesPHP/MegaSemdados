@@ -1,0 +1,132 @@
+body{
+  background-color: #DCDCDC;
+}
+.navbar{
+  background-color: #191970;
+}
+.navbar-brand img{
+    width: 25px;
+    background-color: orange;
+    border-radius: 50%;
+}
+#navbar li a{
+  color: #fff;
+}
+#navbar ul li ul a{
+  color: #000;
+}
+
+#mySidenav a {
+  margin-top: 35px;
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 12px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  z-index: 9999;
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+
+#about {
+  top: 20px;
+  background-color: #4CAF50;
+}
+
+#blog {
+  top: 80px;
+  background-color: #2196F3;
+}
+
+#contact {
+  top: 140px;
+  background-color: #555
+}
+
+#nt{
+  background-color: #6A5ACD;
+}
+#nt:hover{
+  background-color: #8A2BE2;
+}
+
+#nt {
+  box-shadow: 0 0 0 0 rgba(69, 152, 27, 0.5);
+}
+
+#nt {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(.9);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 50px rgba(69, 152, 27, 0);
+  }
+  100% {
+    transform: scale(.9);
+    box-shadow: 0 0 0 0 rgba(69, 152, 27, 0);
+  }
+}
+#not{
+  width: 400px;
+  height: 200px;
+  position: fixed;
+  z-index: 999;
+  margin-left: 60%;
+  top: 10%;
+  border-radius: 10px;
+  border: solid 1px;
+  background: #fff;
+}
+#submenu3{
+  overflow:auto; 
+  height: 300px;
+}
+
+.conteudo{
+  margin-top: 60px;
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
