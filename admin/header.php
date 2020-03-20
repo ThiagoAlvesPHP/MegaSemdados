@@ -30,11 +30,13 @@ if (!empty($match)) {
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/datetime/jquery.datetimepicker.css">
+  <link rel="stylesheet" href="assets/css/datatable.css">
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/Chart_js/Chart.min.js"></script>
   <script src="assets/js/Chart_js/Chart.bundle.js"></script>
   <script src="assets/js/Chart_js/utils.js"></script>
   <script src="assets/js/sweetalert.js"></script>
+  <script src="assets/js/datatable.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/css/header.css">
 </head>
 
@@ -206,19 +208,19 @@ if (!empty($match)) {
                 <li class="dropdown-submenu">
                   <a href="">
                     <i class="fas fa-dollar-sign"></i>
-                    Despesas Próprias
+                    RDP
                   </a>
                   <ul class="dropdown-menu">
                     <li class="divider"></li>
                     <li>
-                        <a href="contas_despesas.php?type=despesas_proprias">
+                        <a href="rdp.php">
                           <i class="fas fa-file-signature"></i>
                           Cadastrar
                         </a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                      <a href="historico_contas_despesas.php?type=despesas_proprias">
+                      <a href="rdp_historico.php?type=despesas_proprias">
                         <i class="fas fa-money-check-alt"></i>
                         Historico
                       </a>

@@ -2,6 +2,108 @@
 require 'autoload.php';
 $sql = new Ajax();
 
+//datatable registros rdp quadro 1
+if (!empty($_POST['quadro1'])) {
+    //Receber a requisão da pesquisa 
+    $requestData = $_REQUEST;
+
+    $columns = array(
+        array(0 => 'id'),
+        array(1 => 'type'),
+        array(2 => 'qt'),
+        array(3 => 'descricao'),
+        array(4 => 'valor'),
+        array(5 => 'total'),
+        array(6 => 'num_processo'),
+        array(7 => 'num_sinistro'),
+        array(8 => 'seguradora'),
+        array(9 => 'segurado'),
+        array(10 => 'tranportadora'),
+        array(11 => 'usuario'),
+        array(12 => 'dt_register')
+    );
+
+    //Obtendo registros de número total sem qualquer pesquisa
+    $resultado = $sql->getRDP($_POST['quadro1']);
+    $qnt_linhas = $sql->getRDPCount($_POST['quadro1']);
+
+
+    $query = "
+            SELECT rdp.*, cad_func.nome FROM rdp 
+            INNER JOIN cad_func
+            ON rdp.id_user = cad_func.id
+            WHERE quadro = :quadro 
+            AND 1=1";
+
+    //se estiver preenchido
+    if(!empty($requestData['search']['value'])) {  
+        $request = $requestData['search']['value'];
+
+        $query .= " AND (id LIKE '".$request."%' ";
+        $query .= " OR type LIKE '".$request."%' ";
+        $query .= " OR qt LIKE '".$request."%' ";
+        $query .= " OR descricao LIKE '".$request."%' ";
+        $query .= " OR valor LIKE '".$request."%' ";
+        $query .= " OR total LIKE '".$request."%' ";
+        $query .= " OR num_processo LIKE '".$request."%' ";
+        $query .= " OR num_sinistro LIKE '".$request."%' ";
+        $query .= " OR seguradora LIKE '".$request."%' ";
+        $query .= " OR segurado LIKE '".$request."%' ";
+        $query .= " OR transportadora LIKE '".$request."%' ";
+        $query .= " OR id_user LIKE '".$request."%' ";
+        $query .= " OR dt_cadastro LIKE '".$request."%') ";
+    }
+    //Ordenar o resultado
+    $query .= " ORDER BY 
+                ". implode(' AND ', $columns[$requestData['order'][0]['column']])."   
+                ".$requestData['order'][0]['dir']." LIMIT 
+                ".$requestData['start']." ,".$requestData['length']."   
+    ";
+
+    $totalFiltered = $sql->getRDP2Count($_POST['quadro1'], $query);
+    $resultado2 = $sql->getRDP2($_POST['quadro1'], $query);
+
+    // Ler e criar o array de dados
+    $dados = array();
+
+    foreach ($resultado2 as $key => $value) {
+        $dado = array();
+        $dado[] = $value["id"];
+        $dado[] = $value["type"];
+        $dado[] = $value["qt"];
+        $dado[] = $value["descricao"];
+        $dado[] = $value["valor"];
+        $dado[] = $value["total"];
+        $dado[] = $value["num_processo"];
+        $dado[] = $value["num_sinistro"];
+        $dado[] = $value["seguradora"];
+        $dado[] = $value["segurado"];
+        $dado[] = $value["transportadora"];
+        $dado[] = $value["nome"];
+        $dado[] = date('Y-m-d', strtotime($value["dt_cadastro"])); 
+        
+        $dado[] = '<a class="btn btn-info" href="view.php?id='.$value["id"].'">Ver</a> - <button class="btn btn-danger confirm" value="delete.php?id='.$value["id"].'">Excluir</button>';  
+        /*$dado[] = $value["email"];
+        $dado[] = '<a class="btn btn-info" href="view.php?id='.$value["id"].'">Ver</a> - <button class="btn btn-danger confirm" value="delete.php?id='.$value["id"].'">Excluir</button>';*/   
+        $dados[] = $dado;
+    }
+
+
+    //Cria o array de informações a serem retornadas para o Javascript
+    $json_data = array(
+        //para cada requisição é enviado um número como parâmetro
+        "draw" => intval( $requestData['draw'] ),
+        //Quantidade de registros que há no banco de dados
+        "recordsTotal" => intval( $qnt_linhas ),  
+        //Total de registros quando houver pesquisa
+        "recordsFiltered" => intval( $totalFiltered ), 
+        //Array de dados completo dos dados retornados da tabela 
+        "data" => $dados   
+    );
+
+    echo json_encode($json_data);  //enviar dados como formato json
+}
+
 //DEFINIR HORARIO O DIA
 if (isset($_POST['value']) && $_POST['value'] == true) {
     $array = array(

@@ -47,7 +47,9 @@ $(function (){
         $('#submenu5').fadeOut();
     });
 
-    $(function(){
+
+    //horario atual
+    /*$(function(){
         let value = true;
 
         var horario = function(){
@@ -66,7 +68,7 @@ $(function (){
 
         setInterval(horario, 800);
         
-    });
+    });*/
 
     //consultar motorista
     $(document).on('keyup', '#search-motorista', function(){
@@ -482,9 +484,10 @@ $(function (){
             data:{ seachProcesso:seachProcesso },
             success:function(data){
                 let html = '<div class="resposta">';
-                html += '<div class="row">';
+                
                 for(line in data){
                     user = data[line];
+                    html += '<div class="row">';
 
                     html += '<div class="col-sm-2"><b>Processo: </b><br>'+user['num_processo']+'</div>';
                     html += '<div class="col-sm-2"><b>Sinistro: </b><br>'+user['num_sinistro']+'</div>';
@@ -494,47 +497,35 @@ $(function (){
                     html += '<div class="col-sm-2"><b>Transportadora: </b><br>'+user['transportadora']+'</div>';
 
                     html += '<div class="col-sm-2"><a href="contas_despesas.php?type='+type+'&num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
+
+                    html += '</div>';
                 }
-                html += '</div></div>';
+                html += '</div>';
                 $('.resposta').html(html);
             }
         });
     });
 
-    $('.formQ1').on('click', function(event){
-        event.preventDefault();
-        let select = ['km Ida', 'km Deslocamento Interno', 'km Retorno', 'Refeição', 'Hospedagem', 'Pedágios', 'Xerox', 'Sedex', 'Outros'];
-
-        let form = '<div class="row">';
-
-        form += '<div class="col-sm-2"><label>Tipo</label>';
-        form += '<select class="form-control" name="type[]">';
-        for(line in select){
-            user = select[line];
-            form += '<option>'+user+'</option>';
-        }
-        form += '</select>';
-        form += '</div>';
-
-        form += '<div class="col-sm-1"><label>Quantidade</label><input type="number" name="qt[]" min="1" value="1" class="form-control qt_form" required=""></div>';
-
-        form += '<div class="col-sm-3"><label>Descrição</label><input type="text" name="descricao[]" class="form-control" required=""></div>';
-        form += '<div class="col-sm-3"><label>Valor Unitario</label><input type="text" name="valor[]" class="money form-control v_uni" required=""></div>';
-        form += '<div class="col-sm-3"><label>Total</label><input type="text" name="total[]" class="money form-control total" required="" readonly=""></div></div><br>';
-
-        $('.form_area').append(form);
-    });
-
     $(document).on('keyup', '.v_uni', function(){
-        let v_uni = $(this).val();
         let qt_form = $('.qt_form').val();
+        let v_uni = $(this).val();
+        let total = '';
+        if (v_uni != '') {
+            total += parseFloat(qt_form)*parseFloat(v_uni);
+        } 
+
+        $('.total').val(parseFloat(total).toFixed(2)); 
     });
+    $(document).on('keyup', '.v_uni2', function(){
+        let qt_form = $('.qt_form2').val();
+        let v_uni = $(this).val();
+        let total = '';
+        if (v_uni != '') {
+            total += parseFloat(qt_form)*parseFloat(v_uni);
+        } 
 
-    /*$(document).on('click', '.btn-action', function(e){
-        e.preventDefault();
-
-
-    });*/
+        $('.total2').val(parseFloat(total).toFixed(2)); 
+    });
 
 
     $(document).on('keyup', '.seachProcesso', function(){

@@ -17,6 +17,57 @@ class Ajax{
 			echo "FALHA: ".$e->getMessage();
 		}
 	}
+
+	public function getRDP($quadro){
+		$array = array();
+		$sql = $this->db->prepare("
+			SELECT rdp.*, cad_func.nome FROM rdp 
+			INNER JOIN cad_func
+			ON rdp.id_user = cad_func.id
+			WHERE quadro = :quadro");
+		$sql->bindValue(':quadro', $quadro);
+		$sql->execute();
+
+		if ($sql->rowCount() > 0) {
+			$array = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		return $array;
+	}
+
+	public function getRDP2($quadro, $query){
+		$array = array();
+
+		$sql = $this->db->prepare($query);
+		$sql->bindValue(':quadro', $quadro);
+		$sql->execute();
+
+		if ($sql->rowCount() > 0) {
+			$array = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		return $array;
+	}
+
+	public function getRDP2Count($quadro, $query){
+		$sql = $this->db->prepare($query);
+		$sql->bindValue(':quadro', $quadro);
+		$sql->execute();
+
+		return $sql->rowCount();
+	}
+
+	public function getRDPCount($quadro){
+		$sql = $this->db->prepare("
+			SELECT * 
+			FROM rdp 
+			WHERE quadro = :quadro");
+		$sql->bindValue(':quadro', $quadro);
+		$sql->execute();
+
+		return $sql->rowCount();
+	}
+
 	//consultar motorista
 	public function getMotorista($motorista, $id_ramo){
 		$array = array();
