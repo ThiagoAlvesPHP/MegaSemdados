@@ -32,7 +32,7 @@ if (!empty($_GET['num_processo'])) {
 			<hr>
 
 			<div class="well">
-				<input class="form-control seach_proc" placeholder="Pesquisar Processo">
+				<input class="form-control Processo seach_proc" placeholder="Pesquisar Processo">
 				<hr>
 				<div class="resposta"></div>
 			</div>

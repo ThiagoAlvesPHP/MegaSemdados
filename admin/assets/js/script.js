@@ -15,6 +15,8 @@ $(function (){
     $('#seachProcesso').mask('##/##');
     $('.seachProcesso').mask('##/##');
 
+    $('.Processo').mask('##/##');
+
     //EFEITO EM MENU
     $('#menu1').bind('mouseenter', function(){
         $('#submenu1').show();
