@@ -220,7 +220,7 @@ if (!empty($match)) {
                     </li>
                     <li class="divider"></li>
                     <li>
-                      <a href="rdp_historico.php?type=despesas_proprias">
+                      <a href="rdp_historico.php">
                         <i class="fas fa-money-check-alt"></i>
                         Historico
                       </a>

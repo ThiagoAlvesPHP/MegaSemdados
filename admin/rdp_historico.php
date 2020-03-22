@@ -1,14 +1,43 @@
+<?php
+require 'header.php';
+$nav = new Navegacao();
+
+if (!empty($_GET['num_processo'])) {
+	$ajax = new Ajax();
+	$r = new Rdp();
+
+	$dados = $ajax->getProc(addslashes($_GET['num_processo']));
+	$rdp = $r->getAll(addslashes($_GET['num_processo']));
+
+	$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+	if (!empty($post['id'])) {
+		$post['total'] = $post['qt'] * $post['valor'];	
+
+		$r->upRDP($post);
+		echo '<script>alert("Registrado com sucesso!");window.location.href="rdp_historico.php?num_processo='.$_GET['num_processo'].'"</script>';
+	}
+
+	if (!empty($_GET['del'])) {
+		$r->delRDP(addslashes($_GET['del']));
+		echo '<script>alert("Deletado com sucesso!");window.location.href="rdp_historico.php?num_processo='.$_GET['num_processo'].'"</script>';
+	}
+	$quadro1 = 0;
+	$quadro2 = 0;
+	$total = 0;
+}
+
+?>
 <div class="container-fluid conteudo">	
 	<div class="row">
 		<div class="col-sm-1"></div>
 		<div class="col-sm-10">
 		
-			<h3>RDP - Recibo Despesas Próprias</h3>
+			<h3>RDP - Recibo Despesas Próprias - Histórico</h3>
 			<hr>
 
 			<div class="well">
-				<input class="form-control seach_proc" placeholder="Pesquisar Processo">
-				<input type="hidden" name="" class="type" value="<?=$_GET['type']; ?>">
+				<input class="form-control seach_proc_historico" placeholder="Pesquisar Processo">
 				<hr>
 				<div class="resposta"></div>
 			</div>
@@ -16,29 +45,30 @@
 			<div class="well">
 				<?php if(!empty($_GET['num_processo'])): ?>
 
-					<script type="text/javascript">
-						$(function (){
-							$(document).on('click', '.confirm', function(){
-								let v = confirm("Tem certeza que deseja excluir?");
-								if (v == true) {
-									window.location.href = $(this).val();
-								}
-							})
-							
-						});
-						$(document).ready(function (){
-							let quadro1 = '1';
-						    $('#quadro01').DataTable({
-						        "processing": true,
-						        "serverSide": true,
-						        "ajax": {
-						            "url": "ajax.php",
-						            "type": "POST",
-						            data:{ quadro1:quadro1 }
-						        }
-						    });
-						});
-					</script>
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Processo Mega Nrº</label>
+							<input type="text" name="" class="form-control" value="<?=$dados['num_processo']; ?>" readonly="">
+						</div>
+						<div class="col-sm-6">
+							<label>Processo Allianz Nrº</label>
+							<input type="text" name="" class="form-control" value="<?=$dados['num_sinistro']; ?>" readonly="">
+						</div>
+					</div>	
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Seguradora:</label>
+							<input type="text" name="" class="form-control" value="<?=$dados['seguradora']; ?>" readonly="">
+						</div>
+						<div class="col-sm-4">
+							<label>Segurado:</label>
+							<input type="text" name="" class="form-control" value="<?=$dados['segurado']; ?>" readonly="">
+						</div>
+						<div class="col-sm-4">
+							<label>Transportador</label>
+							<input type="text" name="" class="form-control" value="<?=$dados['transportadora']; ?>" readonly="">
+						</div>
+					</div>
 
 
 					<!-- INICIO DOS REGISTROS QUADRO 01 -->
@@ -46,20 +76,212 @@
 						<table id="quadro01" class="table table-hover display" style="width:100%">
 						    <thead>
 						        <tr>
-						            <th>ID</th>
+						            <th>Ação</th>
 						            <th>Tipo</th>
 						            <th>Quantidade</th>
 						            <th>Descriçao</th>
 						            <th>Valor</th>
-						            <th>Total</th>
-						            <th>Nº Processo</th>
-						            <th>Nº Sinistro</th>
-						            <th>Seguradora</th>
-						            <th>Segurado</th>
-						            <th>Transportadora</th>
-						            <th>Usuário</th>
+						            <th>Registrado por</th>
 						            <th>Registrado em</th>
+						            <th>Total</th>
+						        </tr>
+						    </thead>
+						    <?php foreach ($rdp as $value): ?>
+						    <?php 
+						    if($value['quadro'] == 1): 
+						    $quadro1 += $value['total'];
+						    ?>
+						    <tbody>
+						    	<tr>
+						    		<td>	
+						    			<a class="far fa-edit" data-toggle="modal" data-target="#edit<?=$value['id']; ?>"></a>
+						    			<!-- MODAl -->
+						    			<div id="edit<?=$value['id']; ?>" class="modal fade" role="dialog">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal">&times;</button>
+										        <h4 class="modal-title">RDP - Quadro 1</h4>
+										      </div>
+										      <div class="modal-body">
+										      	<?php
+										      	$select = [
+										      		'km Ida', 
+										      		'km Deslocamento Interno', 
+										      		'km Retorno', 
+										      		'Refeição', 
+										      		'Hospedagem', 
+										      		'Pedágios', 
+										      		'Xerox', 
+										      		'Sedex', 
+										      		'Outros'
+										      	];
+										      	?>
+										        <p>
+										        	<form method="POST">
+										        		<input type="hidden" name="id" value="<?=$value['id']; ?>">
+														<select class="form-control" name="type">
+														<?php 
+															foreach($select as $item): 
+															if ($value['type'] == $item) {
+																echo '<option selected="">'.$item.'</option>';
+															} else {
+																echo '<option>'.$item.'</option>';
+															}
+															endforeach; 
+														?>
+														</select>
+														<label>Quantidade</label>
+														<input type="number" name="qt" min="1" value="<?=$value['qt']; ?>" class="form-control qt_form2" required="">
+														<label>Descrição</label><input type="text" name="descricao" class="form-control" value="<?=$value['descricao']; ?>" required="" autocomplete="off">
+														<label>Valor Unitario</label><input type="text" name="valor" class="form-control money v_uni2" required="" value="<?=$value['valor']; ?>" autocomplete="off">
+														<br>
+														<button class="btn btn-success">Editar</button>
+													</form>
+										        </p>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+
+										<a href="rdp_historico.php?num_processo=<?=$_GET['num_processo'].'&del='.$value['id']; ?>" style="color: red;" class="far fa-trash-alt"></a>
+						    		</td>
+						    		<td><?=$value['type']; ?></td>
+						    		<td><?=$value['qt']; ?></td>
+						    		<td><?=$value['descricao']; ?></td>
+						    		<td><?=$value['valor']; ?></td>
+						    		<td><?=$value['nome']; ?></td>
+						    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
+						    		<td width="100">R$<?=number_format($value['total'], 2); ?></td>
+						    	</tr>
+						    </tbody>
+							<?php endif;?>
+						    <?php endforeach; ?>
+						</table>
+					</div>
+					<!-- total do quadro 1 -->
+					<div class="table table-responsive">
+						<table id="quadro01" class="table table-hover display" style="width:100%">
+						    <thead>
+						        <tr>
+						            <th>Sub Total</th>
+						            <th width="100">R$<?=number_format($quadro1, 2); ?></th>
+						        </tr>
+						    </thead>
+						</table>
+					</div>
+
+					<!-- INICIO DOS REGISTROS QUADRO 01 -->
+					<div class="table table-responsive">
+						<table id="quadro01" class="table table-hover display" style="width:100%">
+						    <thead>
+						        <tr>
 						            <th>Ação</th>
+						            <th>Tipo</th>
+						            <th>Quantidade</th>
+						            <th>Descriçao</th>
+						            <th>Valor</th>
+						            <th>Registrado por</th>
+						            <th>Registrado em</th>
+						            <th>Total</th>
+						        </tr>
+						    </thead>
+						    <?php foreach ($rdp as $value): ?>
+						    <?php 
+						    if($value['quadro'] == 2): 
+						    $quadro2 += $value['total'];
+						    ?>
+						    <tbody>
+						    	<tr>
+						    		<td>	
+						    			<a class="far fa-edit" data-toggle="modal" data-target="#edit<?=$value['id']; ?>"></a>
+						    			<!-- MODAl -->
+						    			<div id="edit<?=$value['id']; ?>" class="modal fade" role="dialog">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal">&times;</button>
+										        <h4 class="modal-title">RDP - Quadro 1</h4>
+										      </div>
+										      <div class="modal-body">
+										      	<?php
+										      	$select = [
+										      		'Honorario SOS', 
+										      		'Honorario Averiguação Interno', 
+										      		'Honorario Limpeza do Local', 
+										      		'Certificado de Vistoria'
+										      	];
+										      	?>
+										        <p>
+										        	<form method="POST">
+										        		<input type="hidden" name="id" value="<?=$value['id']; ?>">
+														<select class="form-control" name="type">
+														<?php 
+															foreach($select as $item): 
+															if ($value['type'] == $item) {
+																echo '<option selected="">'.$item.'</option>';
+															} else {
+																echo '<option>'.$item.'</option>';
+															}
+															endforeach; 
+														?>
+														</select>
+														<label>Quantidade</label>
+														<input type="number" name="qt" min="1" value="<?=$value['qt']; ?>" class="form-control qt_form2" required="">
+														<label>Descrição</label><input type="text" name="descricao" class="form-control" value="<?=$value['descricao']; ?>" required="" autocomplete="off">
+														<label>Valor Unitario</label><input type="text" name="valor" class="form-control money v_uni2" required="" value="<?=$value['valor']; ?>" autocomplete="off">
+														<br>
+														<button class="btn btn-success">Editar</button>
+													</form>
+										        </p>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+
+										<a href="rdp_historico.php?num_processo=<?=$_GET['num_processo'].'&del='.$value['id']; ?>" style="color: red;" class="far fa-trash-alt"></a>
+						    		</td>
+						    		<td><?=$value['type']; ?></td>
+						    		<td><?=$value['qt']; ?></td>
+						    		<td><?=$value['descricao']; ?></td>
+						    		<td><?=$value['valor']; ?></td>
+						    		<td><?=$value['nome']; ?></td>
+						    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
+						    		<td width="100">R$<?=number_format($value['total'], 2); ?></td>
+						    	</tr>
+						    </tbody>
+							<?php endif;?>
+						    <?php endforeach; ?>
+						</table>
+					</div>
+					<!-- total do quadro 1 -->
+					<div class="table table-responsive">
+						<table id="quadro01" class="table table-hover display" style="width:100%">
+						    <thead>
+						        <tr>
+						            <th>Sub Total</th>
+						            <th width="100">R$<?=number_format($quadro2, 2); ?></th>
+						        </tr>
+						    </thead>
+						</table>
+					</div>
+
+					<!-- total geral -->
+					<?php
+					$total += $quadro1 + $quadro2;
+					?>
+					<div class="table table-responsive">
+						<table class="table table-hover" style="font-size: 20px;">
+						    <thead>
+						        <tr>
+						            <th>Total Geral</th>
+						            <th width="100">R$<?=number_format($total, 2); ?></th>
 						        </tr>
 						    </thead>
 						</table>
@@ -72,3 +294,5 @@
 		<div class="col-sm-1"></div>
 	</div>
 </div>
+
+<?php require 'footer.php'; ?>

@@ -21,26 +21,6 @@ class Processos{
 		}
 	}
 
-	public function setRDP($post){
-		$post['id_user'] = $_SESSION['cLogin'];
-
-		$fields = [];
-        foreach ($post as $key => $value) {
-            $fields[] = "$key=:$key";
-        }
-        $fields = implode(', ', $fields);
-
-		$sql = $this->db->prepare("
-			INSERT INTO rdp 
-			SET {$fields}
-			");
-
-		foreach ($post as $key => $value) {
-            $sql->bindValue(":{$key}", $value);
-        }
-		$sql->execute();
-	}
-
 	public function getProcessoRamo($id_ramo){
 		$sql = $this->db->prepare("
 			SELECT * FROM processos 

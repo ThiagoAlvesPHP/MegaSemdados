@@ -4,7 +4,7 @@ $nav = new Navegacao();
 
 if (!empty($_GET['num_processo'])) {
 	$ajax = new Ajax();
-	$p = new Processos();
+	$r = new Rdp();
 
 	$dados = $ajax->getProc(addslashes($_GET['num_processo']));
 
@@ -17,8 +17,8 @@ if (!empty($_GET['num_processo'])) {
 
 	//inserir quando 01
 	if (!empty($post['quadro'])) {
-		$p->setRDP($post);
-		echo '<script>alert("Registrado com sucesso!");window.location.href="contas_despesas.php?type=despesas_proprias&num_processo='.$_GET['num_processo'].'"</script>';
+		$r->setRDP($post);
+		echo '<script>alert("Registrado com sucesso!");window.location.href="rdp.php?num_processo='.$_GET['num_processo'].'"</script>';
 	}
 }
 
@@ -33,7 +33,6 @@ if (!empty($_GET['num_processo'])) {
 
 			<div class="well">
 				<input class="form-control seach_proc" placeholder="Pesquisar Processo">
-				<input type="hidden" name="" class="type" value="<?=$_GET['type']; ?>">
 				<hr>
 				<div class="resposta"></div>
 			</div>

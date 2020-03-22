@@ -49,7 +49,7 @@ $(function (){
 
 
     //horario atual
-    /*$(function(){
+    $(function(){
         let value = true;
 
         var horario = function(){
@@ -68,7 +68,7 @@ $(function (){
 
         setInterval(horario, 800);
         
-    });*/
+    });
 
     //consultar motorista
     $(document).on('keyup', '#search-motorista', function(){
@@ -472,10 +472,9 @@ $(function (){
         });
     });
 
-    //search processos
+    //search processos em rdp
     $('.seach_proc').on('keyup', function(){
         var seachProcesso = $('.seach_proc').val();
-        let type = $('.type').val();
 
         $.ajax({
             type: 'POST',
@@ -496,7 +495,7 @@ $(function (){
                     html += '<div class="col-sm-2"><b>Seguradora: </b><br>'+user['seguradora']+'</div>';
                     html += '<div class="col-sm-2"><b>Transportadora: </b><br>'+user['transportadora']+'</div>';
 
-                    html += '<div class="col-sm-2"><a href="contas_despesas.php?type='+type+'&num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
+                    html += '<div class="col-sm-2"><a href="rdp.php?num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
 
                     html += '</div>';
                 }
@@ -506,6 +505,40 @@ $(function (){
         });
     });
 
+    //search processos em rdp
+    $('.seach_proc_historico').on('keyup', function(){
+        var seachProcesso = $('.seach_proc_historico').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            dataType:'json',
+            data:{ seachProcesso:seachProcesso },
+            success:function(data){
+                let html = '<div class="resposta">';
+                
+                for(line in data){
+                    user = data[line];
+                    html += '<div class="row">';
+
+                    html += '<div class="col-sm-2"><b>Processo: </b><br>'+user['num_processo']+'</div>';
+                    html += '<div class="col-sm-2"><b>Sinistro: </b><br>'+user['num_sinistro']+'</div>';
+
+                    html += '<div class="col-sm-2"><b>Segurado: </b><br>'+user['segurado']+'</div>';
+                    html += '<div class="col-sm-2"><b>Seguradora: </b><br>'+user['seguradora']+'</div>';
+                    html += '<div class="col-sm-2"><b>Transportadora: </b><br>'+user['transportadora']+'</div>';
+
+                    html += '<div class="col-sm-2"><a href="rdp_historico.php?num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
+
+                    html += '</div>';
+                }
+                html += '</div>';
+                $('.resposta').html(html);
+            }
+        });
+    });
+
+    
     $(document).on('keyup', '.v_uni', function(){
         let qt_form = $('.qt_form').val();
         let v_uni = $(this).val();
