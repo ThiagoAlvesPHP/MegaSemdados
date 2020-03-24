@@ -44,6 +44,14 @@ if (!empty($_GET['num_processo'])) {
 
 			<div class="well">
 				<?php if(!empty($_GET['num_processo'])): ?>
+					<div class="row">
+						<div class="col-sm-11"></div>
+						<div class="col-sm-1">
+							<h1>
+								<a href="rdp_print.php?num_processo=<?=$_GET['num_processo']; ?>" title="Imprimir" target="_blank" class="fas fa-print"></a>
+							</h1>
+						</div>
+					</div>
 
 					<div class="row">
 						<div class="col-sm-6">
@@ -58,15 +66,15 @@ if (!empty($_GET['num_processo'])) {
 					<div class="row">
 						<div class="col-sm-4">
 							<label>Seguradora:</label>
-							<input type="text" name="" class="form-control" value="<?=$dados['seguradora']; ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['seguradora']); ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Segurado:</label>
-							<input type="text" name="" class="form-control" value="<?=$dados['segurado']; ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['segurado']); ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Transportador</label>
-							<input type="text" name="" class="form-control" value="<?=$dados['transportadora']; ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['transportadora']); ?>" readonly="">
 						</div>
 					</div>
 
@@ -152,10 +160,10 @@ if (!empty($_GET['num_processo'])) {
 						    		<td><?=$value['type']; ?></td>
 						    		<td><?=$value['qt']; ?></td>
 						    		<td><?=$value['descricao']; ?></td>
-						    		<td><?=$value['valor']; ?></td>
+						    		<td>R$<?=number_format($value['valor'],2,',','.'); ?></td>
 						    		<td><?=$value['nome']; ?></td>
 						    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
-						    		<td width="100">R$<?=number_format($value['total'], 2); ?></td>
+						    		<td width="100">R$<?=number_format($value['total'], 2, ',', '.'); ?></td>
 						    	</tr>
 						    </tbody>
 							<?php endif;?>
@@ -168,7 +176,7 @@ if (!empty($_GET['num_processo'])) {
 						    <thead>
 						        <tr>
 						            <th>Sub Total</th>
-						            <th width="100">R$<?=number_format($quadro1, 2); ?></th>
+						            <th width="100">R$<?=number_format($quadro1, 2, ',', '.'); ?></th>
 						        </tr>
 						    </thead>
 						</table>
@@ -209,9 +217,9 @@ if (!empty($_GET['num_processo'])) {
 										      <div class="modal-body">
 										      	<?php
 										      	$select = [
-										      		'Honorario SOS', 
-										      		'Honorario Averiguação Interno', 
-										      		'Honorario Limpeza do Local', 
+										      		'Honorário SOS', 
+										      		'Honorário Averiguação', 
+										      		'Honorário Limpeza do Local', 
 										      		'Certificado de Vistoria'
 										      	];
 										      	?>
@@ -250,10 +258,10 @@ if (!empty($_GET['num_processo'])) {
 						    		<td><?=$value['type']; ?></td>
 						    		<td><?=$value['qt']; ?></td>
 						    		<td><?=$value['descricao']; ?></td>
-						    		<td><?=$value['valor']; ?></td>
+						    		<td>R$<?=number_format($value['valor'],2,',','.'); ?></td>
 						    		<td><?=$value['nome']; ?></td>
 						    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
-						    		<td width="100">R$<?=number_format($value['total'], 2); ?></td>
+						    		<td width="100">R$<?=number_format($value['total'], 2, ',', '.'); ?></td>
 						    	</tr>
 						    </tbody>
 							<?php endif;?>
@@ -266,7 +274,7 @@ if (!empty($_GET['num_processo'])) {
 						    <thead>
 						        <tr>
 						            <th>Sub Total</th>
-						            <th width="100">R$<?=number_format($quadro2, 2); ?></th>
+						            <th width="100">R$<?=number_format($quadro2, 2, ',', '.'); ?></th>
 						        </tr>
 						    </thead>
 						</table>
@@ -281,7 +289,7 @@ if (!empty($_GET['num_processo'])) {
 						    <thead>
 						        <tr>
 						            <th>Total Geral</th>
-						            <th width="100">R$<?=number_format($total, 2); ?></th>
+						            <th width="100">R$<?=number_format($total, 2, ',', '.'); ?></th>
 						        </tr>
 						    </thead>
 						</table>
