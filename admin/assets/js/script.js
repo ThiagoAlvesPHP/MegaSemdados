@@ -247,7 +247,6 @@ $(function (){
                 }
             });
         }
-
     });
 
     //AJAX EM PROCESSO02 SEGURADORA
@@ -440,7 +439,7 @@ $(function (){
         }
     });
     
-    //BSCA DE PROCESSOS
+    //BUSCA DE PROCESSOS
     $('#seachProcesso').on('keyup', function(){
         var seachProcesso = $('#seachProcesso').val();
 
@@ -540,6 +539,70 @@ $(function (){
         });
     });
 
+    //search processos em sos
+    $('.seach_proc_sos').on('keyup', function(){
+        var seachProcesso = $('.seach_proc_sos').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            dataType:'json',
+            data:{ seachProcesso:seachProcesso },
+            success:function(data){
+                let html = '<div class="resposta">';
+                
+                for(line in data){
+                    user = data[line];
+                    html += '<div class="row">';
+
+                    html += '<div class="col-sm-2"><b>Processo: </b><br>'+user['num_processo']+'</div>';
+                    html += '<div class="col-sm-2"><b>Sinistro: </b><br>'+user['num_sinistro']+'</div>';
+
+                    html += '<div class="col-sm-2"><b>Segurado: </b><br>'+user['segurado']+'</div>';
+                    html += '<div class="col-sm-2"><b>Seguradora: </b><br>'+user['seguradora']+'</div>';
+                    html += '<div class="col-sm-2"><b>Transportadora: </b><br>'+user['transportadora']+'</div>';
+
+                    html += '<div class="col-sm-2"><a href="despesas_sos.php?num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
+
+                    html += '</div>';
+                }
+                html += '</div>';
+                $('.resposta').html(html);
+            }
+        });
+    });
+    //search processos em sos
+    $('.seach_sos_historico').on('keyup', function(){
+        var seachProcesso = $('.seach_sos_historico').val();
+
+        $.ajax({
+            type: 'POST',
+            url: 'ajax.php',
+            dataType:'json',
+            data:{ seachProcesso:seachProcesso },
+            success:function(data){
+                let html = '<div class="resposta">';
+                
+                for(line in data){
+                    user = data[line];
+                    html += '<div class="row">';
+
+                    html += '<div class="col-sm-2"><b>Processo: </b><br>'+user['num_processo']+'</div>';
+                    html += '<div class="col-sm-2"><b>Sinistro: </b><br>'+user['num_sinistro']+'</div>';
+
+                    html += '<div class="col-sm-2"><b>Segurado: </b><br>'+user['segurado']+'</div>';
+                    html += '<div class="col-sm-2"><b>Seguradora: </b><br>'+user['seguradora']+'</div>';
+                    html += '<div class="col-sm-2"><b>Transportadora: </b><br>'+user['transportadora']+'</div>';
+
+                    html += '<div class="col-sm-2"><a href="despesas_sos_historico.php?num_processo='+user['num_processo']+'" class="btn btn-primary" title="Editar Processo"><i class="far fa-eye"></i></a></div>';
+
+                    html += '</div>';
+                }
+                html += '</div>';
+                $('.resposta').html(html);
+            }
+        });
+    });
     
     $(document).on('keyup', '.v_uni', function(){
         let qt_form = $('.qt_form').val();

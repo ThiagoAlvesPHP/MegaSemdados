@@ -229,6 +229,31 @@ if (!empty($match)) {
                   </ul>
                 </li>
                 <li class="divider"></li>
+
+                <li class="dropdown-submenu">
+                  <a href="">
+                    <i class="fas fa-dollar-sign"></i>
+                    Despesas SOS
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="divider"></li>
+                    <li>
+                        <a href="despesas_sos.php">
+                          <i class="fas fa-file-signature"></i>
+                          Cadastrar
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <a href="despesas_sos_historico.php">
+                        <i class="fas fa-money-check-alt"></i>
+                        Historico
+                      </a>
+                    </li>
+                    <li class="divider"></li>
+                  </ul>
+                </li>
+                <li class="divider"></li>
               </ul>
             </li>
 

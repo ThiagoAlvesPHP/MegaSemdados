@@ -21,7 +21,7 @@ class Rdp{
 		}
 	}
 
-	//INSERIR AGENDA
+	//buscar rdp por num_processo
 	public function getAll($num_processo){	
 		$array = array();
 
@@ -41,16 +41,7 @@ class Rdp{
 
 		return $array;
 	}
-
-	public function delRDP($id){
-		$sql = $this->db->prepare("
-			DELETE FROM rdp 
-			WHERE id = :id
-			");
-		$sql->bindValue(":id", $id);
-		$sql->execute();
-	}
-
+	//inseriri rdp
 	public function setRDP($post){
 		$post['id_user'] = $_SESSION['cLogin'];
 
@@ -70,7 +61,16 @@ class Rdp{
         }
 		$sql->execute();
 	}
-
+	//deletar rdp
+	public function delRDP($id){
+		$sql = $this->db->prepare("
+			DELETE FROM rdp 
+			WHERE id = :id
+			");
+		$sql->bindValue(":id", $id);
+		$sql->execute();
+	}
+	//atualizar rdp
 	public function upRDP($post){
 		$fields = [];
         foreach ($post as $key => $value) {
@@ -89,5 +89,47 @@ class Rdp{
             $sql->bindValue(":{$key}", $value);
         }
 		$sql->execute();
+	}
+
+	//inserir despesas sos
+	public function setSOS($post){
+		$post['id_user'] = $_SESSION['cLogin'];
+
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+
+		$sql = $this->db->prepare("
+			INSERT INTO despesas_sos 
+			SET {$fields}
+			");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
+
+	//buscar rdp por num_processo
+	public function getSosAll($num_processo){	
+		$array = array();
+
+		$sql = $this->db->prepare("
+			SELECT 
+			despesas_sos.*, cad_func.nome 
+			FROM despesas_sos 
+			INNER JOIN cad_func
+			ON despesas_sos.id_user = cad_func.id
+			WHERE despesas_sos.num_processo = :num_processo");
+		$sql->bindValue(':num_processo', $num_processo);
+		$sql->execute();
+
+		if ($sql->rowCount() > 0) {
+			$array = $sql->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		return $array;
 	}
 }
