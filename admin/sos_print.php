@@ -6,10 +6,8 @@ if (!empty($_GET['num_processo'])) {
 	$r = new Rdp();
 
 	$dados = $ajax->getProc(addslashes($_GET['num_processo']));
-	//$rdp = $r->getAll(addslashes($_GET['num_processo']));
+	$sos = $r->getSosAll(addslashes($_GET['num_processo']));
 
-	$quadro1 = 0;
-	$quadro2 = 0;
 	$total = 0;
 }
 ?>
@@ -45,52 +43,41 @@ if (!empty($_GET['num_processo'])) {
 		Segurado: <?=utf8_decode($dados['segurado']); ?><br>
 		Transportador: <?=utf8_decode($dados['transportadora']); ?><br><br>
 		
+		<style type="text/css">
+			.tr td{
+				border: solid 0.2px;
+			}
+		</style>
 
-
-		<!-- <table width="100%">
-		    <tr>
-	            <th>Tipo</th>
-	            <th>Quantidade</th>
-	            <th>Descriçao</th>
-	            <th>Valor</th>
-	            <th>Total</th>
-	        </tr>
-		    <?php foreach ($rdp as $value): ?>
-		    <?php 
-		    if($value['quadro'] == 1): 
-		    $quadro1 += $value['total'];
-		    ?>
-	    	<tr class="tr">
-	    		<td><?=$value['type']; ?></td>
-	    		<td><?=$value['qt']; ?></td>
-	    		<td><?=$value['descricao']; ?></td>
-	    		<td>R$<?=number_format($value['valor'],2,',','.'); ?></td>
-	    		<td width="100">R$<?=number_format($value['total'], 2, ',', '.'); ?></td>
-	    	</tr>
-			<?php endif;?>
-		    <?php endforeach; ?>
-		</table>
-
+		<!-- INICIO DE TABELA -->
 		<table width="100%">
-		    <thead>
-		        <tr>
-		            <th>Sub Total</th>
-		            <th width="100">R$<?=number_format($quadro1, 2, ',', '.'); ?></th>
-		        </tr>
-		    </thead>
-		</table> -->
-
-		<hr>
-
-		<!-- <?php
-		$total += $quadro1 + $quadro2;
-		?>
-
+		    <tr>
+	            <th>Data</th>
+	            <th>Descrição</th>
+	            <th>Registrado por</th>
+	            <th>Valor</th>
+	        </tr>
+		    <?php 
+		    	foreach ($sos as $value): 
+		    	$total += $value['valor']; 
+		    ?>
+		    <tr class="tr">
+	    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
+	    		<td><?=$value['descricao']; ?></td>
+	    		<td><?=$value['nome']; ?></td>
+	    		<td>R$<?=number_format($value['valor'],2,',','.'); ?></td>
+	    	</tr>
+		    <?php endforeach; ?>
+		</table>	
+		<!-- FIM DE TABELA -->
+		<!-- TOTAL -->
 		<table width="100%" style="font-size: 20px;">
-	        <tr>
+		    <tr>
 	            <th>Total Geral</th>
 	            <th width="100">R$<?=number_format($total, 2, ',', '.'); ?></th>
 	        </tr>
-		</table> -->
+		</table>
+		<!-- FIM TOTAL -->
+
 	</div>
 <?php endif; ?>	

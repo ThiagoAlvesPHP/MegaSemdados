@@ -111,18 +111,19 @@ class Rdp{
         }
 		$sql->execute();
 	}
-
 	//buscar rdp por num_processo
 	public function getSosAll($num_processo){	
 		$array = array();
 
 		$sql = $this->db->prepare("
 			SELECT 
-			despesas_sos.*, cad_func.nome 
+			despesas_sos.*, 
+			cad_func.nome 
 			FROM despesas_sos 
 			INNER JOIN cad_func
 			ON despesas_sos.id_user = cad_func.id
-			WHERE despesas_sos.num_processo = :num_processo");
+			WHERE despesas_sos.num_processo = :num_processo
+			ORDER BY despesas_sos.dt_cadastro ASC");
 		$sql->bindValue(':num_processo', $num_processo);
 		$sql->execute();
 
@@ -131,5 +132,34 @@ class Rdp{
 		}
 
 		return $array;
+	}
+	//deletar rdp
+	public function delSOS($id){
+		$sql = $this->db->prepare("
+			DELETE FROM despesas_sos 
+			WHERE id = :id
+			");
+		$sql->bindValue(":id", $id);
+		$sql->execute();
+	}
+	//atualizar sos
+	public function upSOS($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+
+		$sql = $this->db->prepare("
+			UPDATE despesas_sos 
+			SET {$fields}
+			WHERE id = :id
+			");
+
+		$sql->bindValue(":id", $post['id']);
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 }
