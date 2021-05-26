@@ -18,7 +18,6 @@ if (isset($_POST['motorista'])) {
     header("Content-type:application/json");
     echo json_encode($sql->getMotorista($_POST['motorista'], $_POST['id_ramo']));
 }
-
 //DENIFIR QUEM PODE VISUALIZAR MEUS ARQUIVOS docs.php
 if (!empty($_POST['id_doc']) && !empty($_POST['id_func'])) {
     $id_doc = addslashes($_POST['id_doc']);
@@ -32,7 +31,6 @@ if (!empty($_POST['id_docDel']) && !empty($_POST['id_funcDel'])) {
     
     $sql->delVisDoc($id_doc, $id_para);
 }
-
 //CONSULTA PAGINA pessoaPJGrid.php
 if (!empty($_POST['seachPJ'])) {
 	$razao_social = addslashes($_POST['seachPJ']);
@@ -49,7 +47,6 @@ if (!empty($_POST['seachPF'])) {
 	header("Content-type:application/json");
 	echo json_encode($pf);
 }
-
 /*CONSULTA DE APOLICE*/
 if(!empty($_POST['seachAp'])){
 	$seachAp = addslashes($_POST['seachAp']);
@@ -59,7 +56,6 @@ if(!empty($_POST['seachAp'])){
 	header("Content-type:application/json");
 	echo json_encode($apolice);
 }
-
 //CONSULTA PAGINA PROCESSO02.PHP
 if (!empty($_POST['id_empresa'])) {
 	$id = addslashes($_POST['id_empresa']);
@@ -67,7 +63,6 @@ if (!empty($_POST['id_empresa'])) {
 	
 	echo json_encode($j);
 }
-
 //CONSULTA PAGINA PROCESSO03.PHP
 if (!empty($_POST['id_transportadora'])) {
 	$id = addslashes($_POST['id_transportadora']);
@@ -75,7 +70,6 @@ if (!empty($_POST['id_transportadora'])) {
 	
 	echo json_encode($j);
 }
-
 //CONSULTA PAGINA PROCESSO04.PHP
 if (!empty($_POST['id_corretora'])) {
 	$id = addslashes($_POST['id_corretora']);
@@ -83,7 +77,6 @@ if (!empty($_POST['id_corretora'])) {
 	
 	echo json_encode($j);
 }
-
 //CONSULTA PAGINA PROCESSO05.PHP
 if (!empty($_POST['city1'])) {
 	$city1 = addslashes($_POST['city1']);
@@ -92,7 +85,6 @@ if (!empty($_POST['city1'])) {
 	header("Content-type:application/json");
 	echo json_encode($j);
 }
-
 if (!empty($_POST['city2'])) {
 	$city2 = addslashes($_POST['city2']);
 	$j = $sql->getCidade($city2);
@@ -100,7 +92,6 @@ if (!empty($_POST['city2'])) {
 	header("Content-type:application/json");
 	echo json_encode($j);
 }
-
 if (!empty($_POST['city3'])) {
 	$city2 = addslashes($_POST['city3']);
 	$j = $sql->getCidade($city2);
@@ -115,35 +106,30 @@ if (!empty($_POST['city4'])) {
 	header("Content-type:application/json");
 	echo json_encode($j);
 }
-
 if (!empty($_POST['txt'])) {
 	$texto = addslashes($_POST['txt']);
 	$id = addslashes($_POST['id']);
 
 	$sql->setTextoImgPreliminar($id, $texto);
 }
-
 if (!empty($_POST['txtP21'])) {
 	$texto = addslashes($_POST['txtP21']);
 	$id = addslashes($_POST['id']);
 
 	$sql->setTextoReportFT($id, $texto);
 }
-
 if (!empty($_POST['txtftSin'])) {
 	$texto = addslashes($_POST['txtftSin']);
 	$id = addslashes($_POST['id']);
 
 	$sql->setTextoFtSinin($id, $texto);
 }
-
 if (!empty($_POST['txtftSal'])) {
 	$texto = addslashes($_POST['txtftSal']);
 	$id = addslashes($_POST['id']);
 
 	$sql->setTextoFtSal($id, $texto);
 }
-
 if (!empty($_POST['txtVist'])) {
 	$texto = addslashes($_POST['txtVist']);
 	$id = addslashes($_POST['id']);
@@ -367,7 +353,6 @@ if (!empty($_POST['mes'])):
       </div>
     <?php
 endif;
-
 //rdp
 if (!empty($_POST['seachProcesso'])) {
     $num_processo = addslashes($_POST['seachProcesso']);
@@ -375,6 +360,114 @@ if (!empty($_POST['seachProcesso'])) {
 
     header("Content-type:application/json");
     echo json_encode($p);
+}
+
+//processo grid datatable
+if (!empty($_POST['grid_processo'])) {
+    $count = $sql->countProcessos();
+    //Receber a requisão da pesquisa 
+    $requestData = $_REQUEST;
+
+    $columns = array(
+        array(0 => 'id'),
+        array(1 => 'num_processo'),
+        array(2 => 'num_processo'),
+        array(3 => 'num_sinistro'),
+        array(4 => 'id_apolice'),
+        array(5 => 'id_segurado'),
+        array(6 => 'id_seguradora'),
+        array(7 => 'dt_cadastro'),
+        array(8 => 'id_user')
+    );
+
+    //Obtendo registros de número total sem qualquer pesquisa
+    $qnt_linhas = $count['c'];
+
+    //Obter os dados a serem apresentados
+    $result_usuarios = "
+        SELECT processos.*
+        FROM processos 
+        WHERE 1=1 ";
+
+    if( !empty($requestData['search']['value']) ) {   
+    // se houver um parâmetro de pesquisa, $requestData['search']['value'] contém o parâmetro de pesquisa
+        $result_usuarios.=" AND (processos.id LIKE '".$requestData['search']['value']."%' ";    
+        $result_usuarios.=" OR processos.num_processo LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.num_processo LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.num_sinistro LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.id_apolice LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.id_segurado LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.id_seguradora LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR processos.dt_cadastro LIKE '".$requestData['search']['value']."%' ";
+        $result_usuarios.=" OR cad_func.name LIKE '".$requestData['search']['value']."%' )";
+    }
+
+    $resultado_usuarios = $sql->getAllSearch($result_usuarios);
+    $totalFiltered = count($resultado_usuarios);
+
+    //Ordenar o resultado
+    $result_usuarios .= " ORDER BY ". implode(' AND ', $columns[$requestData['order'][0]['column']])."   ".$requestData['order'][0]['dir']." LIMIT ".$requestData['start']." ,".$requestData['length']."   ";
+    $resultado_usuarios = $sql->getAllSearch($result_usuarios);
+
+    // Ler e criar o array de dados
+    $dados = array();
+
+    $p = new Processos();
+    $e = new Eventos();
+    $pj = new PJuridica();
+
+    foreach ($resultado_usuarios as $key => $value) {
+        $dado = array(); 
+        //ação
+        $dado[] = '<a href="processo.php?num_processo='.$value['num_processo'].'" class="fa fa-edit" title="Editar Processo"></a>';
+        //numero do processo
+        $dado[] = $value["num_processo"];
+        //natureza do evento
+        $acontecimento = $p->getDadosAcontecimento($value['num_processo']);
+        if (!empty($acontecimento)) {
+            $nat = $e->getEvento($acontecimento['id_nat_evento']);
+            $dado[] = $nat['nat_evento'];
+        } else {
+            $dado[] = '----';
+        }
+        //sinistro
+        $dado[] = $value["num_sinistro"];
+        //numero da apolice
+        if (!empty($value['id_apolice'])) {
+            $ap = $p->getApolicesID($value['id_apolice']);
+            $dado[] = htmlspecialchars($ap['num_apolice']);
+        } else {
+            $dado[] = '----';
+        }
+        //segurado
+        if (!empty($value['id_segurado'])) {
+            $j = $pj->getPJuridicaID($value['id_segurado']);
+            $dado[] = htmlspecialchars($j['razao_social']);
+        } else {
+            $dado[] = '----';
+        }
+        //seguradora
+        $j = $pj->getPJuridicaID($value['id_seguradora']);
+        $dado[] = htmlspecialchars($j['razao_social']);
+        //data de registro
+        $dado[] = date('d/m/Y H:i:s', strtotime($value["dt_cadastro"]));
+        //registrado por
+        $u = $pj->getFuncAt($value['id_user']);
+        $dado[] = htmlspecialchars($u['nome']);
+
+        $dados[] = $dado;
+    }
+
+
+    //Cria o array de informações a serem retornadas para o Javascript
+    $json_data = array(
+        "draw" => intval( $requestData['draw'] ),//para cada requisição é enviado um número como parâmetro
+        "recordsTotal" => intval( $qnt_linhas ),  //Quantidade de registros que há no banco de dados
+        "recordsFiltered" => intval( $totalFiltered ), //Total de registros quando houver pesquisa
+        "data" => $dados   //Array de dados completo dos dados retornados da tabela 
+    );
+
+    echo json_encode($json_data);
 }
 
 ?>

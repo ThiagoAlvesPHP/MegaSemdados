@@ -23,6 +23,7 @@ if (isset($_GET['idImg']) && !empty($_GET['idImg'])) {
 
 //CAPTURANDO FOTOS PRELIMINARES REGISTRADAS
 $ft = $sql->getFTPreliminar($num_processo);
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 ?>
 
 <br><br><br>
@@ -41,52 +42,48 @@ $ft = $sql->getFTPreliminar($num_processo);
 	      		<?php
 	      		//REGISTRANDO IMAGEM DE DOCUMENTO EM PROCESSO
 				if (!empty($_FILES['arquivo'])) {
-					//VERIFICANDO SE ARQUIVO E JPG
-					if ($_FILES['arquivo']['type'] == 'image/jpeg') {
+					if (count($_FILES['arquivo']['tmp_name']) > 0) {
+						for ($i=0; $i < count($_FILES['arquivo']['tmp_name']); $i++) {
+							if ($_FILES['arquivo']['type'][$i] == 'image/jpeg') {
+								if (count($ft) + count($_FILES['arquivo']['tmp_name']) < 5) {
+									$largura = 800;
+									$altura = 800;
 
-						$largura = 800;
-						$altura = 800;
+									list($larguraOri, $alturaOri) = getimagesize($_FILES['arquivo']['tmp_name'][$i]);
+									$ratio = $larguraOri / $alturaOri;
+									
+									if ($largura / $altura > $ratio) {
+										$largura = $altura * $ratio;
+									} else {
+										$altura = $largura / $ratio;
+									}	
+									$imagem_final = imagecreatetruecolor($largura, $altura);
+									$imagem_original = imagecreatefromjpeg($_FILES['arquivo']['tmp_name'][$i]);
+									imagecopyresampled($imagem_final, $imagem_original, 0, 0, 0, 0, $largura, $altura, $larguraOri, $alturaOri);
 
-						//CAPTURANDO LARGURA E ALTURA ORIGINAL DA IMAGEM
-						list($larguraOri, $alturaOri) = getimagesize($_FILES['arquivo']['tmp_name']);
-						$ratio = $larguraOri / $alturaOri;
-						
-						if ($largura / $altura > $ratio) {
-							$largura = $altura * $ratio;
-						} else {
-							$altura = $largura / $ratio;
+									$arquivo = md5($imagem_final.time().rand(0,999)).'.jpeg'; 
+									$texto = $_FILES['arquivo']['name'][$i];
+									
+									imagejpeg($imagem_final, "assets/img/fotos_preliminares/".$arquivo, 100);
+									
+									$sql->setFTPremilinar($num_processo, $arquivo, $texto);
+
+									echo '<script> window.location.href = "processo08.php?num_processo='.$num_processo.'"; </script>';
+								} else {
+									echo '<script> alert("Quantidade de imagens não permitida!"); window.location.href = "processo08.php?num_processo='.$num_processo.'"; </script>';
+								}
+							} else {
+								echo '<script> alert("Tipo de formato não permitido!"); window.location.href = "processo08.php?num_processo='.$num_processo.'"; </script>';
+							}
 						}
-
-						//CRIAR IMAGEM COM ALTURA E ALTURA
-						$imagem_final = imagecreatetruecolor($largura, $altura);
-						$imagem_original = imagecreatefromjpeg($_FILES['arquivo']['tmp_name']);
-						imagecopyresampled($imagem_final, $imagem_original, 0, 0, 0, 0, $largura, $altura, $larguraOri, $alturaOri);
-
-						$img = md5($_FILES['arquivo']['name'].time().rand(0,999)).'.jpg';
-						$texto = addslashes($_FILES['arquivo']['name']);
-						$ver = $sql->setFTPremilinar($num_processo, $img, $texto);
-						
-						if($ver == true){
-							imagejpeg($imagem_final, "assets/img/fotos_preliminares/".$img, 100);	
-							?>
-							<script>
-								window.location.href = "processo08.php?num_processo=<?=$num_processo; ?>";
-							</script>
-							<?php
-						} else {
-							?>
-							<script>
-								alert("Já existem 04 fotos preliminares adicionadas neste processo!");
-								window.location.href = "processo08.php?num_processo=<?=$num_processo; ?>";
-							</script>
-							<?php
-						}
+					} else {
+						echo '<script> alert("Envie no mínimo 1 arquivo no formato JPEG!"); window.location.href = "processo08.php?num_processo='.$num_processo.'"; </script>';
 					}
 				}
 	      		?>
 	      		<form method="POST"  enctype="multipart/form-data">
 	      			<label>Adicionar Arquivo</label>
-		            <input type="file" name="arquivo" class="form-control"><br>
+		            <input type="file" name="arquivo[]" multiple="" class="form-control"><br>
 				    <div class="row">
 			      			<div class="col-sm-9"></div>
 			      			<div class="col-sm-3">
@@ -135,7 +132,7 @@ $ft = $sql->getFTPreliminar($num_processo);
 										    Carregando...
 										</div>
 
-		            					<textarea name="txt" style="height: 365px;" id="<?=$fts['id']; ?>" name="texto" class="form-control txt"><?=str_replace('.jpg', '', utf8_encode($fts['texto'])); ?></textarea>
+		            					<textarea name="txt" style="height: 365px;" id="<?=$fts['id']; ?>" name="texto" class="form-control txt"><?=str_replace('.jpg', '', $fts['texto']); ?></textarea>
 		            				</td>
 		            			</tr>
 		            		</tbody>

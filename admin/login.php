@@ -11,8 +11,8 @@ if (!empty($_POST['login']) && !empty($_POST['senha'])) {
 	$login = addslashes($_POST['login']);
 	$senha = addslashes($_POST['senha']);
 
-	$_POST['g-recaptcha-response'] = '123';
-	
+	$_POST['g-recaptcha-response'] = true;
+
 	if (!empty($_POST['g-recaptcha-response'])) {
 		if ($sql->logar($login, $senha)) {
 			header('Location: index.php');

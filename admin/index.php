@@ -60,6 +60,26 @@ elseif (date('l') == 'Sunday') {
 }
 
 ?>
+<script type="text/javascript">
+    $(function(){
+        let value = true;
+
+        var horario = function(){
+            $.ajax({
+                url:'ajax.php',
+                type:'POST',
+                dataType:'json',
+                data:{value:value},
+                success:function(data){
+                    let hora = data['hora']+':'+data['minutos']+':'+data['segundos'];
+
+                    $('#horario').html(hora);
+                }
+            });
+        };
+        setInterval(horario, 800); 
+    });
+</script>
 <!-- STILE DA AGENDA + CALENDARIO -->
 <style type="text/css">
     #lembrete{
@@ -118,505 +138,505 @@ elseif (date('l') == 'Sunday') {
     <h3><i class="fas fa-tachometer-alt"></i> Dashboard</h3>
     <br>
 
-<div class="row">
-    <div class="col-lg-2 col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-address-card fa-3x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" style="font-size: 20px;">
-                        	<?=$countFisica['count']; ?>
+    <div class="row">
+        <div class="col-lg-2 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-address-card fa-3x"></i>
                         </div>
-                        <div>Físicas!</div>
-                    </div>
-                </div>
-            </div>
-            <a href="pessoaPFGrid.php">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver detalhes</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-6">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-address-card fa-3x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" style="font-size: 20px;">
-                        	<?=$countJuridica['count']; ?>
-                        </div>
-                        <div>Juridicas!</div>
-                    </div>
-                </div>
-            </div>
-            <a href="pessoaPJGrid.php">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver detalhes</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-6">
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fa fa-tasks fa-3x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" style="font-size: 20px;">
-                            <?=$countProcessos['count']; ?>
-                        </div>
-                        <div>Processos!</div>
-                    </div>
-                </div>
-            </div>
-            <a href="processoGrid.php">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver detalhes</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-6">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="fas fa-address-book fa-3x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" style="font-size: 20px;">
-                        	<?=$countFuncionarios['count']; ?>
-                        </div>
-                        <div>Funcionarios</div>
-                    </div>
-                </div>
-            </div>
-            <a href="funcionarioCad.php">
-                <div class="panel-footer">
-                    <span class="pull-left">Ver detalhes</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <i class="far fa-clock fa-3x"></i>
-                    </div>
-                    <div class="col-xs-9 text-right">
-                        <div class="huge" style="font-size: 30px;">
-                            <div id="horario"></div>
-                        </div>
-                        <div><?=$hoje; ?></div>
-                    </div>
-                </div>
-            </div>
-            <a>
-                <div class="panel-footer">
-                    <span class="pull-left"><?=date('d/m/Y'); ?></span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
-                </div>
-            </a>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-
-    <?php if(!empty($niverFunc)): ?>
-    <div class="col-sm-3">
-        <div class="well"> 
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Funcionário</th>
-                            <th>Logou</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    foreach ($acessoDia as $u) {
-                        echo '<tbody>';
-                            echo '<tr>';
-                                echo '<td>'.$u['nome'].'</td>';
-                                echo '<td>'.date('d/m/Y - H:i:s', strtotime($u['ult_acesso'])).'</td>';
-                            echo '</tr>';
-                        echo '</tbody>';
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="well"> 
-            <div class="table-responsive">
-                <table class="table">
-                    <h4>Funcionários</h4>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Aniversário</th>
-                        </tr>
-                    </thead>
-                    <?php foreach($niverFunc as $n): ?>
-                    <tbody>
-                        <tr>
-                            <td><?=htmlspecialchars($n['nome']); ?></td>
-                            <td><?=date('d/m', strtotime($n['dt_nasc'])); ?></td>
-                        </tr>
-                    </tbody>
-                    <?php endforeach; ?>
-                </table>
-            </div>
-        </div>
-    </div>
-    <?php else: ?>
-    <!-- FUNCIONARIOS LOGADOS -->
-    <div class="col-sm-6">
-        <div class="well"> 
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Funcionário</th>
-                            <th>Logou</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    foreach ($acessoDia as $u) {
-                        echo '<tbody>';
-                            echo '<tr>';
-                                echo '<td>'.$u['nome'].'</td>';
-                                echo '<td>'.date('d/m/Y - H:i:s', strtotime($u['ult_acesso'])).'</td>';
-                            echo '</tr>';
-                        echo '</tbody>';
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
-  
-  <!-- CALENDARIO E AGENDA PESSOAL -->
-  <div class="col-sm-6">
-        <div class="well">
-            <?php
-            $data = date('Y-m');
-            if (utf8_decode(strftime("%B", strtotime($data))) == 'mar?o') {
-                echo '<label id="sel">'.strftime("Março de %Y", strtotime($data)).'</label> / Minha Agenda Pessoal';
-            } else {
-                echo '<label id="sel">'.ucfirst(strftime("%B de %Y", strtotime($data))).'</label> / Minha Agenda Pessoal';
-            }
-            ?>
-            <div class="row">
-                <div class="col-sm-12">
-                    <select class="form-control mes">
-                    <option>Selecione um mês</option>
-                    <?php
-                        $mesAtual = date('Y-m');
-                        for ($i=1; $i < 13; $i++) { 
-                            $dt = date('Y-'.$i);
-
-                            if ($mesAtual == $dt) {
-                                if (utf8_decode(strftime("%B", strtotime($dt))) == 'mar?o') {
-                                    echo '<option selected value="'.$i.'">'.ucfirst(strftime("Março", strtotime($dt))).'</option>';
-                                } else {
-                                    echo '<option selected value="'.$i.'">'.ucfirst(strftime("%B", strtotime($dt))).'</option>';
-                                }
-                            } else {
-                                if (utf8_decode(strftime("%B", strtotime($dt))) == 'mar?o') {
-                                    echo '<option value="'.$i.'">'.ucfirst(strftime("Março", strtotime($dt))).'</option>';
-                                } else {
-                                    echo '<option value="'.$i.'">'.ucfirst(strftime("%B", strtotime($dt))).'</option>';
-                                }
-                            }
-                            
-                        }
-                    ?>
-                    </select>
-                </div>
-            </div>
-
-            <div class="table table-responsive">
-            <table class="table table-hover" id="resultado">
-                <tr>
-                <?php
-                $x = 0;
-                for ($i=1; $i <= date('t'); $i++) { 
-                    $x++;
-
-                    $id = 'ag'.$i;
-                    $v['data'] = date('Y-m-').$i;
-                    $lem = (new Agenda())->getAgendasData($v['data']);
-
-                    //definindo o dia da semana
-                    if (date('l', strtotime($v['data'])) == 'Monday') {
-                        $dia = 'Segunda-Feira';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Tuesday') {
-                        $dia = 'Terça-Feira';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Wednesday') {
-                        $dia = 'Quarta-Feira';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Thursday') {
-                        $dia = 'Quinta-Feira';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Friday') {
-                        $dia = 'Sexta-Feira';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Saturday') {
-                        $dia = 'Sábado';
-                    }
-                    elseif (date('l', strtotime($v['data'])) == 'Sunday') {
-                        $dia = 'Domingo';
-                    }
-
-                    if (($x % 7) != 0) {  
-                        echo '<td>';
-                        //SE ESTIVER PREENCHIDO
-                        if (!empty($lem)) {
-                            $data = date('Y-m-d', strtotime($v['data']));
-
-                            if ($data >= date('Y-m-d')) {
-                                if ($data == date('Y-m-d')) {
-                                    if ($dia == 'Sábado') {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                    } else {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                    }
-                                    
-                                } else {
-                                    if ($dia == 'Sábado') {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                    } else {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                    }
-                                    
-                                }
-                            } else {
-                                if ($dia == 'Sábado') {
-                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                } else {
-                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                }
-                                
-                            }
-                        } else {
-                            if ($dia == 'Sábado') {
-                                echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                            } else {
-                                echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                            }
-                            
-                        }
-                    ?>
-                    <div id="<?=$id; ?>" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">
-                                        <?php
-                                        $dt = date('Y-m-').$i;
-                                        $lembretes = (new Agenda())->getAgendasData($dt);
-                                        echo date('d/m/Y', strtotime($dt));
-                                        ?>
-                                    </h4>
-                                </div>
-
-                                <div class="modal-body">
-                                    <p>
-                                        <div class="table-responsive">
-                                          <table class="table table-hover">
-                                            <thead>
-                                              <tr>
-                                                <th>Lembrete</th>
-                                                <th>Previsão</th>
-                                                <th>Ação</th>
-                                              </tr>
-                                            </thead>
-                                          
-                                            <?php foreach ($lembretes as $l): ?>
-                                              <tbody>
-                                                <tr>
-                                                  <td><?=htmlspecialchars($l['lembrete']); ?></td>
-                                                  <td width="80"><?=date('H:i', strtotime($l['data'])); ?></td>  
-                                                  <td width="50">
-                                                    <a href="?agendaDel=<?=$l['id']; ?>" class="fas fa-trash-alt"></a>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            <?php endforeach; ?>
-                                        </table>
-                                        </div>
-                                    </p>
-                                    <hr>
-                                    <p>
-                                        <form method="POST">
-                                            <input type="text" name="data" value="<?=$dt; ?>" hidden="">
-                                            <label>Horário</label>
-                                            <input type="time" name="hr" class="form-control" required=""><br>
-                                            <label>Lembrete</label>
-                                            <textarea id="lembrete" name="lembrete" class="form-control" required=""></textarea>
-                                            <br>
-                                            <button class="btn btn-primary btn-block btn-lg">Salvar</button>
-                                        </form>
-                                    </p>
-                                </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" style="font-size: 20px;">
+                            	<?=$countFisica['count']; ?>
                             </div>
+                            <div>Físicas!</div>
                         </div>
                     </div>
-                    <?php
+                </div>
+                <a href="pessoaPFGrid.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver detalhes</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-address-card fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" style="font-size: 20px;">
+                            	<?=$countJuridica['count']; ?>
+                            </div>
+                            <div>Juridicas!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="pessoaPJGrid.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver detalhes</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" style="font-size: 20px;">
+                                <?=$countProcessos['count']; ?>
+                            </div>
+                            <div>Processos!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="processoGrid.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver detalhes</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fas fa-address-book fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" style="font-size: 20px;">
+                            	<?=$countFuncionarios['count']; ?>
+                            </div>
+                            <div>Funcionarios</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="funcionarioCad.php">
+                    <div class="panel-footer">
+                        <span class="pull-left">Ver detalhes</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
-                        echo '</td>';
-                    } else {
-                        echo '<td>';
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="far fa-clock fa-3x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" style="font-size: 30px;">
+                                <div id="horario"></div>
+                            </div>
+                            <div><?=$hoje; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <a>
+                    <div class="panel-footer">
+                        <span class="pull-left"><?=date('d/m/Y'); ?></span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
-                        //SE ESTIVER PREENCHIDO
-                        if (!empty($lem)) {
-                            $data = date('Y-m-d', strtotime($v['data']));
+    <div class="row">
 
-                            if ($data >= date('Y-m-d')) {
-                                if ($data == date('Y-m-d')) {
-                                    if ($dia == 'Sábado') {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                    } else {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                    }
-                                    
-                                } else {
-                                    if ($dia == 'Sábado') {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                    } else {
-                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                    }
-                                    
-                                }
-                            } else {
-                                if ($dia == 'Sábado') {
-                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                                } else {
-                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                                }
-                                
-                            }
-                        } else {
-                            if ($dia == 'Sábado') {
-                                echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
-                            } else {
-                                echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
-                            }
-                            
+        <?php if(!empty($niverFunc)): ?>
+        <div class="col-sm-3">
+            <div class="well"> 
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Logou</th>
+                            </tr>
+                        </thead>
+                        <?php
+                        foreach ($acessoDia as $u) {
+                            echo '<tbody>';
+                                echo '<tr>';
+                                    echo '<td>'.$u['nome'].'</td>';
+                                    echo '<td>'.date('d/m/Y - H:i:s', strtotime($u['ult_acesso'])).'</td>';
+                                echo '</tr>';
+                            echo '</tbody>';
                         }
-
-
                         ?>
-                    <div id="<?=$id; ?>" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">
-                                        <?php
-                                        $dt = date('Y-m-').$i;
-                                        $lembretes = (new Agenda())->getAgendasData($dt);
-                                        echo date('d/m/Y', strtotime($dt));
-                                        ?>
-                                    </h4>
-                                </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="well"> 
+                <div class="table-responsive">
+                    <table class="table">
+                        <h4>Funcionários</h4>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Aniversário</th>
+                            </tr>
+                        </thead>
+                        <?php foreach($niverFunc as $n): ?>
+                        <tbody>
+                            <tr>
+                                <td><?=htmlspecialchars($n['nome']); ?></td>
+                                <td><?=date('d/m', strtotime($n['dt_nasc'])); ?></td>
+                            </tr>
+                        </tbody>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php else: ?>
+        <!-- FUNCIONARIOS LOGADOS -->
+        <div class="col-sm-6">
+            <div class="well"> 
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Funcionário</th>
+                                <th>Logou</th>
+                            </tr>
+                        </thead>
+                        <?php
+                        foreach ($acessoDia as $u) {
+                            echo '<tbody>';
+                                echo '<tr>';
+                                    echo '<td>'.$u['nome'].'</td>';
+                                    echo '<td>'.date('d/m/Y - H:i:s', strtotime($u['ult_acesso'])).'</td>';
+                                echo '</tr>';
+                            echo '</tbody>';
+                        }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+      
+      <!-- CALENDARIO E AGENDA PESSOAL -->
+      <div class="col-sm-6">
+            <div class="well">
+                <?php
+                $data = date('Y-m');
+                if (utf8_decode(strftime("%B", strtotime($data))) == 'mar?o') {
+                    echo '<label id="sel">'.strftime("Março de %Y", strtotime($data)).'</label> / Minha Agenda Pessoal';
+                } else {
+                    echo '<label id="sel">'.ucfirst(strftime("%B de %Y", strtotime($data))).'</label> / Minha Agenda Pessoal';
+                }
+                ?>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <select class="form-control mes">
+                        <option>Selecione um mês</option>
+                        <?php
+                            $mesAtual = date('Y-m');
+                            for ($i=1; $i < 13; $i++) { 
+                                $dt = date('Y-'.$i);
 
-                                <div class="modal-body">
-                                    <p>
-                                        <div class="table-responsive">
-                                          <table class="table table-hover">
-                                            <thead>
-                                              <tr>
-                                                <th>Lembrete</th>
-                                                <th>Previsão</th>
-                                                <th>Ação</th>
-                                              </tr>
-                                            </thead>
-                                          
-                                            <?php foreach ($lembretes as $l): ?>
-                                              <tbody>
-                                                <tr>
-                                                  <td><?=htmlspecialchars($l['lembrete']); ?></td>
-                                                  <td width="80"><?=date('H:i', strtotime($l['data'])); ?></td>  
-                                                  <td width="50">
-                                                    <a href="?agendaDel=<?=$l['id']; ?>" class="fas fa-trash-alt"></a>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            <?php endforeach; ?>
-                                        </table>
-                                        </div>
-                                    </p>
-                                    <hr>
-                                    <p>
-                                        <form method="POST">
-                                          <input type="text" name="data" value="<?=$dt; ?>" hidden="">
-                                          <label>Horário</label>
-                                          <input type="time" name="hr" class="form-control" required=""><br>
-                                          <label>Lembrete</label>
-                                          <textarea id="lembrete" name="lembrete" class="form-control" required=""></textarea>
-                                          <br>
-                                          <button class="btn btn-primary btn-block btn-lg">Salvar</button>
-                                        </form>
-                                    </p>
+                                if ($mesAtual == $dt) {
+                                    if (utf8_decode(strftime("%B", strtotime($dt))) == 'mar?o') {
+                                        echo '<option selected value="'.$i.'">'.ucfirst(strftime("Março", strtotime($dt))).'</option>';
+                                    } else {
+                                        echo '<option selected value="'.$i.'">'.ucfirst(strftime("%B", strtotime($dt))).'</option>';
+                                    }
+                                } else {
+                                    if (utf8_decode(strftime("%B", strtotime($dt))) == 'mar?o') {
+                                        echo '<option value="'.$i.'">'.ucfirst(strftime("Março", strtotime($dt))).'</option>';
+                                    } else {
+                                        echo '<option value="'.$i.'">'.ucfirst(strftime("%B", strtotime($dt))).'</option>';
+                                    }
+                                }
+                                
+                            }
+                        ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table table-responsive">
+                <table class="table table-hover" id="resultado">
+                    <tr>
+                    <?php
+                    $x = 0;
+                    for ($i=1; $i <= date('t'); $i++) { 
+                        $x++;
+
+                        $id = 'ag'.$i;
+                        $v['data'] = date('Y-m-').$i;
+                        $lem = (new Agenda())->getAgendasData($v['data']);
+
+                        //definindo o dia da semana
+                        if (date('l', strtotime($v['data'])) == 'Monday') {
+                            $dia = 'Segunda-Feira';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Tuesday') {
+                            $dia = 'Terça-Feira';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Wednesday') {
+                            $dia = 'Quarta-Feira';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Thursday') {
+                            $dia = 'Quinta-Feira';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Friday') {
+                            $dia = 'Sexta-Feira';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Saturday') {
+                            $dia = 'Sábado';
+                        }
+                        elseif (date('l', strtotime($v['data'])) == 'Sunday') {
+                            $dia = 'Domingo';
+                        }
+
+                        if (($x % 7) != 0) {  
+                            echo '<td>';
+                            //SE ESTIVER PREENCHIDO
+                            if (!empty($lem)) {
+                                $data = date('Y-m-d', strtotime($v['data']));
+
+                                if ($data >= date('Y-m-d')) {
+                                    if ($data == date('Y-m-d')) {
+                                        if ($dia == 'Sábado') {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                        } else {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                        }
+                                        
+                                    } else {
+                                        if ($dia == 'Sábado') {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                        } else {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                        }
+                                        
+                                    }
+                                } else {
+                                    if ($dia == 'Sábado') {
+                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                    } else {
+                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                    }
+                                    
+                                }
+                            } else {
+                                if ($dia == 'Sábado') {
+                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                } else {
+                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                }
+                                
+                            }
+                        ?>
+                        <div id="<?=$id; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">
+                                            <?php
+                                            $dt = date('Y-m-').$i;
+                                            $lembretes = (new Agenda())->getAgendasData($dt);
+                                            echo date('d/m/Y', strtotime($dt));
+                                            ?>
+                                        </h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>
+                                            <div class="table-responsive">
+                                              <table class="table table-hover">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Lembrete</th>
+                                                    <th>Previsão</th>
+                                                    <th>Ação</th>
+                                                  </tr>
+                                                </thead>
+                                              
+                                                <?php foreach ($lembretes as $l): ?>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td><?=htmlspecialchars($l['lembrete']); ?></td>
+                                                      <td width="80"><?=date('H:i', strtotime($l['data'])); ?></td>  
+                                                      <td width="50">
+                                                        <a href="?agendaDel=<?=$l['id']; ?>" class="fas fa-trash-alt"></a>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                <?php endforeach; ?>
+                                            </table>
+                                            </div>
+                                        </p>
+                                        <hr>
+                                        <p>
+                                            <form method="POST">
+                                                <input type="text" name="data" value="<?=$dt; ?>" hidden="">
+                                                <label>Horário</label>
+                                                <input type="time" name="hr" class="form-control" required=""><br>
+                                                <label>Lembrete</label>
+                                                <textarea id="lembrete" name="lembrete" class="form-control" required=""></textarea>
+                                                <br>
+                                                <button class="btn btn-primary btn-block btn-lg">Salvar</button>
+                                            </form>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <?php
-                        echo '</td>';
-                        echo '</tr>';
-                    }
-                    
-                    }
-                ?>
-                </tbody>
-            </table>
+                        <?php
+
+                            echo '</td>';
+                        } else {
+                            echo '<td>';
+
+                            //SE ESTIVER PREENCHIDO
+                            if (!empty($lem)) {
+                                $data = date('Y-m-d', strtotime($v['data']));
+
+                                if ($data >= date('Y-m-d')) {
+                                    if ($data == date('Y-m-d')) {
+                                        if ($dia == 'Sábado') {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                        } else {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-success btn-block send">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                        }
+                                        
+                                    } else {
+                                        if ($dia == 'Sábado') {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                        } else {
+                                            echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-primary btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                        }
+                                        
+                                    }
+                                } else {
+                                    if ($dia == 'Sábado') {
+                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                    } else {
+                                        echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-danger btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                    }
+                                    
+                                }
+                            } else {
+                                if ($dia == 'Sábado') {
+                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 4).'</button>';
+                                } else {
+                                    echo '<button title="'.$dia.'" data-toggle="modal" data-target="#'.$id.'" class="btn btn-default btn-block">'.$i.'<br>'.substr($dia, 0, 3).'</button>';
+                                }
+                                
+                            }
+
+
+                            ?>
+                        <div id="<?=$id; ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">
+                                            <?php
+                                            $dt = date('Y-m-').$i;
+                                            $lembretes = (new Agenda())->getAgendasData($dt);
+                                            echo date('d/m/Y', strtotime($dt));
+                                            ?>
+                                        </h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>
+                                            <div class="table-responsive">
+                                              <table class="table table-hover">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Lembrete</th>
+                                                    <th>Previsão</th>
+                                                    <th>Ação</th>
+                                                  </tr>
+                                                </thead>
+                                              
+                                                <?php foreach ($lembretes as $l): ?>
+                                                  <tbody>
+                                                    <tr>
+                                                      <td><?=htmlspecialchars($l['lembrete']); ?></td>
+                                                      <td width="80"><?=date('H:i', strtotime($l['data'])); ?></td>  
+                                                      <td width="50">
+                                                        <a href="?agendaDel=<?=$l['id']; ?>" class="fas fa-trash-alt"></a>
+                                                      </td>
+                                                    </tr>
+                                                  </tbody>
+                                                <?php endforeach; ?>
+                                            </table>
+                                            </div>
+                                        </p>
+                                        <hr>
+                                        <p>
+                                            <form method="POST">
+                                              <input type="text" name="data" value="<?=$dt; ?>" hidden="">
+                                              <label>Horário</label>
+                                              <input type="time" name="hr" class="form-control" required=""><br>
+                                              <label>Lembrete</label>
+                                              <textarea id="lembrete" name="lembrete" class="form-control" required=""></textarea>
+                                              <br>
+                                              <button class="btn btn-primary btn-block btn-lg">Salvar</button>
+                                            </form>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                            echo '</td>';
+                            echo '</tr>';
+                        }
+                        
+                        }
+                    ?>
+                    </tbody>
+                </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-xs-6">
-        <div class="alert alert-info">
-            <canvas id="canvas" height="150"></canvas>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="alert alert-info">
+                <canvas id="canvas" height="150"></canvas>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="alert alert-danger">
+                <canvas id="grafico" height="150"></canvas>
+            </div>
         </div>
     </div>
-    <div class="col-xs-6">
-        <div class="alert alert-danger">
-            <canvas id="grafico" height="150"></canvas>
-        </div>
-    </div>
-</div>
 </div>
 
 <?php 
@@ -728,7 +748,6 @@ elseif (date('l') == 'Sunday') {
         }
     });
     }
-    
 </script>
 
 <?php

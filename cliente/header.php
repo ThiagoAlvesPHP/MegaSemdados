@@ -20,7 +20,7 @@ require 'autoload.php';
 ?>
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
 <head>
 	<title>Mega Adm</title>
 	<meta charset="utf-8">

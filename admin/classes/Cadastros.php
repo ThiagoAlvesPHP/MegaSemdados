@@ -71,36 +71,18 @@ class Cadastros{
 		}
 	}
 	//CADASTRO DE PESSOA JURIDICA
-	public function setPJForm($razao_social, $email, $cnpj, $tel01, $tel02, $outras, $segurado, $seguradora, $transportadora, $corretora, $status, $id_user){
+	public function setPJForm($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO cad_p_juridica SET {$fields}");
 
-		$sql = $this->db->prepare("INSERT INTO cad_p_juridica SET 
-			razao_social = :razao_social, 
-			email = :email, 
-			cnpj = :cnpj, 
-			tel01 = :tel01, 
-			tel02 = :tel02, 
-			outras = :outras, 
-			segurado = :segurado, 
-			seguradora = :seguradora, 
-			transportadora = :transportadora,
-			corretora = :corretora, 
-			status = :status, 
-			id_user = :id_user");
-		$sql->bindValue(":razao_social", $razao_social);
-		$sql->bindValue(":email", $email);
-		$sql->bindValue(":cnpj", $cnpj);
-		$sql->bindValue(":tel01", $tel01);
-		$sql->bindValue(":tel02", $tel02);
-		$sql->bindValue(":outras", $outras);
-		$sql->bindValue(":segurado", $segurado);
-		$sql->bindValue(":seguradora", $seguradora);
-		$sql->bindValue(":transportadora", $transportadora);
-		$sql->bindValue(":corretora", $corretora);
-		$sql->bindValue(":status", $status);
-		$sql->bindValue(":id_user", $id_user);
-		$sql->execute();
-
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", strtoupper($value));
+        }
+		$sql->execute();		
 	}
 	//SET DE FUNCIONARIOS
 	public function setFuncionario($nome, $cpf, $rg, $dt_nasc, $email, $login, $senha, $nivel){

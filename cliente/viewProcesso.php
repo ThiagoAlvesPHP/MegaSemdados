@@ -51,7 +51,7 @@
 							if (!empty($historico)) { 
 								foreach ($historico as $value) {
 									echo '<strong>'.htmlspecialchars(date('d/m/Y H:i:s', strtotime($value['dt_cadastrado'])).': ').'</strong>'; 
-									echo htmlspecialchars($value['evento']).'<br>'; 
+									echo $value['evento'].'<br>'; 
 								}
 							} 
 							?>

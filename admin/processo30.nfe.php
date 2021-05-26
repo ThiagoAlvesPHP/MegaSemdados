@@ -113,7 +113,7 @@ if (isset($_GET['id'])) {
 	      					<select name="id_unidade" class="form-control">
 	      						<?php
 	      						foreach ($uni as $u) {
-	      							echo '<option value="'.$u['id'].'">'.utf8_encode($u['nome']).'</option>';
+	      							echo '<option value="'.$u['id'].'">'.$u['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>

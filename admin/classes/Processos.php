@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 date_default_timezone_set('America/Sao_Paulo');
 class Processos{
 	private $db;
@@ -20,7 +20,58 @@ class Processos{
 			echo "FALHA: ".$e->getMessage();
 		}
 	}
+	//selecionar processo_tick_docs de processo
+	public function getAllTickDocs(){
+		$sql = $this->db->query("
+			SELECT 
+			processo_tick_docs.*, 
+			processos.dt_cadastro
+			FROM processo_tick_docs
+			INNER JOIN processos
+			ON processo_tick_docs.num_processo = processos.num_processo
+			WHERE processos.status = 2
+		");
+		return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+	//selecionar processo_tick_docs de processo
+	public function getAllTickDocsProcesso($num_processo){
+		$sql = $this->db->query("
+			SELECT * FROM processo_tick_docs 
+			WHERE num_processo = '{$num_processo}'");
+		return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+	//registrar tickek
+	public function setTickDocs($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO processo_tick_docs SET {$fields}");
 
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
+	//atualizar tickek
+	public function upTickDocs($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("
+			UPDATE processo_tick_docs 
+			SET {$fields}
+			WHERE num_processo = '{$post['num_processo']}'
+		");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
 	public function getProcessoRamo($id_ramo){
 		$sql = $this->db->prepare("
 			SELECT * FROM processos 
@@ -153,7 +204,25 @@ class Processos{
 
 	//PDF CERTIFICADO VISTORIA
 	public function getVistoriaCompleto($num_processo){
-		$sql = $this->db->prepare("SELECT processos.*, cad_p_juridica.id, cad_p_juridica.razao_social, cad_p_juridica.cnpj, cad_apolice.num_apolice, nav_ramo.ramo, nav_moeda.nome as md FROM processos INNER JOIN cad_p_juridica ON processos.id_seguradora = cad_p_juridica.id INNER JOIN cad_apolice ON processos.id_apolice = cad_apolice.id INNER JOIN nav_ramo ON processos.id_ramo = nav_ramo.id INNER JOIN nav_moeda ON processos.moeda = nav_moeda.id WHERE num_processo = :num_processo");
+		$sql = $this->db->prepare("
+			SELECT 
+			processos.*, 
+			cad_p_juridica.id, 
+			cad_p_juridica.razao_social, 
+			cad_p_juridica.cnpj, 
+			cad_apolice.num_apolice, 
+			nav_ramo.ramo, 
+			nav_moeda.nome as md 
+			FROM processos 
+			INNER JOIN cad_p_juridica 
+			ON processos.id_seguradora = cad_p_juridica.id 
+			INNER JOIN cad_apolice 
+			ON processos.id_apolice = cad_apolice.id 
+			INNER JOIN nav_ramo 
+			ON processos.id_ramo = nav_ramo.id 
+			INNER JOIN nav_moeda 
+			ON processos.moeda = nav_moeda.id 
+			WHERE num_processo = :num_processo");
 		$sql->bindValue(":num_processo", $num_processo);
 		$sql->execute();
 
@@ -273,6 +342,47 @@ class Processos{
 		$sql->execute();
 
 		return $sql->fetch(PDO::FETCH_ASSOC);
+	}
+
+	//atualizar evento de processo
+	public function upDocProcesso($post){
+		$post['id'] = $post['idup'];
+		unset($post['idup']);
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("
+			UPDATE doc_processo 
+			SET {$fields}
+			WHERE id = '{$post['id']}'
+		");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
+	}
+
+	//SETOR DE EVENTOS
+	//atualizar evento de processo
+	public function upEventoProcesso($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("
+			UPDATE processo_evento 
+			SET {$fields}
+			WHERE id = '{$post['id']}'
+		");
+
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 	//EXCLUIR EVENTO
 	public function delEvento($id){
@@ -636,25 +746,15 @@ class Processos{
 	}
 	//PROCESSO08.PHP FOTOS PRE LIMINARES
 	public function setFTPremilinar($num_processo, $img, $texto){
-		$sql = $this->db->prepare("SELECT * FROM processo_img_preliminar WHERE num_processo = :num_processo");
+		$sql = $this->db->prepare("INSERT INTO processo_img_preliminar SET 
+			num_processo = :num_processo,
+			img = :img,
+			texto = :texto
+			");
 		$sql->bindValue(":num_processo", $num_processo);
+		$sql->bindValue(":img", $img);
+		$sql->bindValue(":texto", $texto);
 		$sql->execute();
-
-		if ($sql->rowCount() <= 3) {
-			$sql = $this->db->prepare("INSERT INTO processo_img_preliminar SET 
-				num_processo = :num_processo,
-				img = :img,
-				texto = :texto
-				");
-			$sql->bindValue(":num_processo", $num_processo);
-			$sql->bindValue(":img", $img);
-			$sql->bindValue(":texto", $texto);
-			$sql->execute();
-
-			return true;
-		} else {
-			return false;
-		}
 	}
 	//processoftSinistro.php
 	public function setFTSinistro($num_processo, $img, $texto){
@@ -730,11 +830,7 @@ class Processos{
 
 	//SELECIONAR IMG DO BANCO DE DADOS
 	public function getFTPreliminar($num_processo){
-		$sql = $this->db->prepare("
-			SELECT processo_img_preliminar.*, 
-			(select count(id) from processo_img_preliminar WHERE num_processo = :num_processo) as count 
-			FROM processo_img_preliminar 
-			WHERE num_processo = :num_processo");
+		$sql = $this->db->prepare("SELECT processo_img_preliminar.*, (select count(id) from processo_img_preliminar WHERE num_processo = :num_processo) as count FROM processo_img_preliminar WHERE num_processo = :num_processo");
 		$sql->bindValue(":num_processo", $num_processo);
 		$sql->execute();
 
@@ -765,46 +861,31 @@ class Processos{
 
 		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
-	public function setRegPolicial($num_processo, $orgao_acidente, $num_acidente, $orgao_saque, $num_saque, $inquerito, $investigacao){
-		$sql = $this->db->prepare("INSERT INTO processo_reg_policial SET
-			num_processo = :num_processo,
-			orgao_acidente = :orgao_acidente,
-			num_acidente = :num_acidente,
-			orgao_saque = :orgao_saque,
-			num_saque = :num_saque,
-			inquerito = :inquerito,
-			investigacao = :investigacao
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":orgao_acidente", $orgao_acidente);
-		$sql->bindValue(":num_acidente", $num_acidente);
-		$sql->bindValue(":orgao_saque", $orgao_saque);
-		$sql->bindValue(":num_saque", $num_saque);
-		$sql->bindValue(":inquerito", $inquerito);
-		$sql->bindValue(":investigacao", $investigacao);
-		$sql->execute();
+	public function setRegPolicial($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO processo_reg_policial SET {$fields}");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
-	public function upRegPolicial($num_processo, $orgao_acidente, $num_acidente, $orgao_saque, $num_saque, $inquerito, $investigacao){
-		$sql = $this->db->prepare("UPDATE processo_reg_policial SET
-			orgao_acidente = :orgao_acidente,
-			num_acidente = :num_acidente,
-			orgao_saque = :orgao_saque,
-			num_saque = :num_saque,
-			inquerito = :inquerito,
-			investigacao = :investigacao WHERE num_processo = :num_processo
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":orgao_acidente", $orgao_acidente);
-		$sql->bindValue(":num_acidente", $num_acidente);
-		$sql->bindValue(":orgao_saque", $orgao_saque);
-		$sql->bindValue(":num_saque", $num_saque);
-		$sql->bindValue(":inquerito", $inquerito);
-		$sql->bindValue(":investigacao", $investigacao);
-		$sql->execute();
+	public function upRegPolicial($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("UPDATE processo_reg_policial SET {$fields} WHERE num_processo = '{$post['num_processo']}' ");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 	public function upMidia($num_processo, $midia){
 		$sql = $this->db->prepare("UPDATE processo_reg_policial SET
@@ -867,127 +948,46 @@ class Processos{
 
 		return $sql->fetchAll(PDO::FETCH_ASSOC);
 	}
-	public function setDanosMercadoriaP($num_processo, $id_tipo_merc, $descricao, $id_tipo_emb1, $id_tipo_emb2, $qt_vol, $id_uni_medida, $peso, $id_status_merc1, $id_status_merc2, $id_status_merc3, $id_status_merc4, $id_status_emb1, $id_status_emb2, $id_status_emb3, $id_status_emb4, $nr_onu, $nr_risco, $class_risco, $class_embalagem){
-		$sql = $this->db->prepare("INSERT INTO processo_danos_merc SET
-			num_processo = :num_processo,
-			id_tipo_merc = :id_tipo_merc,
-			descricao = :descricao,
-			id_tipo_emb1 = :id_tipo_emb1,
-			id_tipo_emb2 = :id_tipo_emb2,
-			qt_vol = :qt_vol,
-			id_uni_medida = :id_uni_medida,
-			peso = :peso,
-			id_status_merc1 = :id_status_merc1,
-			id_status_merc2 = :id_status_merc2,
-			id_status_merc3 = :id_status_merc3,
-			id_status_merc4 = :id_status_merc1,
-			id_status_emb1 = :id_status_emb1,
-			id_status_emb2 = :id_status_emb2,
-			id_status_emb3 = :id_status_emb3,
-			id_status_emb4 = :id_status_emb4,
-			nr_onu = :nr_onu,
-			nr_risco = :nr_risco,
-			class_risco = :class_risco,
-			class_embalagem = :class_embalagem
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":id_tipo_merc", $id_tipo_merc);
-		$sql->bindValue(":descricao", $descricao);
-		$sql->bindValue(":id_tipo_emb1", $id_tipo_emb1);
-		$sql->bindValue(":id_tipo_emb2", $id_tipo_emb2);
-		$sql->bindValue(":qt_vol", $qt_vol);
-		$sql->bindValue(":id_uni_medida", $id_uni_medida);
-		$sql->bindValue(":peso", $peso);
-		$sql->bindValue(":id_status_merc1", $id_status_merc1);
-		$sql->bindValue(":id_status_merc2", $id_status_merc2);
-		$sql->bindValue(":id_status_merc3", $id_status_merc3);
-		$sql->bindValue(":id_status_merc3", $id_status_merc3);
-		$sql->bindValue(":id_status_emb1", $id_status_emb1);
-		$sql->bindValue(":id_status_emb2", $id_status_emb2);
-		$sql->bindValue(":id_status_emb3", $id_status_emb3);
-		$sql->bindValue(":id_status_emb4", $id_status_emb4);
-		$sql->bindValue(":nr_onu", $nr_onu);
-		$sql->bindValue(":nr_risco", $nr_risco);
-		$sql->bindValue(":class_risco", $class_risco);
-		$sql->bindValue(":class_embalagem", $class_embalagem);
-		$sql->execute();
+	public function setDanosMercadoriaP($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO processo_danos_merc SET {$fields}");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
-	public function upDanosMercadoriaP($num_processo, $id_tipo_merc, $descricao, $id_tipo_emb1, $id_tipo_emb2, $qt_vol, $id_uni_medida, $peso, $id_status_merc1, $id_status_merc2, $id_status_merc3, $id_status_merc4, $id_status_emb1, $id_status_emb2, $id_status_emb3, $id_status_emb4, $nr_onu, $nr_risco, $class_risco, $class_embalagem){
-		$sql = $this->db->prepare("UPDATE processo_danos_merc SET
-			id_tipo_merc = :id_tipo_merc,
-			descricao = :descricao,
-			id_tipo_emb1 = :id_tipo_emb1,
-			id_tipo_emb2 = :id_tipo_emb2,
-			qt_vol = :qt_vol,
-			id_uni_medida = :id_uni_medida,
-			peso = :peso,
-			id_status_merc1 = :id_status_merc1,
-			id_status_merc2 = :id_status_merc2,
-			id_status_merc3 = :id_status_merc3,
-			id_status_merc4 = :id_status_merc4,
-			id_status_emb1 = :id_status_emb1,
-			id_status_emb2 = :id_status_emb2,
-			id_status_emb3 = :id_status_emb3,
-			id_status_emb4 = :id_status_emb4,
-			nr_onu = :nr_onu,
-			nr_risco = :nr_risco,
-			class_risco = :class_risco,
-			class_embalagem = :class_embalagem WHERE num_processo = :num_processo
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":id_tipo_merc", $id_tipo_merc);
-		$sql->bindValue(":descricao", $descricao);
-		$sql->bindValue(":id_tipo_emb1", $id_tipo_emb1);
-		$sql->bindValue(":id_tipo_emb2", $id_tipo_emb2);
-		$sql->bindValue(":qt_vol", $qt_vol);
-		$sql->bindValue(":id_uni_medida", $id_uni_medida);
-		$sql->bindValue(":peso", $peso);
-		$sql->bindValue(":id_status_merc1", $id_status_merc1);
-		$sql->bindValue(":id_status_merc2", $id_status_merc2);
-		$sql->bindValue(":id_status_merc3", $id_status_merc3);
-		$sql->bindValue(":id_status_merc4", $id_status_merc4);
-		$sql->bindValue(":id_status_emb1", $id_status_emb1);
-		$sql->bindValue(":id_status_emb2", $id_status_emb2);
-		$sql->bindValue(":id_status_emb3", $id_status_emb3);
-		$sql->bindValue(":id_status_emb4", $id_status_emb4);
-		$sql->bindValue(":nr_onu", $nr_onu);
-		$sql->bindValue(":nr_risco", $nr_risco);
-		$sql->bindValue(":class_risco", $class_risco);
-		$sql->bindValue(":class_embalagem", $class_embalagem);
-		$sql->execute();
+	public function upDanosMercadoriaP($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("UPDATE processo_danos_merc SET {$fields} WHERE num_processo = '{$post['num_processo']}' ");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 
 	//PAGINA PROCESSO12.PHP
-	public function setDanosContainerP($num_processo, $num_registro, $armador, $ano_fabricacao, $modelo, $danos, $valor_averbado, $valor_depreciado, $valor_reparo, $lacres){
-		$sql = $this->db->prepare("INSERT INTO processo_dados_container SET
-			num_processo = :num_processo,
-			num_registro = :num_registro,
-			armador = :armador,
-			ano_fabricacao = :ano_fabricacao,
-			modelo = :modelo,
-			danos = :danos,
-			valor_averbado = :valor_averbado,
-			valor_depreciado = :valor_depreciado,
-			valor_reparo = :valor_reparo,
-			lacres = :lacres
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":num_registro", $num_registro);
-		$sql->bindValue(":armador", $armador);
-		$sql->bindValue(":ano_fabricacao", $ano_fabricacao);
-		$sql->bindValue(":modelo", $modelo);
-		$sql->bindValue(":danos", $danos);
-		$sql->bindValue(":valor_averbado", $valor_averbado);
-		$sql->bindValue(":valor_depreciado", $valor_depreciado);
-		$sql->bindValue(":valor_reparo", $valor_reparo);
-		$sql->bindValue(":lacres", $lacres);
-		$sql->execute();
+	public function setDanosContainerP($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO processo_dados_container SET {$fields}");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 	//GET DADOS CONTAINER
 	public function getDnContainerP($num_processo){
@@ -1765,51 +1765,54 @@ class Processos{
 
 		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
-	public function setPrejCusto($num_processo, $danos, $dispersao, $fsr){
-		$sql = $this->db->prepare("INSERT INTO processo_prej_custo SET
+	public function setPrejCusto($num_processo, $post){
+		$sql = $this->db->prepare("
+			INSERT INTO processo_prej_custo 
+			SET
 			num_processo = :num_processo,
 			danos = :danos,
 			dispersao = :dispersao,
-			fsr = :fsr
+			fsr = :fsr,
+			aproveitamento_salvados = :aproveitamento_salvados,
+			franquia = :franquia,
+			pos = :pos
 			");
 		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":danos", $danos);
-		$sql->bindValue(":dispersao", $dispersao);
-		$sql->bindValue(":fsr", $fsr);
+		$sql->bindValue(":danos", $post['danos']);
+		$sql->bindValue(":dispersao", $post['dispersao']);
+		$sql->bindValue(":fsr", $post['fsr']);
+		$sql->bindValue(":aproveitamento_salvados", $post['aproveitamento_salvados']);
+		$sql->bindValue(":franquia", $post['franquia']);
+		$sql->bindValue(":pos", $post['pos']);
 		$sql->execute();
-
-		return true;
 	}
-	public function upPrejCusto($num_processo, $danos, $dispersao, $fsr){
-		$sql = $this->db->prepare("UPDATE processo_prej_custo SET
-			danos = :danos,
-			dispersao = :dispersao,
-			fsr = :fsr WHERE num_processo = :num_processo
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":danos", $danos);
-		$sql->bindValue(":dispersao", $dispersao);
-		$sql->bindValue(":fsr", $fsr);
-		$sql->execute();
+	public function upPrejCusto($num_processo, $post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("
+			UPDATE processo_prej_custo SET {$fields} 
+			WHERE num_processo = '{$num_processo}'");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
-	public function setCusto($num_processo, $id_esforco, $qt, $valor, $id_user){
-		$sql = $this->db->prepare("INSERT INTO processo_prej_custo2 SET
-			num_processo = :num_processo,
-			id_esforco = :id_esforco,
-			qt = :qt,
-			valor = :valor,
-			id_user = :id_user
-			");
-		$sql->bindValue(":num_processo", $num_processo);
-		$sql->bindValue(":id_esforco", $id_esforco);
-		$sql->bindValue(":qt", $qt);
-		$sql->bindValue(":valor", $valor);
-		$sql->bindValue(":id_user", $id_user);
-		$sql->execute();
+	public function setCusto($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("INSERT INTO processo_prej_custo2 SET {$fields}");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 	public function getCusto($num_processo){
 		$sql = $this->db->prepare("SELECT processo_prej_custo2.*, cad_func.nome, nav_esforco.nome as esforco FROM processo_prej_custo2 INNER JOIN cad_func ON processo_prej_custo2.id_user = cad_func.id INNER JOIN nav_esforco ON processo_prej_custo2.id_esforco = nav_esforco.id WHERE num_processo = :num_processo ORDER BY processo_prej_custo2.id DESC");
@@ -1825,21 +1828,20 @@ class Processos{
 
 		return true;
 	}
-	public function upCusto($id, $id_esforco, $qt, $valor, $id_user){
-		$sql = $this->db->prepare("UPDATE processo_prej_custo2 SET
-			id_esforco = :id_esforco,
-			qt = :qt,
-			valor = :valor,
-			id_user = :id_user WHERE id = :id
-			");
-		$sql->bindValue(":id", $id);
-		$sql->bindValue(":id_esforco", $id_esforco);
-		$sql->bindValue(":qt", $qt);
-		$sql->bindValue(":valor", $valor);
-		$sql->bindValue(":id_user", $id_user);
-		$sql->execute();
+	public function upCusto($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+        	$key = substr($key, 0, -2);
+            $fields[] = "$key=:$key";
+        }
+		$fields = implode(', ', $fields);
+		$sql = $this->db->prepare("UPDATE processo_prej_custo2 SET {$fields} WHERE id = :id");
 
-		return true;
+		foreach ($post as $key => $value) {
+			$key = substr($key, 0, -2);
+            $sql->bindValue(":{$key}", $value);
+        }
+        $sql->execute();
 	}
 
 	//PAGINA PROCESSO26.PHP

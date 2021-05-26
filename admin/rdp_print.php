@@ -39,11 +39,11 @@ if (!empty($_GET['num_processo'])) {
 		<br><br>
 
 		Processo Mega Nrº: <?=$dados['num_processo']; ?><br>
-		Processo Allianz Nrº: <?=utf8_decode($dados['num_sinistro']); ?><br>
+		Processo Allianz Nrº: <?=$dados['num_sinistro']; ?><br>
 		
-		Seguradora: <?=utf8_decode($dados['seguradora']); ?><br>
-		Segurado: <?=utf8_decode($dados['segurado']); ?><br>
-		Transportador: <?=utf8_decode($dados['transportadora']); ?><br><br>
+		Seguradora: <?=$dados['seguradora']; ?><br>
+		Segurado: <?=$dados['segurado']; ?><br>
+		Transportador: <?=$dados['transportadora']; ?><br><br>
 		
 
 

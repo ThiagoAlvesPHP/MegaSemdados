@@ -5,6 +5,11 @@ $nav = new Navegacao();
 if (!empty($_GET['num_processo'])) {
 	$ajax = new Ajax();
 	$r = new Rdp();
+	$p = new Processos();
+
+	$nav_esforco = $p->getNavEsforco();
+
+	$getCusto = $p->getCusto($_GET['num_processo']);
 
 	$dados = $ajax->getProc(addslashes($_GET['num_processo']));
 	$sos = $r->getSosAll(addslashes($_GET['num_processo']));
@@ -15,6 +20,30 @@ if (!empty($_GET['num_processo'])) {
 
 		$r->upSOS($post);
 		echo '<script>alert("Registrado com sucesso!");window.location.href="despesas_sos_historico.php?num_processo='.$_GET['num_processo'].'"</script>';
+	}
+
+	//DELETAR DADOS DO CONTAINER
+	if (isset($_GET['del2']) && !empty($_GET['del2'])) {
+		$p->delCusto(addslashes($_GET['del2']));
+		?>
+		<script>
+			alert("Deletado com Sucesso!");
+			window.location.href = "despesas_sos_historico.php?num_processo=<?=$_GET['num_processo']; ?>";
+		</script>
+		<?php
+	}
+	//ATUALIZANDO CUSTO 2
+	if (!empty($_POST['esforcoUP'])) {
+		$idUP = addslashes($_POST['idUP']);
+		$esforco = addslashes($_POST['esforcoUP']);
+		$qt = addslashes($_POST['qtUP']);
+		$valor = addslashes($_POST['valorUP']);
+		$p->upCusto($idUP, $esforco, $qt, $valor, $id_user);
+		?>
+		<script>
+			window.location.href = "despesas_sos_historico.php?num_processo=<?=$_GET['num_processo']; ?>";
+		</script>
+		<?php
 	}
 
 	if (!empty($_GET['del'])) {
@@ -64,15 +93,15 @@ if (!empty($_GET['num_processo'])) {
 					<div class="row">
 						<div class="col-sm-4">
 							<label>Seguradora:</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['seguradora']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['seguradora']; ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Segurado:</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['segurado']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['segurado']; ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Transportador</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['transportadora']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['transportadora']; ?>" readonly="">
 						</div>
 					</div>
 					<hr>
@@ -134,6 +163,78 @@ if (!empty($_GET['num_processo'])) {
 						    	</tr>
 						    </tbody>
 						    <?php endforeach; ?>
+
+
+						    <!-- tabla 2 -->
+						    <?php
+								foreach ($getCusto as $dnC):
+								$sub = $dnC['valor']*$dnC['qt'];
+							?>
+							<tbody>
+								<tr>
+									<td>
+										<a href="" class="fa fa-edit" data-toggle="modal" data-target="#<?=$dnC['id']; ?>"></a>
+										
+										<a style="color: red;" href="despesas_sos_historico.php?num_processo=<?=$_GET['num_processo']; ?>&del2=<?=$dnC['id']; ?>" class="far fa-trash-alt"></a>
+
+
+										<!-- MODAL -->
+										<div id="<?=$dnC['id']; ?>" class="modal fade" role="dialog">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal">&times;</button>
+										        <h4 class="modal-title">Dados do Container</h4>
+										      </div>
+										      <form method="POST">
+										      	<input type="text" name="idUP" hidden="" value="<?=$dnC['id']; ?>">
+										      <div class="modal-body">
+										        <p>
+										        	<label>Documento:</label>
+									        		<select name="esforcoUP" class="form-control">
+									        			<?php
+									        			foreach ($nav_esforco as $dn) {
+									        				if ($dn['id'] == $dnC['id_esforco']) {
+									        					echo '<option selected value="'.$dn['id'].'">'.$dn['nome'].'</option>';
+									        				} else {
+									        					echo '<option value="'.$dn['id'].'">'.$dn['nome'].'</option>';
+									        				}
+									        				
+									        			}
+									        			?>
+									        		</select>
+									        		<label>Quantidade:</label>
+									        		<input type="number" value="<?=$dnC['qt']; ?>" name="qtUP" class="form-control">
+									        		<label>Valor Unitário:</label>
+									        		<input type="text" name="valorUP" value="<?=number_format($dnC['valor'], 2, '.',''); ?>" class="form-control money">
+										        </p>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+										        <button class="btn btn-primary">Salvar</button>
+										      </div>
+										      </form>
+										    </div>
+										  </div>
+										</div>
+										<!-- FIM MODAL -->
+
+
+									</td>
+									<td><?=date('d/m/Y', strtotime($dnC['dt_cadastro'])); ?></td>
+									<td>
+										<?=htmlspecialchars($dnC['esforco']); ?>
+									</td>
+									<td><?=$dnC['nome']; ?></td>
+									<td>R$<?=number_format($sub, 2, '.','') ?></td>
+									
+								</tr>
+							</tbody>
+								<?php
+								$total += $sub;
+							endforeach;
+							
+							?>
+
 						</table>
 					</div>	
 					<!-- FIM DE TABELA -->

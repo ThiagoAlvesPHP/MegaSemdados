@@ -79,7 +79,7 @@ $los = $sql->getCidadeID($dbAc['id_cidade']);
 	        <?php
 	        foreach ($status_merc as $value) {
 	          if ($value['id'] == $dn['id_status_merc1'] OR $value['id'] == $dn['id_status_merc2'] OR $value['id'] == $dn['id_status_merc3'] OR $value['id'] == $dn['id_status_merc4']) {
-	            echo utf8_encode($value['status']).', ';
+	            echo $value['status'].', ';
 	          }
 	        }
 	        ?>
@@ -90,7 +90,7 @@ $los = $sql->getCidadeID($dbAc['id_cidade']);
 	        <?php
 	        foreach ($status_emb as $value) {
 	          if ($value['id'] == $dn['id_status_emb1'] OR $value['id'] == $dn['id_status_emb2'] OR $value['id'] == $dn['id_status_emb3'] OR $value['id'] == $dn['id_status_emb4']) {
-	            echo utf8_encode($value['status']).', ';
+	            echo $value['status'].', ';
 	          }
 	        }
 	        ?>
@@ -107,7 +107,7 @@ $los = $sql->getCidadeID($dbAc['id_cidade']);
 	    	<td><b>CEP:</b> <?=$inventario2['v9']; ?></td>
 	    </tr>
 	    <tr>
-	    	<td colspan="2"><b>UF/Cidade:</b> <?=utf8_encode($c1['sigla']).' / '.$c1['uf'].' / '.$c1['nome']; ?></td>
+	    	<td colspan="2"><b>UF/Cidade:</b> <?=$c1['sigla'].' / '.$c1['uf'].' / '.$c1['nome']; ?></td>
 	    	<td><b>Telefone(s):</b> <?=$inventario2['v11']; ?></td>
 	    </tr>
 	    <tr>
@@ -157,7 +157,7 @@ $los = $sql->getCidadeID($dbAc['id_cidade']);
 			<?php
 			foreach ($getMedidaP as $m) {
 				if ($v['d3'] == $m['id']) {
-					echo utf8_encode($m['nome']);
+					echo $m['nome'];
 				}
 			}
 			?>

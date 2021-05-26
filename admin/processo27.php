@@ -83,9 +83,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav01 as $n) {
 	      							if ($getDescLocal['nav_processo27_1'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -95,9 +95,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav02 as $n) {
 	      							if ($getDescLocal['nav_processo27_2'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -107,9 +107,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav03 as $n) {
 	      							if ($getDescLocal['nav_processo27_3'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -119,9 +119,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav04 as $n) {
 	      							if ($getDescLocal['nav_processo27_4'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -131,9 +131,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav05 as $n) {
 	      							if ($getDescLocal['nav_processo27_5'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -143,9 +143,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav06 as $n) {
 	      							if ($getDescLocal['nav_processo27_6'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -155,9 +155,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav07 as $n) {
 	      							if ($getDescLocal['nav_processo27_7'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -169,9 +169,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav08 as $n) {
 	      							if ($getDescLocal['nav_processo27_8'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -181,9 +181,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav09 as $n) {
 	      							if ($getDescLocal['nav_processo27_9'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -193,9 +193,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav10 as $n) {
 	      							if ($getDescLocal['nav_processo27_10'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -205,9 +205,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav11 as $n) {
 	      							if ($getDescLocal['nav_processo27_11'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -217,9 +217,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav12 as $n) {
 	      							if ($getDescLocal['nav_processo27_12'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -229,9 +229,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav13 as $n) {
 	      							if ($getDescLocal['nav_processo27_13'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -241,9 +241,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav14 as $n) {
 	      							if ($getDescLocal['nav_processo27_14'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -258,9 +258,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav15 as $n) {
 	      							if ($getDescLocal['nav_processo27_15'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -270,9 +270,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav16 as $n) {
 	      							if ($getDescLocal['nav_processo27_16'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -284,9 +284,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav17 as $n) {
 	      							if ($getDescLocal['nav_processo27_17'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -296,9 +296,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav18 as $n) {
 	      							if ($getDescLocal['nav_processo27_18'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -312,9 +312,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav19 as $n) {
 	      							if ($getDescLocal['nav_processo27_19'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -326,9 +326,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav19 as $n) {
 	      							if ($getDescLocal['nav_processo27_20'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -340,9 +340,9 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      						<?php 
 	      						foreach ($nav19 as $n) {
 	      							if ($getDescLocal['nav_processo27_21'] == $n['id']) {
-	      								echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      								echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      							}
 	      						}
 	      						?>
@@ -389,7 +389,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_1" class="form-control">
 	      						<?php 
 	      						foreach ($nav01 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -397,7 +397,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_2" class="form-control">
 	      						<?php 
 	      						foreach ($nav02 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -405,7 +405,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_3" class="form-control">
 	      						<?php 
 	      						foreach ($nav03 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -413,7 +413,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_4" class="form-control">
 	      						<?php 
 	      						foreach ($nav04 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -421,7 +421,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_5" class="form-control">
 	      						<?php 
 	      						foreach ($nav05 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -429,7 +429,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_6" class="form-control">
 	      						<?php 
 	      						foreach ($nav06 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -437,7 +437,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_7" class="form-control">
 	      						<?php 
 	      						foreach ($nav07 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -447,7 +447,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_8" class="form-control">
 	      						<?php 
 	      						foreach ($nav08 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -455,7 +455,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_9" class="form-control">
 	      						<?php 
 	      						foreach ($nav09 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -463,7 +463,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_10" class="form-control">
 	      						<?php 
 	      						foreach ($nav10 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -471,7 +471,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_11" class="form-control">
 	      						<?php 
 	      						foreach ($nav11 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -479,7 +479,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_12" class="form-control">
 	      						<?php 
 	      						foreach ($nav12 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -487,7 +487,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_13" class="form-control">
 	      						<?php 
 	      						foreach ($nav13 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -495,7 +495,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_14" class="form-control">
 	      						<?php 
 	      						foreach ($nav14 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -508,7 +508,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_15" class="form-control">
 	      						<?php 
 	      						foreach ($nav15 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -516,7 +516,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_16" class="form-control">
 	      						<?php 
 	      						foreach ($nav16 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -526,7 +526,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_17" class="form-control">
 	      						<?php 
 	      						foreach ($nav17 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -534,7 +534,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_18" class="form-control">
 	      						<?php 
 	      						foreach ($nav18 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -546,7 +546,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_19" class="form-control">
 	      						<?php 
 	      						foreach ($nav19 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -556,7 +556,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_20" class="form-control">
 	      						<?php 
 	      						foreach ($nav19 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -566,7 +566,7 @@ $getDescLocal = $sql->processo_descricao_local($num_processo);
 	      					<select name="nav_processo27_21" class="form-control">
 	      						<?php 
 	      						foreach ($nav19 as $n) {
-	      							echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+	      							echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>

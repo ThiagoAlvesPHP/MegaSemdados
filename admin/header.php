@@ -30,13 +30,13 @@ if (!empty($match)) {
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="assets/datetime/jquery.datetimepicker.css">
-  <link rel="stylesheet" href="assets/css/datatable.css">
+  <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
   <script src="assets/js/jquery.min.js"></script>
   <script src="assets/js/Chart_js/Chart.min.js"></script>
   <script src="assets/js/Chart_js/Chart.bundle.js"></script>
   <script src="assets/js/Chart_js/utils.js"></script>
   <script src="assets/js/sweetalert.js"></script>
-  <script src="assets/js/datatable.js"></script>
+  <!-- <script src="assets/js/datatable.js"></script> -->
   <link rel="stylesheet" type="text/css" href="assets/css/header.css">
 </head>
 
@@ -54,6 +54,7 @@ if (!empty($match)) {
       </div>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="nav navbar-nav">
+            <!-- cadastros -->
             <li id="menu1" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fas fa-align-justify"></i> 
@@ -84,6 +85,7 @@ if (!empty($match)) {
                 <li class="divider"></li>
               </ul>
             </li>
+            <!-- processos -->
             <li id="menu2" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <b>
@@ -115,6 +117,7 @@ if (!empty($match)) {
                 <li class="divider"></li>
               </ul>
             </li>
+            <!-- gerenciamento -->
             <li class="dropdown" id="menu3">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <b>

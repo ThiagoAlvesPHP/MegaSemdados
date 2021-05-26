@@ -58,9 +58,9 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 	      						<?php
 	      						foreach ($nav_def_dest as $a) {
 	      							if ($getDestMerc['destino'] == $a['id']) {
-	      								echo '<option selected value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      								echo '<option selected value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      								echo '<option value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      							}
 	      						}
 					      		?>
@@ -76,9 +76,9 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 	      						<?php
 	      						foreach ($nav_motivo_dec as $a) {
 	      							if ($getDestMerc['motivo'] == $a['id']) {
-	      								echo '<option selected value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      								echo '<option selected value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      							} else {
-	      								echo '<option value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      								echo '<option value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      							}
 	      						}
 					      		?>
@@ -114,10 +114,10 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 					      			if (!empty($getDestMerc['cidade'])) {
 					      				$d  = $sql->getCidadeID($getDestMerc['cidade']);
 
-					      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			} else {
 					      				foreach ($getCidades as $value) {
-						      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+						      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 						      			}
 					      			}
 					      			?>
@@ -167,7 +167,7 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 	      					<select name="destino" class="form-control">
 	      						<?php
 	      						foreach ($nav_def_dest as $a) {
-	      							echo '<option value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      							echo '<option value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -181,7 +181,7 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 	      					<select name="motivo" class="form-control">
 	      						<?php 
 	      						foreach ($nav_motivo_dec as $a) {
-	      							echo '<option value="'.$a['id'].'">'.utf8_encode($a['nome']).'</option>';
+	      							echo '<option value="'.$a['id'].'">'.$a['nome'].'</option>';
 	      						}
 	      						?>
 	      					</select>
@@ -216,10 +216,10 @@ $getDestMerc = $sql->getDestMerc($num_processo);
 					      			if (!empty($p['1'])) {
 					      				$d  = $sql->getCidadeID($p['cidade1']);
 
-					      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			} else {
 					      				foreach ($getCidades as $value) {
-						      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+						      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 						      			}
 					      			}
 					      			?>

@@ -78,7 +78,7 @@ $ap = $sql->getProcessos($p, $limite);
 					    			$acontecimento = $sql->getDadosAcontecimento($a['num_processo']);
 					    			if (!empty($acontecimento)) {
 					    				$nat = $nat_evento->getEvento($acontecimento['id_nat_evento']);
-					    				echo $nat['nat_evento'];
+					    				echo utf8_decode($nat['nat_evento']);
 					    			} else {
 					    				echo '----';
 					    			}

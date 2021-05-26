@@ -66,15 +66,15 @@ if (!empty($_GET['num_processo'])) {
 					<div class="row">
 						<div class="col-sm-4">
 							<label>Seguradora:</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['seguradora']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['seguradora']; ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Segurado:</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['segurado']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['segurado']; ?>" readonly="">
 						</div>
 						<div class="col-sm-4">
 							<label>Transportador</label>
-							<input type="text" name="" class="form-control" value="<?=utf8_decode($dados['transportadora']); ?>" readonly="">
+							<input type="text" name="" class="form-control" value="<?=$dados['transportadora']; ?>" readonly="">
 						</div>
 					</div>
 

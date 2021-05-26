@@ -1,34 +1,35 @@
 <?php
 require 'header.php';
+$get = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+//capturando envio post
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
 //ÁREA DE EDIÇÃO DE DADOS DO CLIENTE PESSOA FISICA
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-	$id = addslashes($_GET['id']);
+if (!empty($get['id'])) {
+	$id = addslashes($get['id']);
 	$db = new PJuridica();
 	//SELECT DOS DADOS
-	$dados = $db->getPJuridicaID($id);
+	$dados = $db->getPJuridicaID($get['id']);
 
 	//ATUALIZAÇÃO DE PESSOA FISICA
-	if (!empty($_POST['razao_socialUP'])) {
-		$razao_social = addslashes($_POST['razao_socialUP']);
-		$email = addslashes($_POST['emailUP']);
-		$cnpj = addslashes($_POST['cnpjUP']);
-		$tel01 = addslashes($_POST['tel01UP']);
-		$tel02 = addslashes($_POST['tel02UP']);
-		$outras = addslashes($_POST['outrasUP']);
-		$segurado = addslashes($_POST['seguradoUP']);
-		$seguradora = addslashes($_POST['seguradoraUP']);
-		$transportadora = addslashes($_POST['transportadoraUP']);
-		$corretora = addslashes($_POST['corretoraUP']);
-		$status = addslashes($_POST['statusUP']);
-		$dt_at = date('Y-m-d');
+	if (!empty($_POST['razao_social'])) {
+		
+		$post['dt_at'] = date('Y-m-d');
+		$post['id_user_at'] = $_SESSION['cLogin'];
+		$post['id'] = $get['id'];
 
-		$db->upPJForm($razao_social, $email, $cnpj, $tel01, $tel02, $outras, $segurado, $seguradora, $transportadora, $corretora, $status, $id_user, $dt_at, $id);
+		/*echo "<br><br><br><pre>";
+
+		print_r($post);
+		exit;*/
+
+		$db->upPJForm($post);
 		?>
 		<script>
 			Swal.fire('Alterado com sucesso!');
 			setTimeout(success,1500);
 			function success(){
-				window.location.assign("pessoaPJGrid.php");
+				window.location.assign("pessoaPJForm.php?id=<?=$get['id']; ?>");
 			}
 			
 		</script>
@@ -47,79 +48,65 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 		      <div class="panel-body">
 		      	<form method="POST">
 		      		<label>Razão Social:</label>
-		      		<input type="text" name="razao_socialUP" value="<?=$dados['razao_social']; ?>" class="form-control">
-		      		
-		      		
+		      		<input type="text" name="razao_social" value="<?=$dados['razao_social']; ?>" class="form-control">
+
 		      		<div class="row">
 		      			<div class="col-sm-6">
 		      				<label>E-mail:</label>
-		      				<input type="email" name="emailUP" value="<?=$dados['email']; ?>" class="form-control">
+		      				<input type="email" name="email" value="<?=$dados['email']; ?>" class="form-control">
 		      				
 		      			</div>
 		      			<div class="col-sm-6">
 		      				<label>CNPJ:</label>
-		      				<input type="text" id="cnpj" name="cnpjUP" value="<?=$dados['cnpj']; ?>" class="form-control">
+		      				<input type="text" id="cnpj" name="cnpj" value="<?=$dados['cnpj']; ?>" class="form-control">
 		      			</div>
 		      		</div>
 					
 		      		<div class="row">
 		      			<div class="col-sm-6">
 		      				<label>Telefone 01:</label>
-		      				<input type="text" name="tel01UP" value="<?=$dados['tel01']; ?>" class="form-control">
+		      				<input type="text" name="tel01" value="<?=$dados['tel01']; ?>" class="form-control">
 		      			</div>
 		      			<div class="col-sm-6">
 		      				<label>Telefone 02:</label>
-		      				<input type="text" name="tel02UP" value="<?=$dados['tel02']; ?>" class="form-control">
+		      				<input type="text" name="tel02" value="<?=$dados['tel02']; ?>" class="form-control">
 		      			</div>
 		      		</div>
+
 		      		<label>Outras:</label>
-		      		<textarea class="form-control" name="outrasUP" value="<?=$dados['outras']; ?>"></textarea>
+		      		<textarea class="form-control" name="outras" value="<?=$dados['outras']; ?>"></textarea>
+		      		
 		      		<br>
 		      		<div class="row">
 		      			<div class="col-sm-2">
-		      				<?php
-		      				if ($dados['segurado'] == 1) {
-		      					echo '<input type="checkbox" name="seguradoUP" value="1" checked><label>Segurado?</label>';
-		      				} else {
-		      					echo '<input type="checkbox" name="seguradoUP" value="1"><label>Segurado?</label>';
-		      				}
-		      				?>
+		      				<label>Segurado?</label><br>
+		      				<input type="radio" name="segurado" value="1" <?=($dados['segurado'] == 1)?'checked':''; ?>><label>Sim</label> 
+		      				|
+		      				<input type="radio" name="segurado" value="0" <?=($dados['segurado'] == 0)?'checked':''; ?>><label>Não</label>
 		      			</div>
 		      			<div class="col-sm-2">
-		      				<?php
-		      				if ($dados['seguradora'] == 1) {
-		      					echo '<input type="checkbox" name="seguradoraUP" value="1" checked><label>Seguradora?</label>';
-		      				} else {
-		      					echo '<input type="checkbox" name="seguradoraUP" value="1"><label>Seguradora?</label>';
-		      				}
-		      				?>
+		      				<label>Seguradora?</label><br>
+		      				<input type="radio" name="seguradora" value="1" <?=($dados['seguradora'] == 1)?'checked':''; ?>><label>Sim</label> 
+		      				|
+		      				<input type="radio" name="seguradora" value="0" <?=($dados['seguradora'] == 0)?'checked':''; ?>><label>Não</label>
 		      			</div>
 		      			<div class="col-sm-2">
-		      				<?php
-		      				if ($dados['transportadora'] == 1) {
-		      					echo '<input type="checkbox" name="transportadoraUP" value="1" checked><label>Transportadora?</label>';
-		      				} else {
-		      					echo '<input type="checkbox" name="transportadoraUP" value="1"><label>Transportadora?</label>';
-		      				}
-		      				?>
+		      				<label>Transportadora?</label><br>
+		      				<input type="radio" name="transportadora" value="1" <?=($dados['transportadora'] == 1)?'checked':''; ?>><label>Sim</label> 
+		      				|
+		      				<input type="radio" name="transportadora" value="0" <?=($dados['transportadora'] == 0)?'checked':''; ?>><label>Não</label>
 		      			</div>
 		      			<div class="col-sm-2">
-		      				<?php
-		      				if ($dados['corretora'] == 1) {
-		      					echo '<input type="checkbox" name="corretoraUP" value="1" checked><label>Corretor (a)?</label>';
-		      				} else {
-		      					echo '<input type="checkbox" name="corretoraUP" value="1"><label>Corretor (a)?</label>';
-		      				}
-		      				?>
+		      				<label>Corretor (a)?</label><br>
+		      				<input type="radio" name="corretora" value="1" <?=($dados['corretora'] == 1)?'checked':''; ?>><label>Sim</label> 
+		      				|
+		      				<input type="radio" name="corretora" value="0" <?=($dados['corretora'] == 0)?'checked':''; ?>><label>Não</label>
 		      			</div>
 		      			<div class="col-sm-2">
-		      				<?php
-		      				if ($dados['status'] == 1) {
-		      					echo '<input type="checkbox" name="statusUP" value="1" checked><label>Cadastro Ativo</label>';
-		      				} else {
-		      					echo '<input type="checkbox" name="statusUP" value="1"><label>Cadastro Ativo</label>';
-		      				}
-		      				?>
+		      				<label>Status</label><br>
+		      				<input type="radio" name="status" value="1" <?=($dados['status'] == 1)?'checked':''; ?>><label>Ativo</label> 
+		      				|
+		      				<input type="radio" name="status" value="0" <?=($dados['status'] == 0)?'checked':''; ?>><label>Inativo</label>
 		      			</div>
 		      		</div>
 		      		<hr>
@@ -140,20 +127,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 } else {
 	$sql = new Cadastros();
 	//CADASTRO DE PESSOA FISICA
-	if (!empty($_POST['razao_social'])) {
-		$razao_social = addslashes($_POST['razao_social']);
-		$email = addslashes($_POST['email']);
-		$cnpj = addslashes($_POST['cnpj']);
-		$tel01 = addslashes($_POST['tel01']);
-		$tel02 = addslashes($_POST['tel02']);
-		$outras = addslashes($_POST['outras']);
-		$segurado = addslashes($_POST['segurado']);
-		$seguradora = addslashes($_POST['seguradora']);
-		$transportadora = addslashes($_POST['transportadora']);
-		$corretora = addslashes($_POST['corretora']);
-		$status = addslashes($_POST['status']);
-
-		$sql->setPJForm($razao_social, $email, $cnpj, $tel01, $tel02, $outras, $segurado, $seguradora, $transportadora, $prestadora, $corretora, $status, $id_user);
+	if (!empty($post['razao_social'])) {
+		$post['id_user'] = $id_user;
+		$sql->setPJForm($post);		
 		?>
 		<script>
 			Swal.fire('Registrado com sucesso!');

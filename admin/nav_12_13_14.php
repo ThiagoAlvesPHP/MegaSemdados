@@ -152,7 +152,7 @@ if (!empty($_POST['form5'])) {
 										      <div class="modal-body">
 										        <form method="POST">
 										        	<input type="text" hidden="" name="menu1_id" value="<?=$v['id']; ?>">
-										        	<input type="text" name="menu1" class="form-control" value="<?=utf8_encode($v['dano']); ?>"><br>
+										        	<input type="text" name="menu1" class="form-control" value="<?=$v['dano']; ?>"><br>
 										        	<button class="btn btn-primary">Atualizar</button>
 										        </form>
 										      </div>
@@ -165,7 +165,7 @@ if (!empty($_POST['form5'])) {
 
 				    				</td>
 				    				<td>
-				    					<?=utf8_encode($v['dano']); ?>
+				    					<?=$v['dano']; ?>
 				    				</td>
 				    			</tr>
 				    		</tbody>
@@ -206,7 +206,7 @@ if (!empty($_POST['form5'])) {
 										      <div class="modal-body">
 										        <form method="POST">
 										        	<input type="text" hidden="" name="menu3_id" value="<?=$v['id']; ?>">
-										        	<input type="text" name="menu3" class="form-control" value="<?=utf8_encode($v['tipo_doc']); ?>"><br>
+										        	<input type="text" name="menu3" class="form-control" value="<?=$v['tipo_doc']; ?>"><br>
 										        	<button class="btn btn-primary">Atualizar</button>
 										        </form>
 										      </div>
@@ -218,7 +218,7 @@ if (!empty($_POST['form5'])) {
 										</div>
 				    				</td>
 				    				<td>
-				    					<?=utf8_encode($v['tipo_doc']); ?>
+				    					<?=$v['tipo_doc']; ?>
 				    				</td>
 				    			</tr>
 				    		</tbody>
@@ -260,7 +260,7 @@ if (!empty($_POST['form5'])) {
 										      <div class="modal-body">
 										        <form method="POST">
 										        	<input type="text" hidden="" name="menu4_id" value="<?=$v['id']; ?>">
-										        	<input type="text" name="menu4" class="form-control" value="<?=utf8_encode($v['frete']); ?>"><br>
+										        	<input type="text" name="menu4" class="form-control" value="<?=$v['frete']; ?>"><br>
 										        	<button class="btn btn-primary">Atualizar</button>
 										        </form>
 										      </div>
@@ -272,7 +272,7 @@ if (!empty($_POST['form5'])) {
 										</div>
 				    				</td>
 				    				<td>
-				    					<?=utf8_encode($v['frete']); ?>
+				    					<?=$v['frete']; ?>
 				    				</td>
 				    			</tr>
 				    		</tbody>
@@ -314,7 +314,7 @@ if (!empty($_POST['form5'])) {
 										      <div class="modal-body">
 										        <form method="POST">
 										        	<input type="text" hidden="" name="menu5_id" value="<?=$v['id']; ?>">
-										        	<input type="text" name="menu5" class="form-control" value="<?=utf8_encode($v['tipo_doc']); ?>"><br>
+										        	<input type="text" name="menu5" class="form-control" value="<?=$v['tipo_doc']; ?>"><br>
 										        	<button class="btn btn-primary">Atualizar</button>
 										        </form>
 										      </div>
@@ -326,7 +326,7 @@ if (!empty($_POST['form5'])) {
 										</div>
 				    				</td>
 				    				<td>
-				    					<?=utf8_encode($v['tipo_doc']); ?>
+				    					<?=$v['tipo_doc']; ?>
 				    				</td>
 				    			</tr>
 				    		</tbody>

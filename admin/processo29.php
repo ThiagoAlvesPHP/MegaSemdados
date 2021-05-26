@@ -88,7 +88,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 						        			<select name="operacao" class="form-control">
 						        			<?php 
 						        			foreach ($nav_lancamento as $l) {
-						        				echo '<option value="'.$l['id'].'">'.utf8_encode($l['nome']).'</option>';
+						        				echo '<option value="'.$l['id'].'">'.$l['nome'].'</option>';
 						        			}
 						        			?>
 						        			</select>
@@ -98,7 +98,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 						        			<select name="atividade1" class="form-control">
 						        			<?php 
 						        			foreach ($nav_atividade as $l) {
-						        				echo '<option value="'.$l['id'].'">'.utf8_encode($l['nome']).'</option>';
+						        				echo '<option value="'.$l['id'].'">'.$l['nome'].'</option>';
 						        			}
 						        			?>
 						        			</select>
@@ -171,9 +171,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 			        			<?php 
 			        			foreach ($nav_lancamento as $la) {
 			        				if ($l['operacao'] == $la['id']) {
-			        					echo '<option selected value="'.$la['id'].'">'.utf8_encode($la['nome']).'</option>';
+			        					echo '<option selected value="'.$la['id'].'">'.$la['nome'].'</option>';
 			        				} else {
-			        					echo '<option value="'.$la['id'].'">'.utf8_encode($la['nome']).'</option>';
+			        					echo '<option value="'.$la['id'].'">'.$la['nome'].'</option>';
 			        				}
 			        			}
 			        			?>
@@ -185,9 +185,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 			        			<?php 
 			        			foreach ($nav_atividade as $la) {
 			        				if ($l['atividade1'] == $la['id']) {
-			        					echo '<option selected value="'.$la['id'].'">'.utf8_encode($la['nome']).'</option>';
+			        					echo '<option selected value="'.$la['id'].'">'.$la['nome'].'</option>';
 			        				} else {
-			        					echo '<option value="'.$la['id'].'">'.utf8_encode($la['nome']).'</option>';
+			        					echo '<option value="'.$la['id'].'">'.$la['nome'].'</option>';
 			        				}
 			        			}
 			        			?>
@@ -217,8 +217,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 
 									</td>
-									<td><?=utf8_encode($l['n']); ?></td>
-									<td><?=utf8_encode($l['name']); ?></td>
+									<td><?=$l['n']; ?></td>
+									<td><?=$l['name']; ?></td>
 									<td><?=htmlspecialchars($l['atividade2']); ?></td>
 									<td>R$<?=number_format($l['valor_receber'], 2,'.','') ?></td>
 									<td>R$<?=number_format($l['valor_pagar'], 2,'.','') ?></td>

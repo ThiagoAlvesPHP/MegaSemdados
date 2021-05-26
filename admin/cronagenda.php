@@ -1,5 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 require 'vendor/autoload.php';
 
@@ -25,10 +26,10 @@ if (count($dados) > 0) {
     $mail->isSMTP();
 
     /*Debug*/
-    $mail->SMTPDebug = 2;
+    //$mail->SMTPDebug = 2;
 
     //smtp.live.com - hotmail / smtp.gmail.com - GMAIL
-    $mail->Host = 'megasystemreguladora.com.br'; 
+    $mail->Host = 'mail.megasystemreguladora.com.br'; 
     $mail->SMTPAuth = true;                              
     $mail->Username = EMAIL;                 
     $mail->Password = SENHA;  
@@ -38,9 +39,10 @@ if (count($dados) > 0) {
     foreach ($dados as $v) {
     	//QUEM ESTA ENVIANDO - EMAIL DA EMPRESA
 	    $mail->setFrom($mail->Username);/*opcional*/
-	    //AQUI VAI PARA QUEM VOU ENVIAR O EMAIL
+	    //AQUI VAI PARA QUEM VOU ENVIAR O EMAIL / $v['email']
 	    $mail->addAddress($v['email'], 'Mega Reguladora'); 
-	    //ENVIANDO COPIA PARA O MESMO OU OUTRO E-MAIL             
+	    //ENVIANDO COPIA PARA O MESMO OU OUTRO E-MAIL
+	    //thiagoalves@albicod.com   / financeiro@megareguladora.com.br          
 	    $mail->addReplyTo('financeiro@megareguladora.com.br', 'Mega Reguladora');
 
 	    //ATIVANDO HTML NO ENVIO DO EMAIL
@@ -69,6 +71,7 @@ if (count($dados) > 0) {
 	    </div>';
 
 	    $mail->send();
+	    echo "Enviado com sucesso!";
 	}
     
     } catch (Exception $e) {

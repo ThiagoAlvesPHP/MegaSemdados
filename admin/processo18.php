@@ -55,11 +55,10 @@ $getNav4 = $sql->nav_processo16_2();
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP18form1['p1'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
-										
 									}
 									?>
 								</select>
@@ -90,7 +89,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      			<?php
 					      			$d  = $sql->getCidadeID($getP18form1['p6']);
 					      				
-					      			echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      			echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			?>
 							    </select>
 							</div>
@@ -101,7 +100,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      			<?php
 					      			$d  = $sql->getCidadeID($getP18form1['p7']);
 					      				
-					      			echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      			echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			?>
 							    </select>
 							</div>
@@ -111,9 +110,9 @@ $getNav4 = $sql->nav_processo16_2();
 									<?php
 									foreach ($getNav4 as $n) {
 										if ($getP18form1['p8'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -176,7 +175,7 @@ $getNav4 = $sql->nav_processo16_2();
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -219,7 +218,7 @@ $getNav4 = $sql->nav_processo16_2();
 								<select class="form-control" name="p1">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -249,7 +248,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      		<select name="p6" multiple class="form-control" id="cidades1">
 					      			<?php
 					      			foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 					      			?>
 							    </select>
@@ -260,7 +259,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      		<select name="p7" multiple class="form-control" id="cidades2">
 					      			<?php
 					      			foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 					      			?>
 							    </select>
@@ -270,7 +269,7 @@ $getNav4 = $sql->nav_processo16_2();
 								<select class="form-control" name="p8">
 									<?php
 									foreach ($getNav4 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -332,7 +331,7 @@ $getNav4 = $sql->nav_processo16_2();
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -384,9 +383,9 @@ $getNav4 = $sql->nav_processo16_2();
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP18form2['a1'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 										
 									}
@@ -419,7 +418,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      			<?php
 					      			$d  = $sql->getCidadeID($getP18form2['p6']);
 					      				
-					      			echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      			echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			?>
 							    </select>
 							</div>
@@ -430,7 +429,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      			<?php
 					      			$d  = $sql->getCidadeID($getP18form2['p7']);
 					      				
-					      			echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+					      			echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			?>
 							    </select>
 							</div>
@@ -440,9 +439,9 @@ $getNav4 = $sql->nav_processo16_2();
 									<?php
 									foreach ($getNav4 as $n) {
 										if ($getP18form2['p8'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -505,7 +504,7 @@ $getNav4 = $sql->nav_processo16_2();
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -548,7 +547,7 @@ $getNav4 = $sql->nav_processo16_2();
 								<select class="form-control" name="a1">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -578,7 +577,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      		<select name="p6" multiple class="form-control" id="cidades3">
 					      			<?php
 					      			foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 					      			?>
 							    </select>
@@ -589,7 +588,7 @@ $getNav4 = $sql->nav_processo16_2();
 					      		<select name="p7" multiple class="form-control" id="cidades4">
 					      			<?php
 					      			foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 					      			?>
 							    </select>
@@ -599,7 +598,7 @@ $getNav4 = $sql->nav_processo16_2();
 								<select class="form-control" name="p8">
 									<?php
 									foreach ($getNav4 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -661,7 +660,7 @@ $getNav4 = $sql->nav_processo16_2();
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>

@@ -35,11 +35,11 @@ $at = $sql->getRamos();
 				}
 				?>
 				<div class="panel-heading">
-		      	Edição de Moedas
+		      	Edição de Ramo
 			    </div>
 			    <div class="panel-body">
 			      	<form method="POST">
-			      		<label>Moeda</label>
+			      		<label>Ramo</label>
 			      		<input type="text" value="<?=$getRamo['ramo']; ?>" name="ramoUP" class="form-control">
 			      		<br>
 			      		<a class="btn btn-danger" href="index.php">Voltar</a>

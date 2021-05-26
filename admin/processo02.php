@@ -35,7 +35,7 @@ if (!empty($_POST['num_apolice'])) {
 		      	<hr>
 		      	<h3>Dados do Segurado</h3>
 		      	<div class="well">
-		      		<form method="POST"">
+		      		<form method="POST">
 		      			<div class="row">
 		      				<div class="col-sm-6">
 		      					<label><span style="color: red;">*</span> Segurado:</label>

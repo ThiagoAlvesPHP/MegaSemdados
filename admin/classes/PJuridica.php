@@ -41,38 +41,17 @@ class PJuridica{
 
 		return $sql->fetch(PDO::FETCH_ASSOC);
 	}
-	public function upPJForm($razao_social, $email, $cnpj, $tel01, $tel02, $outras, $segurado, $seguradora, $transportadora, $corretora, $status, $id_user_at, $dt_at, $id){
-		$sql = $this->db->prepare("UPDATE cad_p_juridica SET 
-			razao_social = :razao_social, 
-			email = :email,
-			cnpj = :cnpj,  
-			tel01 = :tel01, 
-			tel02 = :tel02,
-			outras = :outras, 
-			segurado = :segurado,
-			seguradora = :seguradora, 
-			transportadora = :transportadora,
-			corretora = :corretora,
-			status = :status, 
-			id_user_at = :id_user_at,
-			dt_at = :dt_at WHERE id = :id
-			");
-		$sql->bindValue(":razao_social", $razao_social);
-		$sql->bindValue(":email", $email);
-		$sql->bindValue(":cnpj", $cnpj);
-		$sql->bindValue(":tel01", $tel01);
-		$sql->bindValue(":tel02", $tel02);
-		$sql->bindValue(":outras", $outras);
-		$sql->bindValue(":segurado", $segurado);
-		$sql->bindValue(":seguradora", $seguradora);
-		$sql->bindValue(":transportadora", $transportadora);
-		$sql->bindValue(":corretora", $corretora);
-		$sql->bindValue(":status", $status);
-		$sql->bindValue(":id_user_at", $id_user_at);
-		$sql->bindValue(":dt_at", $dt_at);
-		$sql->bindValue(":id", $id);
-		$sql->execute();
+	public function upPJForm($post){
+		$fields = [];
+        foreach ($post as $key => $value) {
+            $fields[] = "$key=:$key";
+        }
+        $fields = implode(', ', $fields);
+		$sql = $this->db->prepare("UPDATE cad_p_juridica SET {$fields} WHERE id = {$post['id']}");
 
-		return true;
+		foreach ($post as $key => $value) {
+            $sql->bindValue(":{$key}", $value);
+        }
+		$sql->execute();
 	}
 }

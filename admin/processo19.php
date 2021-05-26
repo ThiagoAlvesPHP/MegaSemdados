@@ -67,9 +67,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['terc_env']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -79,9 +79,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['dec_terc']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -93,9 +93,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['terc_culp']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -105,9 +105,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['dados_terc']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -119,9 +119,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['ressarc']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -131,9 +131,9 @@ if (!empty($_POST['terc_envUP'])) {
 											<?php
 											foreach ($getStatus as $s) {
 												if ($s['id'] == $getTercForm['rel_compl']) {
-													echo '<option selected value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option selected value="'.$s['id'].'">'.$s['status'].'</option>';
 												} else {
-													echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+													echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 												}
 											}
 											?>
@@ -152,7 +152,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="terc_env" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -160,7 +160,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="dec_terc" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -170,7 +170,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="terc_culp" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -178,7 +178,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="dados_terc" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -188,7 +188,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="ressarc" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -196,7 +196,7 @@ if (!empty($_POST['terc_envUP'])) {
 										<select name="rel_compl" class="form-control">
 											<?php
 											foreach ($getStatus as $s) {
-												echo '<option value="'.$s['id'].'">'.utf8_encode($s['status']).'</option>';
+												echo '<option value="'.$s['id'].'">'.$s['status'].'</option>';
 											}
 											?>
 										</select>
@@ -206,8 +206,6 @@ if (!empty($_POST['terc_envUP'])) {
 		      				<?php
 		      			}
 		      		?>
-					
-
 					<br>
 				    <div class="row">
 			      			<div class="col-sm-10"></div>

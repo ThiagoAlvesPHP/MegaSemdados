@@ -1,0 +1,54 @@
+[24-Apr-2020 13:36:17 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:17 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:24 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:24 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:24 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/config.php on line 4
+[24-Apr-2020 13:36:43 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:43 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:26 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:26 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/config.php on line 4
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  opendir(_MPDF_PATHgraph_cache): failed to open dir: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 12
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 23
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 23
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_line.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 24
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_line.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 24
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_log.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 25
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_log.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 25
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_scatter.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 26
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_scatter.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 26
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_regstat.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 27
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_regstat.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 27
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_pie.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 28
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_pie.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 28
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_pie3d.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 29
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_pie3d.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 29
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_bar.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 30
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_bar.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 30
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(_JPGRAPH_PATHjpgraph_radar.php): failed to open stream: No such file or directory in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 31
+[24-Apr-2020 13:45:28 America/Fortaleza] PHP Warning:  include_once(): Failed opening '_JPGRAPH_PATHjpgraph_radar.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/graph.php on line 31
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/config_fonts.php on line 16
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Fatal error:  Class 'UCDN' not found in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/config_script2lang.php on line 5
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:29 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/config_fonts-distr-without-OTL.php on line 16
+[24-Apr-2020 14:05:42 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 14:05:42 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 16:15:26 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 16:15:26 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0

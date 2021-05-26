@@ -21,15 +21,17 @@ class LoginCliente{
 		}
 	}
 	//LOGAR
-	public function logarCliente($email, $senha){
+	public function logarCliente($post){
 		$dados = array();
-
-		$sql = $this->db->prepare("SELECT id FROM cad_p_fisica WHERE 
-			email = :email AND senha = :senha AND status = 1");
-		$sql->bindValue(":email", $email);
-		$sql->bindValue(":senha", md5($senha));
+		$sql = $this->db->prepare("
+			SELECT id FROM cad_p_fisica 
+			WHERE email = :email 
+			AND senha = :senha 
+			AND status = 1");
+		$sql->bindValue(":email", $post['email']);
+		$sql->bindValue(":senha", md5($post['senha']));
 		$sql->execute();
-
+		
 		if ($sql->rowCount() > 0) {
 			$dados = $sql->fetch(PDO::FETCH_ASSOC);
 			$_SESSION['cLoginCliente'] = $dados['id'];

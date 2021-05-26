@@ -7,6 +7,7 @@ $num_processo = addslashes($_GET['num_processo']);
 $p = $sql->getProcesso($num_processo);
 
 $getRegPolicial = $sql->getRegPolicial($num_processo);
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 ?>
 
 <br><br><br>
@@ -26,14 +27,8 @@ $getRegPolicial = $sql->getRegPolicial($num_processo);
 	      		//ATUALIZANDO DADOS
 	      		if (!empty($getRegPolicial)) {
 	      			if (isset($_POST['orgao_acidente'])) {
-	      				$orgao_acidente = addslashes($_POST['orgao_acidente']);
-	      				$num_acidente = addslashes($_POST['num_acidente']);
-	      				$orgao_saque = addslashes($_POST['orgao_saque']);
-	      				$num_saque = addslashes($_POST['num_saque']);
-	      				$inquerito = addslashes($_POST['inquerito']);
-	      				$investigacao = addslashes($_POST['investigacao']);
-
-	      				$sql->upRegPolicial($num_processo, $orgao_acidente, $num_acidente, $orgao_saque, $num_saque, $inquerito, $investigacao);
+	      				$post['num_processo'] = $num_processo;
+	      				$sql->upRegPolicial($post);
 	      				?>
 						<script>
 							window.location.href = "processo10.php?num_processo=<?=$num_processo; ?>";
@@ -95,15 +90,9 @@ $getRegPolicial = $sql->getRegPolicial($num_processo);
 		      	</form>
 	      			<?php
 	      		} else {
-	      			if (isset($_POST['orgao_acidente'])) {
-	      				$orgao_acidente = addslashes($_POST['orgao_acidente']);
-	      				$num_acidente = addslashes($_POST['num_acidente']);
-	      				$orgao_saque = addslashes($_POST['orgao_saque']);
-	      				$num_saque = addslashes($_POST['num_saque']);
-	      				$inquerito = addslashes($_POST['inquerito']);
-	      				$investigacao = addslashes($_POST['investigacao']);
-
-	      				$sql->setRegPolicial($num_processo, $orgao_acidente, $num_acidente, $orgao_saque, $num_saque, $inquerito, $investigacao);
+	      			if (isset($post['orgao_acidente'])) {
+	      				$post['num_processo'] = $num_processo;
+	      				$sql->setRegPolicial($post);
 	      				?>
 						<script>
 							window.location.href = "processo10.php?num_processo=<?=$num_processo; ?>";

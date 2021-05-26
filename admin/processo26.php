@@ -61,9 +61,9 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 									<?php
 									foreach ($getNavPassagemMot as $m) {
 										if ($getCausasSinistros['id_nav_passagem_mot'] == $m['id']) {
-											echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 										} else {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									}
 									?>
@@ -73,9 +73,9 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 									<?php
 									foreach ($getDiagrama as $m) {
 										if ($getCausasSinistros['id_nav_diagrama'] == $m['id']) {
-											echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 										} else {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									}
 									?>
@@ -89,9 +89,9 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 									<?php
 									foreach ($getStatusConh as $m) {
 										if ($getCausasSinistros['id_status_conhecimento'] == $m['id']) {
-											echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 										} else {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									}
 									?>
@@ -101,9 +101,9 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 									<?php
 									foreach ($getTacografo as $m) {
 										if ($getCausasSinistros['id_status_torografia'] == $m['id']) {
-											echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 										} else {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									}
 									?>
@@ -146,7 +146,7 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 								<select class="form-control" name="id_nav_passagem_mot">
 									<?php
 									foreach ($getNavPassagemMot as $m) {
-										echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+										echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -154,7 +154,7 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 								<select class="form-control" name="id_nav_diagrama">
 									<?php
 									foreach ($getDiagrama as $m) {
-										echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+										echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -166,7 +166,7 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 								<select class="form-control" name="id_status_conhecimento">
 									<?php
 									foreach ($getStatusConh as $m) {
-										echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+										echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -174,7 +174,7 @@ $getCausasSinistros = $sql->getCausasSinistros($num_processo);
 								<select class="form-control" name="id_status_torografia">
 									<?php
 									foreach ($getTacografo as $m) {
-										echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+										echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 									}
 									?>
 								</select>

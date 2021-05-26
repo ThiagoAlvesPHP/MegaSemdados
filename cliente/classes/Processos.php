@@ -13,7 +13,7 @@ class Processos{
 		$config['host'] = $options['localhost'];
 		$config['user'] = $options['user'];
 		$config['pass'] = $options['pass'];
-
+		
 		try {
 			$this->db = new PDO("mysql:dbname=".$config['db'].";host=".$config['host']."", "".$config['user']."", "".$config['pass']."");
 		} catch(PDOException $e) {

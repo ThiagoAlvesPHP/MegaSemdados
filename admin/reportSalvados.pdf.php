@@ -43,14 +43,14 @@ $ft = $sql->getFTSalvados($num_processo);
         ?>
           <th width="50%">
             <img width="250" height="200" src="<?=$mini; ?>"><br>
-            <?=utf8_encode($fts['texto']); ?>
+            <?=$fts['texto']; ?>
           </th>
         <?php
       } else {
         ?>
           <th width="50%">
             <img width="250" height="200" src="<?=$mini; ?>"><br>
-            <?=utf8_encode($fts['texto']); ?>
+            <?=$fts['texto']; ?>
           </th>
           </tr>
         <?php

@@ -43,10 +43,10 @@ if (!empty($_POST['cidade1']) && !empty($_POST['cidade2'])) {
 				      			if (!empty($p['cidade1'])) {
 				      				$d  = $sql->getCidadeID($p['cidade1']);
 
-				      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+				      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 				      			} else {
 				      				foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 				      			}
 				      			?>
@@ -61,10 +61,10 @@ if (!empty($_POST['cidade1']) && !empty($_POST['cidade2'])) {
 				      			if (!empty($p['cidade2'])) {
 				      				$d  = $sql->getCidadeID($p['cidade2']);
 				      				
-				      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+				      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 				      			} else {
 				      				foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 				      			}
 				      			?>

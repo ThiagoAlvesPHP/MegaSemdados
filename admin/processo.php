@@ -60,7 +60,7 @@ if (isset($_GET['num_processo']) && !empty($_GET['num_processo'])) {
 			      		<div class="row">
 			      			<div class="col-sm-6">
 			      				<label>Seguradora:</label>
-			      				<input readonly="" value="<?=$p['razao_social']; ?>" class="form-control">
+			      				<input readonly="" value="<?=utf8_decode($p['razao_social']); ?>" class="form-control">
 			      			</div>
 			      			<div class="col-sm-3">
 			      				<label>CNPJ:</label>

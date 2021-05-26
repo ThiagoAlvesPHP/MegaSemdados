@@ -23,30 +23,22 @@ $dest = $sql->getDestinatario06($num_processo);
 	      	<div class="well">
 	      		<?php
 	      		if (!empty($rem) && !empty($dest)) {
-
+	      			$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 	      			//UPDATE DE REMETENTE E DESTINATARIO
-	      			if (isset($_POST['razao_socialUP'])) {
-	      				$razao_social = addslashes($_POST['razao_socialUP']);
-	      				$endereco = addslashes($_POST['enderecoUP']);
-	      				$responsavel = addslashes($_POST['responsavelUP']);
-	      				$contato = addslashes($_POST['contatoUP']);
-	      				$email = addslashes($_POST['emailUP']);
-	      				if (!empty($_POST['seguroUP'])) {
-	      					$seguro_proprio = addslashes($_POST['seguroUP']);
-	      				} else {
-	      					$seguro_proprio = 0;
-	      				}
+	      			if (isset($post['razao_socialUP'])) {
+	      				$razao_social = $post['razao_socialUP'];
+	      				$endereco = $post['enderecoUP'];
+	      				$responsavel = $post['responsavelUP'];
+	      				$contato = $post['contatoUP'];
+	      				$email = $post['emailUP'];
+	      				$seguro_proprio = (!empty($post['seguroUP']))?$post['seguroUP']:'0';
 
-	      				$razao_social2 = addslashes($_POST['razao_social2UP']);
-	      				$endereco2 = addslashes($_POST['endereco2UP']);
-	      				$responsavel2 = addslashes($_POST['responsavel2UP']);
-	      				$contato2 = addslashes($_POST['contato2UP']);
-	      				$email2 = addslashes($_POST['email2UP']);
-	      				if (!empty($_POST['seguro2UP'])) {
-	      					$seguro_proprio2 = addslashes($_POST['seguro2UP']);
-	      				} else {
-	      					$seguro_proprio2 = 0;
-	      				}
+	      				$razao_social2 = $post['razao_social2UP'];
+	      				$endereco2 = $post['endereco2UP'];
+	      				$responsavel2 = $post['responsavel2UP'];
+	      				$contato2 = $post['contato2UP'];
+	      				$email2 = $post['email2UP'];
+	      				$seguro_proprio2 = (!empty($post['seguro2UP']))?$post['seguro2UP']:'0';
 	      				
 	      				//REGISTRANDO REMETENTE
 	      				$sql->upRemetente($num_processo, $razao_social, $endereco, $responsavel, $contato, $email, $seguro_proprio);
@@ -116,21 +108,22 @@ $dest = $sql->getDestinatario06($num_processo);
 			      	</form>
 	      			<?php
 	      		} else {
+	      			$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 	      			//CADASTRO DE REMETENTE E DESTINATARIO
-	      			if (isset($_POST['razao_social'])) {
-	      				$razao_social = addslashes($_POST['razao_social']);
-	      				$endereco = addslashes($_POST['endereco']);
-	      				$responsavel = addslashes($_POST['responsavel']);
-	      				$contato = addslashes($_POST['contato']);
-	      				$email = addslashes($_POST['email']);
-	      				$seguro_proprio = addslashes($_POST['seguro_proprio']);
+	      			if (isset($post['razao_social'])) {
+	      				$razao_social = $post['razao_social'];
+	      				$endereco = $post['endereco'];
+	      				$responsavel = $post['responsavel'];
+	      				$contato = $post['contato'];
+	      				$email = $post['email'];
+	      				$seguro_proprio = (!empty($post['seguro_proprio']))?$post['seguro_proprio']:'';
 
-	      				$razao_social2 = addslashes($_POST['razao_social2']);
-	      				$endereco2 = addslashes($_POST['endereco2']);
-	      				$responsavel2 = addslashes($_POST['responsavel2']);
-	      				$contato2 = addslashes($_POST['contato2']);
-	      				$email2 = addslashes($_POST['email2']);
-	      				$seguro_proprio2 = addslashes($_POST['seguro_proprio2']);
+	      				$razao_social2 = $post['razao_social2'];
+	      				$endereco2 = $post['endereco2'];
+	      				$responsavel2 = $post['responsavel2'];
+	      				$contato2 = $post['contato2'];
+	      				$email2 = $post['email2'];
+	      				$seguro_proprio2 = (!empty($post['seguro_proprio2']))?$post['seguro_proprio2']:'';
 	      				
 	      				//REGISTRANDO REMETENTE
 	      				$sql->setRemetente($num_processo, $razao_social, $endereco, $responsavel, $contato, $email, $seguro_proprio);

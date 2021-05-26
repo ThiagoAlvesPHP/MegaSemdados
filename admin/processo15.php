@@ -66,7 +66,7 @@ $getP15 = $sql->getP15($num_processo);
 					      			<?php
 					      			$d  = $sql->getCidadeID($getP15['p5']);
 
-				      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+				      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 					      			?>
 							    </select>
 
@@ -129,7 +129,7 @@ $getP15 = $sql->getP15($num_processo);
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -167,9 +167,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p32'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -178,9 +178,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p33'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -189,9 +189,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p34'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -200,9 +200,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p35'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -211,9 +211,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p36'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -222,9 +222,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p37'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -233,9 +233,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p38'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -244,9 +244,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p39'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -255,9 +255,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p40'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -266,9 +266,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p41'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -280,9 +280,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p42'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -291,9 +291,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p43'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -302,9 +302,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p44'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -313,9 +313,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p45'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -324,9 +324,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p46'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -335,9 +335,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p47'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -346,9 +346,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p48'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -357,9 +357,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p49'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -368,9 +368,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p50'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -379,9 +379,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p51'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -393,9 +393,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p52'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -404,9 +404,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p53'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -415,9 +415,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p54'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -426,9 +426,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p55'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -437,9 +437,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p56'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -448,9 +448,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p57'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -459,9 +459,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p58'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -470,9 +470,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p59'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -481,9 +481,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p60'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -492,9 +492,9 @@ $getP15 = $sql->getP15($num_processo);
 									<?php
 									foreach ($getNav as $n) {
 										if ($getP15['p61'] == $n['id']) {
-											echo '<option selected value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option selected value="'.$n['id'].'">'.$n['nome'].'</option>';
 										} else {
-											echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+											echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 										}
 									}
 									?>
@@ -535,7 +535,7 @@ $getP15 = $sql->getP15($num_processo);
 					      		<select name="p5" multiple class="form-control" id="cidades2">
 					      			<?php
 					      			foreach ($getCidades as $value) {
-					      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+					      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 					      			}
 					      			?>
 							    </select>
@@ -599,7 +599,7 @@ $getP15 = $sql->getP15($num_processo);
 									<option value="0">----</option>
 									<?php
 									foreach ($getNAv2 as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -636,70 +636,70 @@ $getP15 = $sql->getP15($num_processo);
 								<select class="form-control" name="p32">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p33">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p34">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p35">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p36">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p37">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p38">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p39">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p40">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p41">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -709,70 +709,70 @@ $getP15 = $sql->getP15($num_processo);
 								<select class="form-control" name="p42">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p43">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p44">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p45">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p46">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p47">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p48">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p49">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p50">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p51">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
@@ -782,70 +782,70 @@ $getP15 = $sql->getP15($num_processo);
 								<select class="form-control" name="p52">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p53">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p54">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p55">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p56">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p57">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p58">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p59">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p60">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>
 								<select class="form-control" name="p61">
 									<?php
 									foreach ($getNav as $n) {
-										echo '<option value="'.$n['id'].'">'.utf8_encode($n['nome']).'</option>';
+										echo '<option value="'.$n['id'].'">'.$n['nome'].'</option>';
 									}
 									?>
 								</select>

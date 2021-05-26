@@ -12,6 +12,8 @@ $num_processo = addslashes($_GET['num_processo']);
 $p = $sql->getProcesso($num_processo);
 
 $dbAc = $sql->getDadosAcontecimento($num_processo);
+
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 ?>
 <br><br><br>
 <div class="row">
@@ -30,22 +32,22 @@ $dbAc = $sql->getDadosAcontecimento($num_processo);
 	      			if (!empty($dbAc)) {
 
 	      			//UPDATE DE DADOS DO PROCESSO
-	      			if (isset($_POST['atividade'])) {
-						$id_atividade = addslashes($_POST['atividade']);
-						$id_atuacao = addslashes($_POST['atuacao']);
-						$id_nat_evento = addslashes($_POST['nat_evento']);
-						$id_cidade = addslashes($_POST['cidade']);
-						$dt_hs = addslashes($_POST['dt_hs']);
+	      			if (isset($post['atividade'])) {
+						$id_atividade = $post['atividade'];
+						$id_atuacao = $post['atuacao'];
+						$id_nat_evento = $post['nat_evento'];
+						$id_cidade = $post['cidade'];
+						$dt_hs = $post['dt_hs'];
 
 						$explode = explode('/', $dt_hs);
 						$explode2 = explode(' ', $explode[2]);
 						$dt_hss = $explode2[0].'-'.$explode[1].'-'.$explode[0].' '.$explode2[1];
-						$local_os = addslashes($_POST['local_os']);
-						$pres_representante = addslashes($_POST['pres_representante']);
-						$lc_preservado = addslashes($_POST['lc_preservado']);
-						$risco_saque = addslashes($_POST['risco_saque']);
-						$risco_ambiental = addslashes($_POST['risco_ambiental']);
-						$descricao = addslashes($_POST['descricao']);
+						$local_os = $post['local_os'];
+						$pres_representante = $post['pres_representante'];
+						$lc_preservado = $post['lc_preservado'];
+						$risco_saque = $post['risco_saque'];
+						$risco_ambiental = $post['risco_ambiental'];
+						$descricao = $post['descricao'];
 
 						$sql->upDadosAcontecimento($num_processo, $id_atividade, $id_atuacao, $id_nat_evento, $id_cidade, $dt_hss, $local_os, $pres_representante, $lc_preservado, $risco_saque, $risco_ambiental, $descricao);
 						?>
@@ -107,7 +109,7 @@ $dbAc = $sql->getDadosAcontecimento($num_processo);
       							if (!empty($dbAc['id_cidade'])) {
       								$d  = $sql->getCidadeID($dbAc['id_cidade']);
 			      				
-			      					echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+			      					echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
       							}
 	      						?>
 	      						</select>
@@ -191,22 +193,22 @@ $dbAc = $sql->getDadosAcontecimento($num_processo);
 	      			} else {
 
 	      			//CADASTRO DE DADOS DO ACONTECIMENTO
-	      			if (isset($_POST['atividade'])) {
-						$id_atividade = addslashes($_POST['atividade']);
-						$id_atuacao = addslashes($_POST['atuacao']);
-						$id_nat_evento = addslashes($_POST['nat_evento']);
-						$id_cidade = addslashes($_POST['cidade']);
-						$dt_hs = addslashes($_POST['dt_hs']);
+	      			if (isset($post['atividade'])) {
+						$id_atividade = $post['atividade'];
+						$id_atuacao = $post['atuacao'];
+						$id_nat_evento = $post['nat_evento'];
+						$id_cidade = $post['cidade'];
+						$dt_hs = $post['dt_hs'];
 
 						$explode = explode('/', $dt_hs);
 						$explode2 = explode(' ', $explode[2]);
 						$dt_hss = $explode2[0].'-'.$explode[1].'-'.$explode[0].' '.$explode2[1];
-						$local_os = addslashes($_POST['local_os']);
-						$pres_representante = addslashes($_POST['pres_representante']);
-						$lc_preservado = addslashes($_POST['lc_preservado']);
-						$risco_saque = addslashes($_POST['risco_saque']);
-						$risco_ambiental = addslashes($_POST['risco_ambiental']);
-						$descricao = addslashes($_POST['descricao']);
+						$local_os = $post['local_os'];
+						$pres_representante = $post['pres_representante'];
+						$lc_preservado = $post['lc_preservado'];
+						$risco_saque = $post['risco_saque'];
+						$risco_ambiental = $post['risco_ambiental'];
+						$descricao = $post['descricao'];
 
 						$sql->setDadosAcontecimento($num_processo, $id_atividade, $id_atuacao, $id_nat_evento, $id_cidade, $dt_hss, $local_os, $pres_representante, $lc_preservado, $risco_saque, $risco_ambiental, $descricao);
 						?>
@@ -258,7 +260,7 @@ $dbAc = $sql->getDadosAcontecimento($num_processo);
 	      						<select multiple="" id="cidades1" name="cidade" class="form-control">
 	      						<?php
 	      						foreach ($getCidades as $c) {
-	      							echo '<option value="'.$c['id'].'">'.utf8_encode($c['nome']).' - '.$c['uf'].' - '.$c['sigla'].'</option>';
+	      							echo '<option value="'.$c['id'].'">'.$c['nome'].' - '.$c['uf'].' - '.$c['sigla'].'</option>';
 	      						}
 	      						?>
 	      						</select>

@@ -6,19 +6,16 @@ $getCidades = $sql->getCidades();
 $num_processo = addslashes($_GET['num_processo']);
 $p = $sql->getProcesso($num_processo);
 
-//REGISTRANDO DANOS CONTAINER
-if (isset($_POST['num_registro'])) {
-	$num_registro = addslashes($_POST['num_registro']);
-	$armador = addslashes($_POST['armador']);
-	$ano_fabricacao = addslashes($_POST['ano_fabricacao']);
-	$modelo = addslashes($_POST['modelo']);
-	$danos = addslashes($_POST['danos']);
-	$valor_averbado = addslashes(str_replace(",", ".", $_POST['valor_averbado']));
-	$valor_depreciado = addslashes(str_replace(",", ".", $_POST['valor_depreciado']));
-	$valor_reparo = addslashes(str_replace(",", ".", $_POST['valor_reparo']));
-	$lacres = addslashes($_POST['lacres']);
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-	$sql->setDanosContainerP($num_processo, $num_registro, $armador, $ano_fabricacao, $modelo, $danos, $valor_averbado, $valor_depreciado, $valor_reparo, $lacres);
+//REGISTRANDO DANOS CONTAINER
+if (isset($post['num_registro'])) {
+	$post['num_processo'] = $num_processo;
+	$post['valor_averbado'] = str_replace(",", ".", $post['valor_averbado']);
+	$post['valor_depreciado'] = str_replace(",", ".", $post['valor_depreciado']);
+	$post['valor_reparo'] = str_replace(",", ".", $post['valor_reparo']);
+
+	$sql->setDanosContainerP($post);
 	?>
 	<script>
 		window.location.href = "processo12.php?num_processo=<?=$num_processo; ?>";
@@ -28,16 +25,16 @@ if (isset($_POST['num_registro'])) {
 
 //UPDATE DANOS CONTAINER
 if (isset($_POST['num_registroUP'])) {
-	$id = $_POST['idUP'];
-	$num_registro = addslashes($_POST['num_registroUP']);
-	$armador = addslashes($_POST['armadorUP']);
-	$ano_fabricacao = addslashes($_POST['ano_fabricacaoUP']);
-	$modelo = addslashes($_POST['modeloUP']);
-	$danos = addslashes($_POST['danosUP']);
-	$valor_averbado = addslashes(str_replace(",", ".", $_POST['valor_averbadoUP']));
-	$valor_depreciado = addslashes(str_replace(",", ".", $_POST['valor_depreciadoUP']));
-	$valor_reparo = addslashes(str_replace(",", ".", $_POST['valor_reparoUP']));
-	$lacres = addslashes($_POST['lacresUP']);
+	$id = $post['idUP'];
+	$num_registro = $post['num_registroUP'];
+	$armador = $post['armadorUP'];
+	$ano_fabricacao = $post['ano_fabricacaoUP'];
+	$modelo = $post['modeloUP'];
+	$danos = $post['danosUP'];
+	$valor_averbado = str_replace(",", ".", $post['valor_averbadoUP']);
+	$valor_depreciado = str_replace(",", ".", $post['valor_depreciadoUP']);
+	$valor_reparo = str_replace(",", ".", $post['valor_reparoUP']);
+	$lacres = $post['lacresUP'];
 
 	$sql->upDanosContainerP($id, $num_registro, $armador, $ano_fabricacao, $modelo, $danos, $valor_averbado, $valor_depreciado, $valor_reparo, $lacres);
 	?>
@@ -100,7 +97,7 @@ $getInforP = $sql->getInforP($num_processo);
 						        		<select name="danos" class="form-control">
 						        			<?php
 						        			foreach ($getNavAvarias as $dn) {
-						        				echo '<option value="'.$dn['id'].'">'.utf8_encode($dn['dano']).'</option>';
+						        				echo '<option value="'.$dn['id'].'">'.$dn['dano'].'</option>';
 						        			}
 						        			?>
 						        		</select>
@@ -180,9 +177,9 @@ $getInforP = $sql->getInforP($num_processo);
 					        			<?php
 					        			foreach ($getNavAvarias as $dn) {
 					        				if ($dnC['danos'] == $dn['id']) {
-					        					echo '<option selected value="'.$dn['id'].'">'.utf8_encode($dn['dano']).'</option>';
+					        					echo '<option selected value="'.$dn['id'].'">'.$dn['dano'].'</option>';
 					        				} else {
-					        					echo '<option value="'.$dn['id'].'">'.utf8_encode($dn['dano']).'</option>';
+					        					echo '<option value="'.$dn['id'].'">'.$dn['dano'].'</option>';
 					        				}
 					        			}
 					        			?>
@@ -222,7 +219,7 @@ $getInforP = $sql->getInforP($num_processo);
 									<td><?=htmlspecialchars($dnC['armador']); ?></td>
 									<td><?=htmlspecialchars($dnC['ano_fabricacao']); ?></td>
 									<td><?=htmlspecialchars($dnC['modelo']); ?></td>
-									<td><?=htmlspecialchars(utf8_encode($dnC['dano'])); ?></td>
+									<td><?=htmlspecialchars($dnC['dano']); ?></td>
 									<td>R$<?=number_format($dnC['valor_averbado'], 2, '.','') ?></td>
 									<td>R$<?=number_format($dnC['valor_depreciado'], 2, '.','') ?></td>
 									<td>R$<?=number_format($dnC['valor_reparo'], 2, '.','') ?></td>

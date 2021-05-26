@@ -1,10 +1,24 @@
 <?php
 require 'header.php';
 $sql = new Processos();
+$get = filter_input_array(INPUT_GET, FILTER_DEFAULT);
 //SEGURADOS
-$num_processo = addslashes($_GET['num_processo']);
+$num_processo = addslashes($get['num_processo']);
 $p = $sql->getProcesso($num_processo);
 $eventos = $sql->getEventos($num_processo);
+
+//atualizar evento
+if (!empty($get['idup'])) {
+	$get['id'] = $get['idup'];
+	unset($get['idup']);
+	unset($get['num_processo']);
+	$sql->upEventoProcesso($get);
+	?>
+	<script>
+		window.location.href = "processoHistorico.php?num_processo=<?=$num_processo; ?>";
+	</script>
+	<?php
+}
 
 //EXCLUIR EVENTO
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -84,6 +98,39 @@ if (!empty($_POST['evento'])) {
 						    	<tr>
 						    		<td>
 						    			<a href="processoHistorico.php?num_processo=<?=$num_processo; ?>&id=<?=$e['id']; ?>" class="fa fa-trash"></a>
+
+						    			<i class="fas fa-edit" style="color: green;" data-toggle="modal" data-target="#edit<?=$e['id']; ?>"></i>
+
+						    			<div id="edit<?=$e['id']; ?>" class="modal fade" role="dialog">
+										  <div class="modal-dialog">
+
+										    <!-- Modal content-->
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal">&times;</button>
+										        <h4 class="modal-title">Editar</h4>
+										      </div>
+										      <div class="modal-body">
+										        <form method="get">
+										        	<input type="hidden" name="num_processo" value="<?=$num_processo; ?>">
+										        	<input type="hidden" name="idup" value="<?=$e['id']; ?>">
+										        	<label>Criado em: </label>
+										        	<?=date('d/m/Y H:i:s', strtotime($e['dt_cadastrado'])) ?><br>
+										        	<label>Criado por: </label>
+										        	<?=htmlspecialchars($e['nome']); ?><br>
+										        	<label>Evento</label>
+										        	<textarea style="height: 150px;" class="form-control" name="evento"><?=htmlspecialchars($e['evento']); ?></textarea>
+										        	<br>
+					      							<button class="btn btn-primary">Salvar</button>
+										        </form>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+										      </div>
+										    </div>
+
+										  </div>
+										</div>
 						    		</td>
 						    		<td><?=date('d/m/Y H:i:s', strtotime($e['dt_cadastrado'])) ?></td>
 						    		<td><?=htmlspecialchars($e['nome']); ?></td>

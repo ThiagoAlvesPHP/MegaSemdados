@@ -18,6 +18,19 @@ class Ajax{
 		}
 	}
 
+	public function getAllSearch($sql){
+		$sql = $this->db->prepare($sql);
+		$sql->execute();
+
+		return $sql->fetchAll(PDO::FETCH_ASSOC);
+	}
+	//count processos
+	public function countProcessos(){
+		$sql = $this->db->query("SELECT COUNT(*) as c FROM processos");
+
+		return $sql->fetch(PDO::FETCH_ASSOC);
+	}
+
 	//consultar motorista
 	public function getMotorista($motorista, $id_ramo){
 		$array = array();

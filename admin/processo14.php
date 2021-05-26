@@ -174,7 +174,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 					        		<select name="tipo_doc" class="form-control">
 					        			<?php
 					        			foreach ($nav_tipo_doc as $dn) {
-					        				echo '<option value="'.$dn['id'].'">'.utf8_encode($dn['tipo_doc']).'</option>';
+					        				echo '<option value="'.$dn['id'].'">'.$dn['tipo_doc'].'</option>';
 					        			}
 					        			?>
 					        		</select>
@@ -255,9 +255,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 					        			<?php
 					        			foreach ($nav_tipo_doc as $dn) {
 					        				if ($dnC['tipo_doc'] == $dn['id']) {
-					        					echo '<option selected value="'.$dn['id'].'">'.utf8_encode($dn['tipo_doc']).'</option>';
+					        					echo '<option selected value="'.$dn['id'].'">'.$dn['tipo_doc'].'</option>';
 					        				}
-					        				echo '<option value="'.$dn['id'].'">'.utf8_encode($dn['tipo_doc']).'</option>';
+					        				echo '<option value="'.$dn['id'].'">'.$dn['tipo_doc'].'</option>';
 					        			}
 					        			?>
 					        		</select>
@@ -299,7 +299,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 									</td>
 									<td><?=htmlspecialchars($dnC['nrtrc']); ?></td>
 									<td>
-										<?=htmlspecialchars(utf8_encode($dnC['nome_cod'])); ?>
+										<?=htmlspecialchars($dnC['nome_cod']); ?>
 									</td>
 									<td><?=htmlspecialchars($dnC['num_doc']); ?></td>
 									<td><?=htmlspecialchars($dnC['nome']); ?></td>

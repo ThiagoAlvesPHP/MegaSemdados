@@ -6,13 +6,14 @@ if (isset($_SESSION['cLogin']) && !empty($_SESSION['cLogin'])) {
 }
 
 $sql = new LoginCliente();
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 //LOGANDO NO SISTEMA
-if (!empty($_POST['email']) && !empty($_POST['senha'])) {
-	$email = addslashes($_POST['email']);
-	$senha = addslashes($_POST['senha']);
+if (!empty($post['email']) && !empty($post['senha'])) {
+	$post['g-recaptcha-response'] = true;
 
-	if (!empty($_POST['g-recaptcha-response'])) {
-		if ($sql->logarCliente($email, $senha)) {
+	if (!empty($post['g-recaptcha-response'])) {
+		//se existir cliente no db
+		if ($sql->logarCliente($post)) {
 		header('Location: index.php');
 		} else {
 			$alert = '<div class="alert alert-danger">

@@ -133,10 +133,10 @@ $getMedidaP = $sql->getMedidaP();
 		      			if (!empty($invID['city1'])) {
 		      				$d  = $sql->getCidadeID($invID['city1']);
 
-		      				echo '<option selected value="'.$d['id'].'">'.utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'].'</option>';
+		      				echo '<option selected value="'.$d['id'].'">'.$d['nome'].' - '.$d['uf'].' - '.$d['sigla'].'</option>';
 		      			} else {
 		      				foreach ($getCidades as $value) {
-			      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+			      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 			      			}
 		      			}
 		      			?>
@@ -277,7 +277,7 @@ $getMedidaP = $sql->getMedidaP();
 		      		<select name="cidade1" multiple class="form-control" id="cidades1">
 		      			<?php
 		      			foreach ($getCidades as $value) {
-		      				echo '<option value="'.$value['id'].'">'.utf8_encode($value['nome']).' - '.$value['uf'].' - '.$value['sigla'].'</option>';
+		      				echo '<option value="'.$value['id'].'">'.$value['nome'].' - '.$value['uf'].' - '.$value['sigla'].'</option>';
 		      			}
 		      			?>
 				    </select>
@@ -414,7 +414,7 @@ $getMedidaP = $sql->getMedidaP();
 				        				<select class="form-control" name="d3">
 				        					<?php
 											foreach ($getMedidaP as $m) {
-												echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+												echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 											}
 											?>
 				        				</select>
@@ -510,9 +510,9 @@ $getMedidaP = $sql->getMedidaP();
 				        					<?php
 											foreach ($getMedidaP as $m) {
 												if ($l['d3'] == $m['id']) {
-													echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+													echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 												} else {
-													echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+													echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 												}
 											}
 											?>
@@ -559,7 +559,7 @@ $getMedidaP = $sql->getMedidaP();
 								</td>
 								<td><?=$l['d1']; ?></td>
 								<td><?=$l['d2']; ?></td>
-								<td><?=utf8_encode($l['uni']); ?></td>
+								<td><?=$l['uni']; ?></td>
 								<td><?=$l['d4']; ?></td>
 								<td>R$<?=number_format($l['d5'], 2, ',', '.'); ?></td>
 								<td>R$<?=number_format($l['d7'], 2, ',', '.'); ?></td>

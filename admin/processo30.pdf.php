@@ -138,8 +138,8 @@ $table = $sql->getManifesto($num_processo, $id_vistoria);
       <th style="text-align: left;">UF/Município de Destino</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($c1['nome']).' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
-      <td><?=utf8_encode($c2['nome']).' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
+      <td><?=$c1['nome'].' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
+      <td><?=$c2['nome'].' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
     </tr>
   </table>
 </div>
@@ -165,7 +165,7 @@ $table = $sql->getManifesto($num_processo, $id_vistoria);
       <th style="text-align: left;">Local da Ocorrência Constatação</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($los['nome']).' - '.$los['uf'].' - '.$los['sigla']; ?></td>
+      <td><?=$los['nome'].' - '.$los['uf'].' - '.$los['sigla']; ?></td>
       <td><?=date('d/m/Y H:i:s', strtotime($dbAc['dt_hs'])); ?></td>
       <td><?=$dbAc['local_os']; ?></td>
     </tr>
@@ -191,7 +191,7 @@ if (!empty($dn)) {
         <?php
         foreach ($nav_mercadoria as $value) {
           if ($value['id'] == $dn['id_tipo_merc']) {
-            echo utf8_encode($value['nome']);
+            echo $value['nome'];
           }
         }
         echo ' - '.$dn['descricao'];
@@ -203,12 +203,12 @@ if (!empty($dn)) {
         <?php
         foreach ($nav_embalagem as $value) {
           if ($value['id'] == $dn['id_tipo_emb1']) {
-            echo utf8_encode($value['embalagem']);
+            echo $value['embalagem'];
           }
         }
         foreach ($nav_embalagem as $value) {
           if ($value['id'] == $dn['id_tipo_emb2']) {
-            echo ' - '.utf8_encode($value['embalagem']);
+            echo ' - '.$value['embalagem'];
           }
         }
         ?>
@@ -240,7 +240,7 @@ if (!empty($table) && !empty($dadosVistoria)) {
         <?php
         foreach ($getMedidaP as $m) {
           if ($dadosVistoria['id_uni_medida1'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -265,7 +265,7 @@ if (!empty($table) && !empty($dadosVistoria)) {
         <?php
         foreach ($getMedidaP as $m) {
           if ($dadosVistoria['id_uni_medida2'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -317,7 +317,7 @@ if (!empty($dn)) {
         <?php
         foreach ($status_merc as $value) {
           if ($value['id'] == $dn['id_status_merc1'] OR $value['id'] == $dn['id_status_merc2'] OR $value['id'] == $dn['id_status_merc3'] OR $value['id'] == $dn['id_status_merc4']) {
-            echo utf8_encode($value['status']).', ';
+            echo $value['status'].', ';
           }
         }
         ?>
@@ -328,7 +328,7 @@ if (!empty($dn)) {
         <?php
         foreach ($status_emb as $value) {
           if ($value['id'] == $dn['id_status_emb1'] OR $value['id'] == $dn['id_status_emb2'] OR $value['id'] == $dn['id_status_emb3'] OR $value['id'] == $dn['id_status_emb4']) {
-            echo utf8_encode($value['status']).', ';
+            echo $value['status'].', ';
           }
         }
         ?>

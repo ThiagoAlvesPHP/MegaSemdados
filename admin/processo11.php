@@ -13,6 +13,8 @@ $nav_embalagem = $sql->getEmbalagemP();
 $nav_medida = $sql->getMedidaP();
 $status_merc = $sql->getStatusMerP();
 $status_emb = $sql->getStatusEmbP();
+
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 ?>
 
 <br><br><br>
@@ -31,28 +33,9 @@ $status_emb = $sql->getStatusEmbP();
 	      		<?php
 	      		if (!empty($dn)) {
 	      			//UPDATE DE DANOS DE MERCADORIA
-	      			if (isset($_POST['id_tipo_merc'])) {
-	      				$id_tipo_merc = addslashes($_POST['id_tipo_merc']);
-	      				$descricao = addslashes($_POST['descricao']);
-	      				$id_tipo_emb1 = addslashes($_POST['id_tipo_emb1']);
-	      				$id_tipo_emb2 = addslashes($_POST['id_tipo_emb2']);
-	      				$qt_vol = addslashes(str_replace(",", ".", $_POST['qt_vol']));
-	      				$id_uni_medida = addslashes($_POST['id_uni_medida']);
-	      				$peso = addslashes(str_replace(",", ".", $_POST['peso']));
-	      				$id_status_merc1 = addslashes($_POST['id_status_merc1']);
-	      				$id_status_merc2 = addslashes($_POST['id_status_merc2']);
-	      				$id_status_merc3 = addslashes($_POST['id_status_merc3']);
-	      				$id_status_merc4 = addslashes($_POST['id_status_merc4']);
-	      				$id_status_emb1 = addslashes($_POST['id_status_emb1']);
-	      				$id_status_emb2 = addslashes($_POST['id_status_emb2']);
-	      				$id_status_emb3 = addslashes($_POST['id_status_emb3']);
-	      				$id_status_emb4 = addslashes($_POST['id_status_emb4']);
-	      				$nr_onu = addslashes($_POST['nr_onu']);
-	      				$nr_risco = addslashes($_POST['nr_risco']);
-	      				$class_risco = addslashes($_POST['class_risco']);
-	      				$class_embalagem = addslashes($_POST['class_embalagem']);
-
-	      				$sql->upDanosMercadoriaP($num_processo, $id_tipo_merc, $descricao, $id_tipo_emb1, $id_tipo_emb2, $qt_vol, $id_uni_medida, $peso, $id_status_merc1, $id_status_merc2, $id_status_merc3, $id_status_merc4, $id_status_emb1, $id_status_emb2, $id_status_emb3, $id_status_emb4, $nr_onu, $nr_risco, $class_risco, $class_embalagem);
+	      			if (isset($post['id_tipo_merc'])) {
+	      				$post['num_processo'] = $num_processo;
+	      				$sql->upDanosMercadoriaP($post);
 							?>
 						<script>
 							window.location.href = "processo12.php?num_processo=<?=$num_processo; ?>";
@@ -74,13 +57,13 @@ $status_emb = $sql->getStatusEmbP();
 									if ($dn['id_tipo_merc'] == 0) {
 										echo '<option value="0">----</option>';
 										foreach ($nav_mercadoria as $m) {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									} else {
 										if ($m['id'] == $dn['id_tipo_merc']) {
-											echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 										} else {
-											echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+											echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 										}
 									}
 									
@@ -92,14 +75,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_tipo_emb1'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($nav_embalagem as $e) {
-										echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+										echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 									}
 								} else {
 									foreach ($nav_embalagem as $e) {
 										if ($e['id'] == $dn['id_tipo_emb1']) {
-											echo '<option selected value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+											echo '<option selected value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 										} else {
-											echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+											echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 										}
 										
 									}
@@ -115,14 +98,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_tipo_emb2'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($nav_embalagem as $e) {
-										echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+										echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 									}
 								} else {
 									foreach ($nav_embalagem as $e) {
 										if ($e['id'] == $dn['id_tipo_emb2']) {
-											echo '<option selected value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+											echo '<option selected value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 										} else {
-											echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+											echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 										}
 										
 									}
@@ -144,14 +127,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_uni_medida'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($nav_medida as $u) {
-										echo '<option value="'.$u['id'].'">'.utf8_encode($u['nome']).'</option>';
+										echo '<option value="'.$u['id'].'">'.$u['nome'].'</option>';
 									}
 								} else {
 									foreach ($nav_medida as $u) {
 										if ($u['id'] == $dn['id_uni_medida']) {
-											echo '<option selected value="'.$u['id'].'">'.utf8_encode($u['nome']).'</option>';
+											echo '<option selected value="'.$u['id'].'">'.$u['nome'].'</option>';
 										} else {
-											echo '<option value="'.$u['id'].'">'.utf8_encode($u['nome']).'</option>';
+											echo '<option value="'.$u['id'].'">'.$u['nome'].'</option>';
 										}
 										
 									}
@@ -176,14 +159,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_merc1'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_merc as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_merc as $sm) {
 										if ($sm['id'] == $dn['id_status_merc1']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -196,14 +179,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_merc2'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_merc as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_merc as $sm) {
 										if ($sm['id'] == $dn['id_status_merc2']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -217,14 +200,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_merc3'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_merc as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_merc as $sm) {
 										if ($sm['id'] == $dn['id_status_merc3']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -236,14 +219,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_merc4'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_merc as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_merc as $sm) {
 										if ($sm['id'] == $dn['id_status_merc4']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -262,14 +245,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_emb1'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_emb as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_emb as $sm) {
 										if ($sm['id'] == $dn['id_status_emb1']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -281,14 +264,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_emb2'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_emb as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_emb as $sm) {
 										if ($sm['id'] == $dn['id_status_emb2']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -302,14 +285,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_emb3'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_emb as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_emb as $sm) {
 										if ($sm['id'] == $dn['id_status_emb3']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -321,14 +304,14 @@ $status_emb = $sql->getStatusEmbP();
 								if ($dn['id_status_emb4'] == 0) {
 									echo '<option value="0">----</option>';
 									foreach ($status_emb as $sm) {
-										echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+										echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 									}
 								} else {
 									foreach ($status_emb as $sm) {
 										if ($sm['id'] == $dn['id_status_emb4']) {
-											echo '<option selected value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option selected value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										} else {
-											echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+											echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 										}
 										
 									}
@@ -364,28 +347,9 @@ $status_emb = $sql->getStatusEmbP();
 	      			<?php
 	      		} else {
 	      			//CADASTRO DE DANOS DE MERCADORIA
-	      			if (isset($_POST['id_tipo_merc'])) {
-	      				$id_tipo_merc = addslashes($_POST['id_tipo_merc']);
-	      				$descricao = addslashes($_POST['descricao']);
-	      				$id_tipo_emb1 = addslashes($_POST['id_tipo_emb1']);
-	      				$id_tipo_emb2 = addslashes($_POST['id_tipo_emb2']);
-	      				$qt_vol = addslashes(str_replace(",", ".", $_POST['qt_vol']));
-	      				$id_uni_medida = addslashes($_POST['id_uni_medida']);
-	      				$peso = addslashes(str_replace(",", ".", $_POST['peso']));
-	      				$id_status_merc1 = addslashes($_POST['id_status_merc1']);
-	      				$id_status_merc2 = addslashes($_POST['id_status_merc2']);
-	      				$id_status_merc3 = addslashes($_POST['id_status_merc3']);
-	      				$id_status_merc4 = addslashes($_POST['id_status_merc4']);
-	      				$id_status_emb1 = addslashes($_POST['id_status_emb1']);
-	      				$id_status_emb2 = addslashes($_POST['id_status_emb2']);
-	      				$id_status_emb3 = addslashes($_POST['id_status_emb3']);
-	      				$id_status_emb4 = addslashes($_POST['id_status_emb4']);
-	      				$nr_onu = addslashes($_POST['nr_onu']);
-	      				$nr_risco = addslashes($_POST['nr_risco']);
-	      				$class_risco = addslashes($_POST['class_risco']);
-	      				$class_embalagem = addslashes($_POST['class_embalagem']);
-
-	      				$sql->setDanosMercadoriaP($num_processo, $id_tipo_merc, $descricao, $id_tipo_emb1, $id_tipo_emb2, $qt_vol, $id_uni_medida, $peso, $id_status_merc1, $id_status_merc2, $id_status_merc3, $id_status_merc4, $id_status_emb1, $id_status_emb2, $id_status_emb3, $id_status_emb4, $nr_onu, $nr_risco, $class_risco, $class_embalagem);
+	      			if (isset($post['id_tipo_merc'])) {
+	      				$post['num_processo'] = $num_processo;
+	      				$sql->setDanosMercadoriaP($post);
 							?>
 						<script>
 							window.location.href = "processo12.php?num_processo=<?=$num_processo; ?>";
@@ -404,7 +368,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($nav_mercadoria as $m) {
-									echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+									echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 								}
 								?>
 							</select><br>
@@ -412,7 +376,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($nav_embalagem as $e) {
-									echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+									echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 								}
 								?>
 							</select>
@@ -423,7 +387,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($nav_embalagem as $e) {
-									echo '<option value="'.$e['id'].'">'.utf8_encode($e['embalagem']).'</option>';
+									echo '<option value="'.$e['id'].'">'.$e['embalagem'].'</option>';
 								}
 								?>
 							</select>
@@ -440,7 +404,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($nav_medida as $u) {
-									echo '<option value="'.$u['id'].'">'.utf8_encode($u['nome']).'</option>';
+									echo '<option value="'.$u['id'].'">'.$u['nome'].'</option>';
 								}
 								?>
 							</select>
@@ -460,7 +424,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_merc as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select><br>
@@ -468,7 +432,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_merc as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select>
@@ -478,7 +442,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_merc as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select><br>
@@ -486,7 +450,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_merc as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select>
@@ -501,7 +465,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_emb as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select><br>
@@ -509,7 +473,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_emb as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select>
@@ -519,7 +483,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_emb as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select><br>
@@ -527,7 +491,7 @@ $status_emb = $sql->getStatusEmbP();
 								<?php
 								echo '<option value="0">----</option>';
 								foreach ($status_emb as $sm) {
-									echo '<option value="'.$sm['id'].'">'.utf8_encode($sm['status']).'</option>';
+									echo '<option value="'.$sm['id'].'">'.$sm['status'].'</option>';
 								}
 								?>
 							</select>

@@ -1,19 +1,32 @@
 <?php
 require 'header.php';
 $sql = new Processos();
-$num_processo = addslashes($_GET['num_processo']);
+$get = filter_input_array(INPUT_GET, FILTER_DEFAULT);
+$num_processo = addslashes($get['num_processo']);
 
 $p = $sql->getProcesso($num_processo);
 
 $sql2 = new tipoDoc();
 //CRIANDO PAGINAÇÃO
 $pg = 1;
-if (isset($_GET['p']) && !empty($_GET['p'])) {
-    $pg = addslashes($_GET['p']);
+if (isset($get['p']) && !empty($get['p'])) {
+    $pg = addslashes($get['p']);
 }
 $limite = 5;
 $paginas = ($pg - 1) * 5;
 $pastas = $sql2->getPastas($paginas, $limite);
+
+//atualizar comentario de documento
+if (!empty($get['idup'])) {
+	unset($get['num_processo']);
+	$id = $get['id'];
+	$sql->upDocProcesso($get);
+	?>
+	<script>
+		window.location.href = "processoDocArq.php?num_processo=<?=$num_processo; ?>&id=<?=$id; ?>";
+	</script>
+	<?php
+}
 ?>
 
 <br><br><br>
@@ -208,6 +221,38 @@ $pastas = $sql2->getPastas($paginas, $limite);
 					      					<tr>
 					      						<td>
 					      							<a href="processoDocArq.php?num_processo=<?=$num_processo; ?>&id=<?=$idDoc; ?>&idImg=<?=$a['id']; ?>" class="fas fa-trash-alt"></a>
+
+					      							<i class="fas fa-edit" style="color: green;" data-toggle="modal" data-target="#edit<?=$a['id']; ?>"></i>
+
+					      							<div id="edit<?=$a['id']; ?>" class="modal fade" role="dialog">
+													  <div class="modal-dialog">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <button type="button" class="close" data-dismiss="modal">&times;</button>
+													        <h4 class="modal-title">Editar</h4>
+													      </div>
+													      <div class="modal-body">
+													        <form method="get">
+													        	<input type="hidden" name="num_processo" value="<?=$num_processo; ?>">
+													        	<input type="hidden" name="id" value="<?=$get['id']; ?>">
+													        	<input type="hidden" name="idup" value="<?=$a['id']; ?>">
+													        	<label>Criado em: </label>
+													        	<?=date('d/m/Y H:i:s', strtotime($a['dt_cadastrado'])) ?><br>
+													        	<label>Criado por: </label>
+													        	<?=htmlspecialchars($a['nome']); ?><br>
+													        	<label>Evento</label>
+													        	<input type="text" name="comentario" class="form-control" value="<?=$a['comentario']; ?>">
+													        	<br>
+								      							<button class="btn btn-primary">Salvar</button>
+													        </form>
+													      </div>
+													      <div class="modal-footer">
+													        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+													      </div>
+													    </div>
+
+													  </div>
+													</div>
 					      						</td>
 					      						<td>
 					      							<?php
@@ -248,11 +293,11 @@ $pastas = $sql2->getPastas($paginas, $limite);
 					      						<td>
 					      							<?php
 					      							$c = explode('.', $a['comentario']);
-					      							echo htmlspecialchars($c[0]);
+					      							echo $c[0];
 					      							?>
 					      						</td>
 					      						<td><?=date('d/m/Y H:i:s', strtotime($a['dt_cadastrado'])); ?></td>
-					      						<td><?=htmlentities($a['nome']); ?></td>
+					      						<td><?=htmlspecialchars($a['nome']); ?></td>
 					      					</tr>
 					      				</tbody>
 								    	<?php

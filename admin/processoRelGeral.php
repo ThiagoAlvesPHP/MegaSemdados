@@ -3,6 +3,10 @@ require 'autoload.php';
 $sql = new Processos();
 $num_processo = addslashes($_GET['num_processo']);
 
+//valor do IS
+$page1 = $sql->getProcesso($num_processo);
+$is = $page1['valor_mercadoria'];
+
 //SEGURADORA, SINISTRO, APOLICE, RAMO, MODAL, VALOR MERCADORIA, VALOR EFEITO SEGURO
 $p = $sql->getVistoriaCompleto($num_processo);
 //NATURZA DO EVENTO
@@ -153,8 +157,8 @@ if (!empty($c1)) {
       <th>UF/Município de Destino</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($c1['nome']).' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
-      <td><?=utf8_encode($c2['nome']).' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
+      <td><?=$c1['nome'].' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
+      <td><?=$c2['nome'].' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
     </tr>
   </table>
 </div>
@@ -227,7 +231,7 @@ if (!empty($atividade)) {
       <th>Local da Ocorrência Constatação</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($los['nome']).' - '.$los['uf'].' - '.$los['sigla']; ?></td>
+      <td><?=$los['nome'].' - '.$los['uf'].' - '.$los['sigla']; ?></td>
       <td><?=date('d/m/Y H:i:s', strtotime($dbAc['dt_hs'])); ?></td>
       <td><?=$dbAc['local_os']; ?></td>
     </tr>
@@ -401,7 +405,7 @@ if (!empty($dn)) {
         <?php
         foreach ($nav_mercadoria as $value) {
           if ($value['id'] == $dn['id_tipo_merc']) {
-            echo utf8_encode($value['nome']);
+            echo $value['nome'];
           }
         }
         ?>
@@ -410,7 +414,7 @@ if (!empty($dn)) {
         <?php
         foreach ($nav_embalagem as $value) {
           if ($value['id'] == $dn['id_tipo_emb1']) {
-            echo utf8_encode($value['embalagem']);
+            echo $value['embalagem'];
           }
         }
         ?>
@@ -422,7 +426,7 @@ if (!empty($dn)) {
         <?php
         foreach ($nav_medida as $value) {
           if ($value['id'] == $dn['id_uni_medida']) {
-            echo utf8_encode($value['nome']);
+            echo $value['nome'];
           }
         }
         ?>
@@ -437,7 +441,7 @@ if (!empty($dn)) {
         <?php
         foreach ($status_merc as $value) {
           if ($value['id'] == $dn['id_status_merc1'] OR $value['id'] == $dn['id_status_merc2'] OR $value['id'] == $dn['id_status_merc3'] OR $value['id'] == $dn['id_status_merc4']) {
-            echo utf8_encode($value['status']).', ';
+            echo $value['status'].', ';
           }
         }
         ?>
@@ -448,7 +452,7 @@ if (!empty($dn)) {
         <?php
         foreach ($status_emb as $value) {
           if ($value['id'] == $dn['id_status_emb1'] OR $value['id'] == $dn['id_status_emb2'] OR $value['id'] == $dn['id_status_emb3'] OR $value['id'] == $dn['id_status_emb4']) {
-            echo utf8_encode($value['status']).', ';
+            echo $value['status'].', ';
           }
         }
         ?>
@@ -529,7 +533,7 @@ if (!empty($getDocMercP)) {
     foreach ($getDocMercP as $value) {
       ?>
     <tr>
-      <td><?=utf8_encode($value['nome_cod']); ?></td>
+      <td><?=$value['nome_cod']; ?></td>
       <td><?=$value['num_doc'].' - '.$value['nome']; ?></td>
       <td>R$<?=number_format($value['valor'], 2, ',', '.'); ?></td>
       <td><?=$value['efeito_seguro']; ?></td>
@@ -603,7 +607,7 @@ if (!empty($getP15)) {
       <td colspan="2"><b>UF/Cidade: </b>
         <?php
         $d  = $sql->getCidadeID($getP15['p5']);
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -694,7 +698,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p32'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -703,7 +707,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p42'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -712,7 +716,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p52'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -724,7 +728,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p33'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -733,7 +737,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p43'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -742,7 +746,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p53'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -754,7 +758,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p34'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -763,7 +767,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p44'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -772,7 +776,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p54'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -784,7 +788,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p35'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -793,7 +797,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p45'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -802,7 +806,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p55'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -814,7 +818,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p36'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -823,7 +827,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p46'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -832,7 +836,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p56'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -844,7 +848,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p37'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -853,7 +857,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p47'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -862,7 +866,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p57'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -874,7 +878,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p38'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -883,7 +887,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p48'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -892,7 +896,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p58'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -904,7 +908,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p39'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -913,7 +917,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p49'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -922,7 +926,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p59'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -934,7 +938,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p40'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -943,7 +947,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p50'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -952,7 +956,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p60'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -964,7 +968,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p41'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -973,7 +977,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p51'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -982,7 +986,7 @@ if (!empty($getP15)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP15['p61'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1012,7 +1016,7 @@ if (!empty($getP16)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP16['p1'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1028,7 +1032,7 @@ if (!empty($getP16)) {
       <td><b>UF/Cidade: </b>
         <?php
         $a  = $sql->getCidadeID($getP16['p6']);
-        echo utf8_encode($a['nome']).' - '.$a['uf'].' - '.$a['sigla'];
+        echo $a['nome'].' - '.$a['uf'].' - '.$a['sigla'];
         ?>
       </td>
     </tr>
@@ -1037,7 +1041,7 @@ if (!empty($getP16)) {
         <?php
         foreach ($getNav4 as $n) {
           if ($getP16['p8'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1046,7 +1050,7 @@ if (!empty($getP16)) {
       <td><b>UF/Cidade Nasc: </b>
       <?php
         $a  = $sql->getCidadeID($getP16['p7']);
-        echo utf8_encode($a['nome']).' - '.$a['uf'].' - '.$a['sigla'];
+        echo $a['nome'].' - '.$a['uf'].' - '.$a['sigla'];
         ?>
       </td>
     </tr>
@@ -1078,7 +1082,7 @@ if (!empty($getP16)) {
         <?php
         foreach ($getNav3 as $n) {
           if ($getP16['p18'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1123,7 +1127,7 @@ if (!empty($getP17form1)) {
         <?php
         $d  = $sql->getCidadeID($getP17form1['a5']);
           
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1225,7 +1229,7 @@ if (!empty($getP17form2)) {
         <?php
         $d  = $sql->getCidadeID($getP17form2['a5']);
           
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1332,7 +1336,7 @@ if (!empty($getP18form1)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP18form1['p1'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1348,7 +1352,7 @@ if (!empty($getP18form1)) {
       <td><b>UF/ Estado: </b>
         <?php
         $d  = $sql->getCidadeID($getP18form1['p6']);
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1357,7 +1361,7 @@ if (!empty($getP18form1)) {
         <?php
         foreach ($getNav4 as $n) {
           if ($getP18form1['p8'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1366,7 +1370,7 @@ if (!empty($getP18form1)) {
       <td><b>UF/Cidade: </b>
         <?php
         $d  = $sql->getCidadeID($getP18form1['p7']);
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1429,7 +1433,7 @@ if (!empty($getP18form2)) {
         <?php
         foreach ($getNav as $n) {
           if ($getP18form2['a1'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1445,7 +1449,7 @@ if (!empty($getP18form2)) {
       <td><b>UF/ Estado: </b>
         <?php
         $d  = $sql->getCidadeID($getP18form2['p6']);
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1454,7 +1458,7 @@ if (!empty($getP18form2)) {
         <?php
         foreach ($getNav4 as $n) {
           if ($getP18form2['p8'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -1463,7 +1467,7 @@ if (!empty($getP18form2)) {
       <td><b>UF/Cidade: </b>
         <?php
         $d  = $sql->getCidadeID($getP18form2['p7']);
-        echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+        echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         ?>
       </td>
     </tr>
@@ -1530,7 +1534,7 @@ if (!empty($getTercForm)) {
         <?php
           foreach ($getStatus as $s) {
             if ($s['id'] == $getTercForm['terc_env']) {
-              echo utf8_encode($s['status']);
+              echo $s['status'];
             }
           }
           ?>
@@ -1539,7 +1543,7 @@ if (!empty($getTercForm)) {
         <?php
         foreach ($getStatus as $s) {
           if ($s['id'] == $getTercForm['terc_culp']) {
-            echo utf8_encode($s['status']);
+            echo $s['status'];
           }
         }
         ?>
@@ -1548,7 +1552,7 @@ if (!empty($getTercForm)) {
         <?php
         foreach ($getStatus as $s) {
           if ($s['id'] == $getTercForm['ressarc']) {
-            echo utf8_encode($s['status']);
+            echo $s['status'];
           }
         }
         ?>
@@ -1559,7 +1563,7 @@ if (!empty($getTercForm)) {
         <?php
         foreach ($getStatus as $s) {
           if ($s['id'] == $getTercForm['dec_terc']) {
-            echo utf8_encode($s['status']);
+            echo $s['status'];
           }
         }
         ?>
@@ -1568,7 +1572,7 @@ if (!empty($getTercForm)) {
         <?php
         foreach ($getStatus as $s) {
           if ($s['id'] == $getTercForm['dados_terc']) {
-            echo utf8_encode($s['status']);
+            echo $s['status'];
           }
         }
         ?>
@@ -1577,7 +1581,7 @@ if (!empty($getTercForm)) {
         <?php
         foreach ($getStatus as $s) {
           if ($s['id'] == $getTercForm['rel_compl']) {
-            echo utf8_encode($s['status']);
+            echo $s['status'];
           }
         }
         ?>
@@ -1740,14 +1744,14 @@ if (!empty($getFTvistoria)) {
         ?>
           <th width="50%">
             <img width="250" height="200" src="<?=$mini; ?>"><br>
-            <?=utf8_encode($fts['texto']); ?>
+            <?=$fts['texto']; ?>
           </th>
         <?php
       } else {
         ?>
           <th width="50%">
             <img width="250" height="200" src="<?=$mini; ?>"><br>
-            <?=utf8_encode($fts['texto']); ?>
+            <?=$fts['texto']; ?>
           </th>
           </tr>
         <?php
@@ -1794,7 +1798,7 @@ if (!empty($getDestMerc)) {
         <?php
         foreach ($nav_def_dest as $a) {
           if ($getDestMerc['destino'] == $a['id']) {
-            echo utf8_encode($a['nome']);
+            echo $a['nome'];
           }
         }
         ?>
@@ -1803,7 +1807,7 @@ if (!empty($getDestMerc)) {
         <?php
         foreach ($nav_motivo_dec as $a) {
           if ($getDestMerc['motivo'] == $a['id']) {
-            echo utf8_encode($a['nome']);
+            echo $a['nome'];
           }
         }
         ?>
@@ -1831,7 +1835,7 @@ if (!empty($getDestMerc)) {
         <?php
         if (!empty($getDestMerc['cidade'])) {
           $d  = $sql->getCidadeID($getDestMerc['cidade']);
-          echo utf8_encode($d['nome']).' - '.$d['uf'].' - '.$d['sigla'];
+          echo $d['nome'].' - '.$d['uf'].' - '.$d['sigla'];
         }
         ?>
       </td>
@@ -1855,23 +1859,37 @@ $nav_esforco = $sql->getNavEsforco();
 $getCusto = $sql->getCusto($num_processo);
 
 if (!empty($getPrejCusto)) {
-$total = 0;
-$sub1 = $getPrejCusto['danos']+$getPrejCusto['dispersao']+$getPrejCusto['fsr'];
-$total += $sub1;
+//ESTIMATIVA DE PREJUIZO processo25
+$subtotal = $is - $getPrejCusto['dispersao'] - $getPrejCusto['fsr'];
+$danos = $subtotal - $getPrejCusto['franquia'];
+$prejuizo = $danos - $getPrejCusto['aproveitamento_salvados'];
+$prejuizoFinal = $prejuizo - $getPrejCusto['pos'] + $getPrejCusto['dispersao'] + $getPrejCusto['fsr'];
+
+  
+
+$sos = 0;
+$terceiro = 0;
+foreach ($getCusto as $key => $value) {
+  if ($value['definicao'] == 0) {
+    $sos += $value['valor']*$value['qt'];
+  } else {
+    $terceiro += $value['valor']*$value['qt'];
+  }
+}
 ?>
 <br>
 <div style="width: 100%;">
   <table width="100%" border="1">
     <tr>
-      <th colspan="2" style="background-color: #7AA6D0;">Prejuízo Apurado:</th>
+      <th colspan="2" style="text-align: center;">Estimativa de Prejuízo</th>
     </tr>
     <tr>
       <th>DESCRIÇÃO</th>
       <th>TOTAL</th>
     </tr>
     <tr>
-      <td>Danos:</td>
-      <td>R$<?=number_format($getPrejCusto['danos'], 2, ',', '.'); ?></td>
+      <td>IS:</td>
+      <td>R$<?=number_format($is, 2, ',', '.'); ?></td>
     </tr>
     <tr>
       <td>Dispersão:</td>
@@ -1882,11 +1900,57 @@ $total += $sub1;
       <td>R$<?=number_format($getPrejCusto['fsr'], 2, ',', '.'); ?></td>
     </tr>
     <tr>
-      <th colspan="2" style="background-color: #7AA6D0;">TOTAL R$<?=number_format($sub1, 2, ',', '.'); ?></th>
+      <td colspan="2"></td>
     </tr>
+
+    <tr style="color: red;">
+      <td>Sub Total:</td>
+      <td>R$<?=number_format($subtotal, 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Total Entregue:</td>
+      <td>R$<?=number_format($getPrejCusto['franquia'], 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Total Recusado / Danos:</td>
+      <td>R$<?=number_format($danos, 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Aproveitamento Salvados:</td>
+      <td>R$<?=number_format($getPrejCusto['aproveitamento_salvados'], 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Franquia/POS:</td>
+      <td>R$<?=number_format($getPrejCusto['pos'], 2, ',', '.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <th colspan="2" style="text-align: center;">Prejuízo Final: R$<?=number_format($prejuizoFinal, 2, ',', '.'); ?></th>
+    </tr>
+    <tr></tr>
   </table>
 </div>
-<hr><br>
+
+<hr><br><br>
 <div style="width: 100%;">
   <table width="100%" border="1">
     <tr>
@@ -1899,12 +1963,13 @@ $total += $sub1;
       <th>TOTAL</th>
     </tr>
     <?php
+    $total = 0;
     $sub2 = 0;
     foreach ($getCusto as $value) {
       $sub2 += $value['valor']*$value['qt'];
       ?>
       <tr>
-        <td><?=utf8_encode($value['esforco']); ?></td>
+        <td><?=$value['esforco']; ?></td>
         <td><?=$value['qt']; ?></td>
         <td>R$<?=number_format($value['valor'], 2, ',', '.'); ?></td>
         <td>R$<?=number_format($value['valor']*$value['qt'], 2, ',', '.'); ?></td>
@@ -1919,6 +1984,20 @@ $total += $sub1;
   <?php
   $total += $sub2;
   ?>
+</div>
+
+<br><br><br><br>
+<div style="width: 100%;">
+  <table width="100%" border="1">
+    <tr>
+      <td>SOS Cia Seguradora:</td>
+      <td>R$<?=number_format($sos, 2, ',', '.'); ?></td>
+    </tr>
+    <tr>
+      <td>SOS Terceiros (Comprador):</td>
+      <td>R$<?=number_format($terceiro, 2, ',', '.'); ?></td>
+    </tr>
+  </table>
 </div>
 <?php
 }
@@ -1952,7 +2031,7 @@ if (!empty($getCausasSinistros)) {
         <?php
         foreach ($getStatusConh as $m) {
           if ($getCausasSinistros['id_status_conhecimento'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -1963,7 +2042,7 @@ if (!empty($getCausasSinistros)) {
         <?php
         foreach ($getNavPassagemMot as $m) {
           if ($getCausasSinistros['id_nav_passagem_mot'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -1974,7 +2053,7 @@ if (!empty($getCausasSinistros)) {
         <?php
         foreach ($getTacografo as $m) {
           if ($getCausasSinistros['id_status_torografia'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -1985,7 +2064,7 @@ if (!empty($getCausasSinistros)) {
         <?php
         foreach ($getDiagrama as $m) {
           if ($getCausasSinistros['id_nav_diagrama'] == $m['id']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -2035,7 +2114,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav01 as $n) {
           if ($getDescLocal['nav_processo27_1'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2044,7 +2123,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav08 as $n) {
           if ($getDescLocal['nav_processo27_8'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2055,7 +2134,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav02 as $n) {
           if ($getDescLocal['nav_processo27_2'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2064,7 +2143,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav09 as $n) {
           if ($getDescLocal['nav_processo27_9'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2075,7 +2154,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav03 as $n) {
           if ($getDescLocal['nav_processo27_3'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2084,7 +2163,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav10 as $n) {
           if ($getDescLocal['nav_processo27_10'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2095,7 +2174,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav04 as $n) {
           if ($getDescLocal['nav_processo27_4'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2104,7 +2183,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav11 as $n) {
           if ($getDescLocal['nav_processo27_11'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2115,7 +2194,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav05 as $n) {
           if ($getDescLocal['nav_processo27_5'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2124,7 +2203,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav12 as $n) {
           if ($getDescLocal['nav_processo27_12'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2135,7 +2214,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav06 as $n) {
           if ($getDescLocal['nav_processo27_6'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2144,7 +2223,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav13 as $n) {
           if ($getDescLocal['nav_processo27_13'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2155,7 +2234,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav07 as $n) {
           if ($getDescLocal['nav_processo27_7'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2164,7 +2243,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav14 as $n) {
           if ($getDescLocal['nav_processo27_14'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2183,7 +2262,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav15 as $n) {
           if ($getDescLocal['nav_processo27_15'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2192,7 +2271,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav17 as $n) {
           if ($getDescLocal['nav_processo27_17'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2203,7 +2282,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav16 as $n) {
           if ($getDescLocal['nav_processo27_16'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2212,7 +2291,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav18 as $n) {
           if ($getDescLocal['nav_processo27_18'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2231,7 +2310,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav19 as $n) {
           if ($getDescLocal['nav_processo27_19'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2240,7 +2319,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav19 as $n) {
           if ($getDescLocal['nav_processo27_20'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -2249,7 +2328,7 @@ if (!empty($getDescLocal)) {
         <?php 
         foreach ($nav19 as $n) {
           if ($getDescLocal['nav_processo27_21'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>

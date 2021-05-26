@@ -1,6 +1,7 @@
 <?php
 require 'header.php';
 $sql = new Processos();
+$post = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 //SEGURADOS
 $getCidades = $sql->getCidades();
 $num_processo = addslashes($_GET['num_processo']);
@@ -8,9 +9,8 @@ $p = $sql->getProcesso($num_processo);
 
 $getRegPolicial = $sql->getRegPolicial($num_processo);
 
-if (isset($_POST['midia'])) {
-	$midia = addslashes($_POST['midia']);
-	$sql->upMidia($num_processo, $midia);
+if (isset($post['midia'])) {
+	$sql->upMidia($num_processo, $post['midia']);
 		?>
 	<script>
 		window.location.href = "processo11.php?num_processo=<?=$num_processo; ?>";

@@ -4,7 +4,9 @@ if (!empty($_GET['num_processo'])) {
 	require 'autoload.php';
 	$ajax = new Ajax();
 	$r = new Rdp();
+	$p = new Processos();
 
+	$getCusto = $p->getCusto($_GET['num_processo']);
 	$dados = $ajax->getProc(addslashes($_GET['num_processo']));
 	$sos = $r->getSosAll(addslashes($_GET['num_processo']));
 
@@ -27,7 +29,7 @@ if (!empty($_GET['num_processo'])) {
 	    	<tr>
 	    		<td><img width="150" src="assets/img/MegaB.png"></td>
 	    		<td>
-	    			<h2>Despesas SOS Seg.</h2>
+	    			<h2>Despesas SOS Segurado</h2>
 					M.R.S Serviços Técnicos de Seguros Ltda<br>
 					27.015.698/0001-75
 	    		</td>
@@ -37,11 +39,11 @@ if (!empty($_GET['num_processo'])) {
 		<br><br>
 
 		Processo Mega Nrº: <?=$dados['num_processo']; ?><br>
-		Processo Allianz Nrº: <?=utf8_decode($dados['num_sinistro']); ?><br>
+		Processo Allianz Nrº: <?=$dados['num_sinistro']; ?><br>
 		
-		Seguradora: <?=utf8_decode($dados['seguradora']); ?><br>
-		Segurado: <?=utf8_decode($dados['segurado']); ?><br>
-		Transportador: <?=utf8_decode($dados['transportadora']); ?><br><br>
+		Seguradora: <?=$dados['seguradora']; ?><br>
+		Segurado: <?=$dados['segurado']; ?><br>
+		Transportador: <?=$dados['transportadora']; ?><br><br>
 		
 		<style type="text/css">
 			.tr td{
@@ -54,7 +56,6 @@ if (!empty($_GET['num_processo'])) {
 		    <tr>
 	            <th>Data</th>
 	            <th>Descrição</th>
-	            <th>Registrado por</th>
 	            <th>Valor</th>
 	        </tr>
 		    <?php 
@@ -64,10 +65,29 @@ if (!empty($_GET['num_processo'])) {
 		    <tr class="tr">
 	    		<td><?=date('d/m/Y', strtotime($value['dt_cadastro'])); ?></td>
 	    		<td><?=$value['descricao']; ?></td>
-	    		<td><?=$value['nome']; ?></td>
 	    		<td>R$<?=number_format($value['valor'],2,',','.'); ?></td>
 	    	</tr>
 		    <?php endforeach; ?>
+
+		    <!-- tabla 2 -->
+		    <?php
+				foreach ($getCusto as $dnC):
+				$sub = $dnC['valor']*$dnC['qt'];
+			?>
+			<tbody>
+				<tr class="tr">
+					<td><?=date('d/m/Y', strtotime($dnC['dt_cadastro'])); ?></td>
+					<td>
+						<?=htmlspecialchars($dnC['esforco']); ?>
+					</td>
+					<td>R$<?=number_format($sub, 2, '.','') ?></td>
+				</tr>
+			</tbody>
+				<?php
+				$total += $sub;
+			endforeach;
+			?>
+
 		</table>	
 		<!-- FIM DE TABELA -->
 		<!-- TOTAL -->

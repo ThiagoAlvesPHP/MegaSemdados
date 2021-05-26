@@ -3,6 +3,9 @@ require 'autoload.php';
 //ob_start(); 
 $sql = new Processos();
 $num_processo = addslashes($_GET['num_processo']);
+//valor do IS
+$page1 = $sql->getProcesso($num_processo);
+$is = $page1['valor_mercadoria'];
 
 //SEGURADORA, SINISTRO, APOLICE, RAMO, MODAL, VALOR MERCADORIA, VALOR EFEITO SEGURO
 $p = $sql->getVistoriaCompleto($num_processo);
@@ -196,8 +199,8 @@ $getCusto = $sql->getCusto($num_processo);
       <th>UF/Município de Destino</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($c1['nome']).' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
-      <td><?=utf8_encode($c2['nome']).' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
+      <td><?=$c1['nome'].' - '.$c1['uf'].' - '.$c1['sigla']; ?></td>
+      <td><?=$c2['nome'].' - '.$c2['uf'].' - '.$c2['sigla']; ?></td>
     </tr>
   </table>
 </div>
@@ -246,7 +249,7 @@ $getCusto = $sql->getCusto($num_processo);
       <th>Local da Ocorrência / Constatação</th>
     </tr>
     <tr>
-      <td><?=utf8_encode($los['nome']).' - '.$los['uf'].' - '.$los['sigla']; ?></td>
+      <td><?=$los['nome'].' - '.$los['uf'].' - '.$los['sigla']; ?></td>
       <td><?=date('d/m/Y H:i:s', strtotime($dbAc['dt_hs'])); ?></td>
       <td><?=$dbAc['local_os']; ?></td>
     </tr>
@@ -321,8 +324,8 @@ $getCusto = $sql->getCusto($num_processo);
     foreach ($getDocMercP as $value) {
       ?>
     <tr>
-      <td><?=utf8_encode($value['nome_cod']); ?></td>
-      <td><?php echo $value['num_doc'].' - '.utf8_encode($value['nome']); ?></td>
+      <td><?=$value['nome_cod']; ?></td>
+      <td><?php echo $value['num_doc'].' - '.$value['nome']; ?></td>
       <td>R$<?=number_format($value['valor'], 2, ',', '.'); ?></td>
       <td><?=$value['efeito_seguro']; ?></td>
       <td>R$<?=number_format($value['valor_efeito'], 2, ',', '.'); ?></td>
@@ -349,7 +352,7 @@ $getCusto = $sql->getCusto($num_processo);
       ?>
     <tr>
       <td><?=$value['nome_cod']; ?></td>
-      <td><?php echo $value['num_doc'].' - '.utf8_encode($value['nome']); ?></td>
+      <td><?php echo $value['num_doc'].' - '.$value['nome']; ?></td>
       <td>R$<?=number_format($value['valor'], 2, ',', '.'); ?></td>
       <td><?=$value['efeito_seguro']; ?></td>
       <td>R$<?=number_format($value['valor_efeito'], 2, ',', '.'); ?></td>
@@ -390,7 +393,7 @@ $getCusto = $sql->getCusto($num_processo);
         <?php
         foreach ($nav_mercadoria as $m) {
           if ($m['id'] == $dn['id_tipo_merc']) {
-            echo utf8_encode($m['nome']);
+            echo $m['nome'];
           }
         }
         ?>
@@ -417,7 +420,7 @@ $getCusto = $sql->getCusto($num_processo);
         <?php
         foreach ($nav_medida as $u) {
             if ($u['id'] == $dn['id_uni_medida']) {
-              echo utf8_encode($u['nome']);
+              echo $u['nome'];
             }            
           }
         ?>
@@ -432,16 +435,16 @@ $getCusto = $sql->getCusto($num_processo);
         <?php
         foreach ($status_merc as $sm) {
             if ($sm['id'] == $dn['id_status_merc1']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_merc2']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_merc3']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_merc4']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
           }
         ?>
@@ -452,16 +455,16 @@ $getCusto = $sql->getCusto($num_processo);
         <?php
         foreach ($status_emb as $sm) {
             if ($sm['id'] == $dn['id_status_emb1']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_emb2']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_emb3']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
             if ($sm['id'] == $dn['id_status_emb4']) {
-              echo utf8_encode($sm['status']).', ';
+              echo $sm['status'].', ';
             }
           }
         ?>
@@ -477,7 +480,7 @@ $getCusto = $sql->getCusto($num_processo);
     </tr>
     <tr>
       <th colspan="2">Proprietário:</th>
-      <td colspan="2"><?=utf8_encode($getP15['p1']); ?></td>
+      <td colspan="2"><?=$getP15['p1']; ?></td>
     </tr>
     <tr>
       <th>Veículo</th>
@@ -487,9 +490,9 @@ $getCusto = $sql->getCusto($num_processo);
     </tr>
     <tr>
       <th>Placa:</th>
-      <td><?=utf8_encode($getP15['p7']); ?></td>
-      <td><?=utf8_encode($getP15['p14']); ?></td>
-      <td><?=utf8_encode($getP15['p21']); ?></td>
+      <td><?=$getP15['p7']; ?></td>
+      <td><?=$getP15['p14']; ?></td>
+      <td><?=$getP15['p21']; ?></td>
     </tr>
     <tr>
       <th>Marca:</th>
@@ -521,7 +524,7 @@ $getCusto = $sql->getCusto($num_processo);
         <?php
         foreach ($getNav as $n) {
           if ($getP16['p1'] == $n['id']) {
-            echo utf8_encode($n['nome']);
+            echo $n['nome'];
           }
         }
         ?>
@@ -560,9 +563,85 @@ $getCusto = $sql->getCusto($num_processo);
 <br>
 <br>
 <br>
-<?php 
-$total = 0;
+<!-- terceiros envolvidos -->
+<?php
+$getStatus = $sql->getStatus();
+$getTercForm = $sql->getTercForm($num_processo);
+
+if (!empty($getTercForm)):
 ?>
+<br>
+<div style="width: 100%;">
+  <table width="100%" border="1">
+    <tr>
+      <th colspan="3">Terceiro Envolvido (s)</th>
+    </tr>
+    <tr>
+      <td><b>Terceiro Culpado: </b>
+        <?php
+        foreach ($getStatus as $s) {
+          if ($s['id'] == $getTercForm['terc_culp']) {
+            echo $s['status'];
+          }
+        }
+        ?>
+      </td>
+      <td><b>Passível de Ressarcimento: </b>
+        <?php
+        foreach ($getStatus as $s) {
+          if ($s['id'] == $getTercForm['ressarc']) {
+            echo $s['status'];
+          }
+        }
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <td><b>Dados do Terceiro: </b>
+        <?php
+        foreach ($getStatus as $s) {
+          if ($s['id'] == $getTercForm['dados_terc']) {
+            echo $s['status'];
+          }
+        }
+        ?>
+      </td>
+      <td><b>Relatório Complementar anexo: </b>
+        <?php
+        foreach ($getStatus as $s) {
+          if ($s['id'] == $getTercForm['rel_compl']) {
+            echo $s['status'];
+          }
+        }
+        ?>
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<?php 
+endif;
+
+
+//ESTIMATIVA DE PREJUIZO processo25
+$subtotal = $is - $getPrejCusto['dispersao'] - $getPrejCusto['fsr'];
+$danos = $subtotal - $getPrejCusto['franquia'];
+$prejuizo = $danos - $getPrejCusto['aproveitamento_salvados'];
+$prejuizoFinal = $prejuizo - $getPrejCusto['pos'] + $getPrejCusto['dispersao'] + $getPrejCusto['fsr'];
+
+  
+
+$sos = 0;
+$terceiro = 0;
+foreach ($getCusto as $key => $value) {
+  if ($value['definicao'] == 0) {
+    $sos += $value['valor']*$value['qt'];
+  } else {
+    $terceiro += $value['valor']*$value['qt'];
+  }
+}
+?>
+
 <div style="width: 100%;">
   <table width="100%" border="1">
     <tr>
@@ -573,8 +652,8 @@ $total = 0;
       <th>TOTAL</th>
     </tr>
     <tr>
-      <td>Danos:</td>
-      <td>R$<?=number_format($getPrejCusto['danos'], 2, ',', '.'); ?></td>
+      <td>IS:</td>
+      <td>R$<?=number_format($is, 2, ',', '.'); ?></td>
     </tr>
     <tr>
       <td>Dispersão:</td>
@@ -584,15 +663,57 @@ $total = 0;
       <td>Falta/Saque/Roubo:</td>
       <td>R$<?=number_format($getPrejCusto['fsr'], 2, ',', '.'); ?></td>
     </tr>
-    <?php 
-    $sub1 = $getPrejCusto['danos']+$getPrejCusto['dispersao']+$getPrejCusto['fsr'];
-    $total += $sub1;
-    ?>
     <tr>
-      <th colspan="2" style="text-align: center;">SUBTOTAL R$<?=number_format($sub1, 2, ',', '.'); ?></th>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr style="color: red;">
+      <td>Sub Total:</td>
+      <td>R$<?=number_format($subtotal, 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Total Entregue:</td>
+      <td>R$<?=number_format($getPrejCusto['franquia'], 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Total Recusado / Danos:</td>
+      <td>R$<?=number_format($danos, 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Aproveitamento Salvados:</td>
+      <td>R$<?=number_format($getPrejCusto['aproveitamento_salvados'], 2, ',','.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <td>Franquia/POS:</td>
+      <td>R$<?=number_format($getPrejCusto['pos'], 2, ',', '.'); ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+    </tr>
+
+    <tr>
+      <th colspan="2" style="text-align: center;">Prejuízo Final: R$<?=number_format($prejuizoFinal, 2, ',', '.'); ?></th>
     </tr>
   </table>
 </div>
+
+<br><br><br>
 <div style="width: 100%;">
   <table width="100%" border="1">
     <tr>
@@ -605,12 +726,13 @@ $total = 0;
       <th>TOTAL</th>
     </tr>
     <?php
+    $total = 0;
     $sub2 = 0;
     foreach ($getCusto as $value) {
       $sub2 += $value['valor']*$value['qt'];
       ?>
       <tr>
-        <td><?=utf8_encode($value['esforco']); ?></td>
+        <td><?=$value['esforco']; ?></td>
         <td><?=$value['qt']; ?></td>
         <td>R$<?=number_format($value['valor'], 2, ',', '.'); ?></td>
         <td>R$<?=number_format($value['valor']*$value['qt'], 2, ',', '.'); ?></td>
@@ -618,9 +740,9 @@ $total = 0;
       <?php
     }
     ?>
-    <tr>
+    <!-- <tr>
       <th colspan="4" style="text-align: center;">SUBTOTAL R$<?=number_format($sub2, 2, ',', '.'); ?></th>
-    </tr>
+    </tr> -->
   </table>
   <?php
   $total += $sub2;
@@ -629,7 +751,20 @@ $total = 0;
 <div style="width: 100%;">
   <table width="100%" border="1">
     <tr>
-      <th colspan="6" style="font-size: 20px; text-align: center;">Total de Prejuízo Estimado: R$<?=number_format($total, 2, ',', '.') ?></th>
+      <th colspan="6" style="font-size: 20px; text-align: center;">Total: R$<?=number_format($total, 2, ',', '.') ?></th>
+    </tr>
+  </table>
+</div>
+<br><br><br><br>
+<div style="width: 100%;">
+  <table width="100%" border="1">
+    <tr>
+      <td>SOS Cia Seguradora:</td>
+      <td>R$<?=number_format($sos, 2, ',', '.'); ?></td>
+    </tr>
+    <tr>
+      <td>SOS Terceiros (Comprador):</td>
+      <td>R$<?=number_format($terceiro, 2, ',', '.'); ?></td>
     </tr>
   </table>
 </div>

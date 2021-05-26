@@ -193,7 +193,7 @@ if (!empty($_POST['m1UP'])) {
 			        				<select name="m14" class="form-control">
 			        					<?php 
 			        					foreach ($getNavPrejuizo as $f) {
-			        						echo '<option value="'.$f['id'].'">'.utf8_encode($f['nome']).'</option>';
+			        						echo '<option value="'.$f['id'].'">'.$f['nome'].'</option>';
 			        					}
 			        					?>
 			        				</select>
@@ -318,7 +318,7 @@ if (!empty($_POST['m1UP'])) {
 							<td><?=$m['m10']; ?></td>
 							<td><?=$m['m11']; ?></td>
 							<td><?=$m['m12']; ?></td>
-							<td><?=utf8_encode($m['prej']); ?></td>
+							<td><?=$m['prej']; ?></td>
 							<td><?php 
 							if (!empty($m['m16'])) {
 								echo 'R$'.number_format($m['m16'], 2, ',', '.');
@@ -399,9 +399,9 @@ if (!empty($_POST['m1UP'])) {
 							<?php
 							foreach ($getMedidaP as $m) {
 								if ($dadosVistoria['id_uni_medida1'] == $m['id']) {
-									echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+									echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 								} else {
-									echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+									echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 								}
 							}
 							?>
@@ -424,9 +424,9 @@ if (!empty($_POST['m1UP'])) {
 							<?php
 							foreach ($getMedidaP as $m) {
 								if ($dadosVistoria['id_uni_medida2'] == $m['id']) {
-									echo '<option selected value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+									echo '<option selected value="'.$m['id'].'">'.$m['nome'].'</option>';
 								} else {
-									echo '<option value="'.$m['id'].'">'.utf8_encode($m['nome']).'</option>';
+									echo '<option value="'.$m['id'].'">'.$m['nome'].'</option>';
 								}
 							}
 							?>

@@ -49,29 +49,6 @@ $(function (){
         $('#submenu5').fadeOut();
     });
 
-
-    //horario atual
-    $(function(){
-        let value = true;
-
-        var horario = function(){
-            $.ajax({
-                url:'ajax.php',
-                type:'POST',
-                dataType:'json',
-                data:{value:value},
-                success:function(data){
-                    let hora = data['hora']+':'+data['minutos']+':'+data['segundos'];
-
-                    $('#horario').html(hora);
-                }
-            });
-        };
-
-        setInterval(horario, 800);
-        
-    });
-
     //consultar motorista
     $(document).on('keyup', '#search-motorista', function(){
         var motorista = $(this).val();
@@ -414,6 +391,42 @@ $(function (){
         var b = $('#dispersao').val();
         var c = $('#fsr').val();
         var total = parseFloat(a)+parseFloat(b)+parseFloat(c);
+        if (parseFloat(total) > 0) {
+            $('#res01').val(total.toFixed(2));
+        }
+    });
+    $('#danos, #dispersao, #fsr, #aproveitamento_salvados').on('keyup', function(){
+        var a = $('#danos').val();
+        var b = $('#dispersao').val();
+        var c = $('#fsr').val();
+        var d = $('#aproveitamento_salvados').val();
+
+        var total = parseFloat(a)+parseFloat(b)+parseFloat(c)-parseFloat(d);
+        if (parseFloat(total) > 0) {
+            $('#res01').val(total.toFixed(2));
+        }
+    });
+    $('#danos, #dispersao, #fsr, #aproveitamento_salvados, #franquia').on('keyup', function(){
+        var a = $('#danos').val();
+        var b = $('#dispersao').val();
+        var c = $('#fsr').val();
+        var d = $('#aproveitamento_salvados').val();
+        var e = $('#franquia').val();
+
+        var total = parseFloat(a)+parseFloat(b)+parseFloat(c)-parseFloat(d)-parseFloat(e);
+        if (parseFloat(total) > 0) {
+            $('#res01').val(total.toFixed(2));
+        }
+    });
+    $('#danos, #dispersao, #fsr, #aproveitamento_salvados, #franquia, #pos').on('keyup', function(){
+        var a = $('#danos').val();
+        var b = $('#dispersao').val();
+        var c = $('#fsr').val();
+        var d = $('#aproveitamento_salvados').val();
+        var e = $('#franquia').val();
+        var f = $('#pos').val();
+
+        var total = parseFloat(a)+parseFloat(b)+parseFloat(c)-parseFloat(d)-parseFloat(e)-parseFloat(f);
         if (parseFloat(total) > 0) {
             $('#res01').val(total.toFixed(2));
         }
