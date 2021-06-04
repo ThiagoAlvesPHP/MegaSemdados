@@ -1,0 +1,22 @@
+[24-Apr-2020 13:36:57 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:57 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:36:57 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/includes/CJKdata.php on line 18
+[24-Apr-2020 13:37:00 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:37:00 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:37:01 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:37:01 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:37:01 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/includes/upperCase.php on line 2
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/includes/upperCase.php on line 2
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Fatal error:  Using $this when not in object context in /home1/megare18/public_html/admin/assets/mpdf/mpdf/mpdf/includes/CJKdata.php on line 18
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:37 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0

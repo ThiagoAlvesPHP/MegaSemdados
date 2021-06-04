@@ -679,6 +679,18 @@ if (!empty($getP15)) {
       <td><b>ID Nr.: </b><?=$getP15['p29']; ?></td>
       <td><b>Provedor: </b><?=$getP15['p30']; ?></td>
     </tr>
+
+    <tr>
+      <td colspan="2"><b>RNTRC: </b><?=$getP15['rntrc']; ?></td>
+      <td><b>Validade: </b><?=date("d/m/Y", strtotime($getP15['rntrc_validade'])); ?></td>
+      <td><b>Títular: </b><?=$getP15['rntrc_titular']; ?></td>
+    </tr>
+
+    <tr>
+      <td colspan="2"><b>Excesso de Peso: </b><?=$getP15['excesso_peso']; ?></td>
+      <td colspan="2"><b>Excesso de Altura: </b><?=$getP15['excesso_altura']; ?></td>
+    </tr>
+
     <tr>
       <td colspan="4"><b>Observações: </b><?=$getP15['p31']; ?></td>
     </tr>

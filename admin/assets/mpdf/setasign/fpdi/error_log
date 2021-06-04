@@ -1,0 +1,15 @@
+[24-Apr-2020 13:45:25 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:25 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:25 America/Fortaleza] PHP Fatal error:  Class 'FPDF' not found in /home1/megare18/public_html/admin/assets/mpdf/setasign/fpdi/fpdi_bridge.php on line 24
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Fatal error:  Class 'FPDF' not found in /home1/megare18/public_html/admin/assets/mpdf/setasign/fpdi/fpdi_bridge.php on line 24
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Fatal error:  Class 'FPDF' not found in /home1/megare18/public_html/admin/assets/mpdf/setasign/fpdi/fpdi_bridge.php on line 24
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'imagick' already loaded in Unknown on line 0
+[24-Apr-2020 13:45:27 America/Fortaleza] PHP Warning:  Module 'SourceGuardian' already loaded in Unknown on line 0

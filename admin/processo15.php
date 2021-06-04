@@ -43,8 +43,7 @@ $getP15 = $sql->getP15($num_processo);
 							</script>
 							<?php
 		      			}
-
-	      					?>
+	      			?>
 	      			<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Aplicável ?</button>
 	      			<div id="demo" class="collapse show">
 						<br>
@@ -143,8 +142,36 @@ $getP15 = $sql->getP15($num_processo);
 								<input type="text" readonly="" value="<?=$getP15['p30']; ?>" name="p30" class="form-control value">
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-sm-4">
+								<label>RNTRC</label>
+								<input type="text" value="<?=$getP15['rntrc']; ?>" name="rntrc" class="form-control">
+							</div>
+							<div class="col-sm-4">
+								<label>Validade</label>
+								<input type="date" value="<?=$getP15['rntrc_validade']; ?>" name="rntrc_validade" class="form-control">
+							</div>
+							<div class="col-sm-4">
+								<label>Nome da Pessoa ou Empresa</label>
+								<input type="text" value="<?=$getP15['rntrc_titular']; ?>" name="rntrc_titular" class="form-control">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Excesso de Peso</label>
+								<input type="text" value="<?=$getP15['excesso_peso']; ?>" name="excesso_peso" class="form-control">
+							</div>
+							<div class="col-sm-6">
+								<label>Excesso de Altura</label>
+								<input type="text" value="<?=$getP15['excesso_altura']; ?>" name="excesso_altura" class="form-control">
+							</div>
+						</div>
+
 						<label>Observações:</label>
 						<input type="text" value="<?=$getP15['p31']; ?>" name="p31" class="form-control">
+
 						<h3>Estado de Conservação</h3>
 
 						<div class="row">
@@ -613,6 +640,33 @@ $getP15 = $sql->getP15($num_processo);
 								<input type="text" readonly="" name="p30" class="form-control value">
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-sm-4">
+								<label>RNTRC</label>
+								<input type="text" name="rntrc" class="form-control">
+							</div>
+							<div class="col-sm-4">
+								<label>Validade</label>
+								<input type="date" name="rntrc_validade" class="form-control">
+							</div>
+							<div class="col-sm-4">
+								<label>Nome da Pessoa ou Empresa</label>
+								<input type="text" name="rntrc_titular" class="form-control">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Excesso de Peso</label>
+								<input type="text" name="excesso_peso" class="form-control">
+							</div>
+							<div class="col-sm-6">
+								<label>Excesso de Altura</label>
+								<input type="text" name="excesso_altura" class="form-control">
+							</div>
+						</div>
+
 						<label>Observações:</label>
 						<input type="text" name="p31" class="form-control">
 						<h3>Estado de Conservação</h3>
